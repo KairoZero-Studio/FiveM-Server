@@ -1,0 +1,75 @@
+/* Cookie Server weapon-icon killfeed, attached below existing right HUD.
+   Small transparent cards, no extra panel/box around the whole feed. */
+#cookieKillFeed.ck-kf-list {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  margin-top: 9px;
+  padding: 0;
+  pointer-events: none;
+  z-index: 12;
+}
+#cookieKillFeed:empty { display: none; }
+.ck-kf-row {
+  --ck-kf-accent: #ffbd42;
+  min-width: 180px;
+  max-width: 100%;
+  min-height: 32px;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  column-gap: 8px;
+  padding: 5px 9px;
+  border-radius: 5px;
+  background: rgba(9, 11, 15, .73);
+  color: #f9fafb;
+  box-shadow: 0 2px 8px rgba(0,0,0,.24);
+  border: 1px solid rgba(255,255,255,.07);
+  font: 700 12px/1.2 'Pretendard','Malgun Gothic',Arial,sans-serif;
+  text-shadow: 0 1px 2px rgba(0,0,0,.75);
+  animation: ck-kf-enter .18s ease-out both;
+  overflow: hidden;
+}
+.ck-kf-row.ck-kf-gold  { --ck-kf-accent: #ffc84a; }
+.ck-kf-row.ck-kf-pink  { --ck-kf-accent: #ff82c8; }
+.ck-kf-row.ck-kf-ice   { --ck-kf-accent: #90eaff; }
+.ck-kf-killer, .ck-kf-victim {
+  display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 125px;
+  white-space: nowrap;
+}
+.ck-kf-killer { color: var(--ck-kf-accent); }
+.ck-kf-victim { color: #f5f5f5; }
+.ck-kf-icon-wrap {
+  display: inline-flex;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 23px;
+  align-items: center;
+  justify-content: center;
+}
+.ck-kf-icon {
+  display: block;
+  max-width: 46px;
+  max-height: 21px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  /* TURN icons keep their original silhouette/transparency. */
+}
+.ck-kf-headshot {
+  flex: 0 0 auto;
+  color: #ff7171;
+  font-size: 8px;
+  letter-spacing: .2px;
+}
+.ck-kf-out { opacity: 0; transform: translateX(14px); transition: opacity .28s ease,transform .28s ease; }
+@keyframes ck-kf-enter {
+  from { opacity: 0; transform: translateX(14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}

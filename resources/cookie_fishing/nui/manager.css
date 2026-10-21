@@ -1,0 +1,197 @@
+*{box-sizing:border-box}body{margin:0;font-family:Inter,"Noto Sans KR",Arial,sans-serif;background:transparent;color:#171717}.hidden{display:none!important}#app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,8,12,.62);backdrop-filter:blur(4px)}.panel{width:min(1000px,92vw);height:min(720px,86vh);background:#f8f9fb;border-radius:24px;overflow:hidden;box-shadow:0 28px 90px rgba(0,0,0,.45);display:flex;flex-direction:column}header{padding:24px 28px 20px;display:flex;justify-content:space-between;background:linear-gradient(125deg,#fff,#eef7ff);border-bottom:1px solid #e9e9e9}header small{color:#1976c9;font-weight:900;letter-spacing:1.4px}h1{margin:5px 0 4px;font-size:28px}header p{margin:0;color:#8a8a8a;font-size:13px}#close{width:44px;height:44px;border:1px solid #ddd;border-radius:14px;background:#fff;font-size:25px;cursor:pointer}nav{display:flex;gap:8px;padding:14px 28px;background:#fff;border-bottom:1px solid #eee}nav button{border:0;border-radius:11px;padding:10px 22px;background:#f1f3f5;font-weight:800;color:#777;cursor:pointer}nav button.active{background:#45a3ff;color:#111}main{padding:22px 28px 30px;overflow:auto;flex:1}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stat,.card{background:#fff;border:1px solid #e7e7e7;border-radius:16px}.stat{padding:16px}.stat span{font-size:11px;color:#999}.stat b{display:block;margin-top:4px;font-size:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:16px}.card h3{margin:0 0 5px;font-size:16px}.card p{margin:0;color:#888;font-size:12px;line-height:1.5}.row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid #e9e9e9;border-radius:13px;margin-bottom:9px}.row .grow{flex:1}.row b{display:block}.row small{color:#999}.price{font-weight:900;color:#1976c9}.btn{border:0;border-radius:10px;padding:9px 14px;background:#45a3ff;font-weight:900;cursor:pointer}.btn.dark{background:#222;color:#fff}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.toolbar h2{margin:0}.empty{padding:60px;text-align:center;color:#aaa}.badge{display:inline-block;margin-top:5px;padding:3px 7px;border-radius:20px;background:#f3f3f3;font-size:10px;color:#777}@media(max-width:720px){.grid,.summary{grid-template-columns:1fr}.panel{height:92vh}main{padding:18px}}
+.buy-card{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center}.buy-card .item-img{width:92px;height:92px;object-fit:contain;background:#f4f5f7;border:1px solid #e7e7e7;border-radius:14px;padding:7px}.buy-card .item-info{min-width:0}
+
+
+
+
+/* COOKIE FISHING COMPACT CLASSIC HUD V1.7.7 */
+.fish-prompt{
+  position:fixed;
+  left:50%;
+  top:10vh;
+  bottom:auto;
+  transform:translateX(-50%);
+  z-index:9998;
+  padding:0;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  color:#fff;
+  font-size:12px;
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:.15px;
+  text-shadow:0 2px 4px rgba(0,0,0,.96),0 0 8px rgba(0,0,0,.8);
+  pointer-events:none;
+  white-space:nowrap
+}
+.fish-prompt.hidden{display:none!important}
+
+.fish-game{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:flex-start;
+  justify-content:center;
+  padding-top:15vh;
+  pointer-events:none;
+  background:transparent!important
+}
+.fish-game.hidden{display:none!important}
+
+.fish-game-card{
+  width:min(520px,78vw);
+  padding:0;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  color:#fff
+}
+.fish-game-top{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-align:center;
+  text-shadow:0 2px 4px rgba(0,0,0,.96)
+}
+.fish-game-top>div{
+  display:flex;
+  flex-direction:column;
+  align-items:center
+}
+.fish-game-top small{
+  font-size:7px;
+  line-height:1;
+  letter-spacing:1.25px;
+  font-weight:900;
+  color:#9fd4ff
+}
+.fish-game-top h2{
+  font-size:12px;
+  line-height:1.15;
+  margin:3px 0 0
+}
+.fish-grade{
+  padding:3px 6px;
+  border-radius:999px;
+  border:1.5px solid #4dabf7;
+  background:rgba(0,0,0,.12);
+  font-size:8px;
+  line-height:1;
+  font-weight:1000;
+  white-space:nowrap;
+  text-shadow:0 1px 3px rgba(0,0,0,.85)
+}
+
+.fish-keys{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:5px;
+  flex-wrap:wrap;
+  margin:8px auto 7px;
+  max-width:510px
+}
+.fish-key{
+  width:38px;
+  height:38px;
+  border-radius:9px;
+  border:1.5px solid rgba(255,255,255,.78);
+  background:rgba(245,247,250,.94);
+  color:#16181b;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.10s ease;
+  box-shadow:0 4px 10px rgba(0,0,0,.26),inset 0 -3px 0 rgba(0,0,0,.13)
+}
+.fish-key span{
+  font-size:16px;
+  line-height:1;
+  font-weight:1000;
+  letter-spacing:.15px
+}
+.fish-key.current{
+  transform:translateY(-3px) scale(1.05);
+  background:#f7b928;
+  border-color:#ffe08a;
+  color:#111;
+  box-shadow:0 6px 16px rgba(247,185,40,.34),inset 0 -3px 0 rgba(121,82,0,.18)
+}
+.fish-key.done{
+  background:#28b56b;
+  border-color:#8bf0b8;
+  color:#fff
+}
+.fish-key.fail{
+  background:#e74b4b;
+  border-color:#ff9d9d;
+  color:#fff;
+  animation:fishShake .20s linear 2
+}
+
+.fish-game-bottom{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:9px;
+  font-size:8.5px;
+  line-height:1;
+  color:#fff;
+  font-weight:850;
+  text-shadow:0 2px 4px rgba(0,0,0,.96)
+}
+.fish-game-bottom #fishProgressText{
+  font-weight:1000
+}
+.fish-time{
+  width:min(390px,60vw);
+  height:3px;
+  margin:6px auto 0;
+  border-radius:999px;
+  background:rgba(255,255,255,.28);
+  overflow:hidden;
+  box-shadow:0 1px 4px rgba(0,0,0,.3)
+}
+.fish-time i{
+  display:block;
+  width:100%;
+  height:100%;
+  border-radius:inherit;
+  background:linear-gradient(90deg,#42a5f5,#55d6be,#ffd166)
+}
+@keyframes fishShake{
+  0%,100%{transform:translateX(0)}
+  25%{transform:translateX(-3px)}
+  75%{transform:translateX(3px)}
+}
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* COOKIE FISHING MANAGER LARGE UI V14.2.5 */
+.panel{width:min(1220px,96vw)!important;height:min(860px,94vh)!important;}

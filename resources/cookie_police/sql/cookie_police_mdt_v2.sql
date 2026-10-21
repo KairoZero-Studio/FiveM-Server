@@ -1,0 +1,18 @@
+-- COOKIE POLICE MDT V2.1
+-- 서버 시작 시 server/mdt.lua가 필요한 테이블/컬럼을 자동 생성/확장합니다.
+-- 별도 수동 실행은 필요하지 않습니다.
+--
+-- 현재 사용:
+-- cookie_police_wanted
+-- cookie_police_wanted_unit
+-- cookie_police_warrant
+-- cookie_police_case
+-- cookie_police_fine
+-- cookie_police_dispatch
+-- cookie_police_dispatch_unit
+-- cookie_police_detention_active
+-- cookie_police_audit
+--
+-- V2의 cookie_police_evidence / cookie_police_vehicle_bolo 테이블은
+-- V2.1부터 사용하지 않습니다.
+-- 기존 데이터 보호를 위해 자동 DROP하지 않습니다.

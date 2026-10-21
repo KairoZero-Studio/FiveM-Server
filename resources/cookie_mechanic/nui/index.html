@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="dlg" class="hidden">
+  <div class="mech-left">
+    <div class="mech-npc">
+      <span class="role">정비소 반장</span>
+      <span class="name" id="npcName">강민철</span><span class="job-sub">정비공 관리인</span>
+    </div>
+    <aside id="profile" class="profile"></aside>
+  </div>
+  <div id="speech" class="speech"></div>
+  <nav id="acts" class="acts"></nav>
+</div>
+
+<div id="status" class="status hidden">
+  <div class="statusIcon">🔧</div>
+  <div><b id="statusTitle">정비 요청 대기중</b><p id="statusText">새로운 현장 정비 요청을 기다리고 있습니다</p></div>
+</div>
+
+<div id="offer" class="offer hidden">
+  <div class="accent"></div>
+  <p class="cap">MECHANIC DISPATCH · <span id="offerType">NPC 현장정비</span></p>
+  <h2 id="offerTitle">현장 정비 요청</h2>
+  <p id="offerCar">차량 -</p>
+  <div class="offerMeta">
+    <div><span>예상 보수</span><b id="offerPay">0원</b></div>
+    <div><span>정비 시간</span><b id="offerSecs">0초</b></div>
+  </div>
+  <div class="timer"><i id="offerBar"></i></div>
+  <p id="offerTimer">남은 시간 45초</p>
+  <p class="keys"><kbd>휠 ↑</kbd> / <kbd>NUM +</kbd> 수락 &nbsp;·&nbsp; <kbd>휠 ↓</kbd> / <kbd>NUM -</kbd> 거절</p>
+</div>
+
+<div id="receipt" class="receipt hidden">
+  <span>정비 완료</span>
+  <b id="receiptPay">0원</b>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

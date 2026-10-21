@@ -1,0 +1,1532 @@
+*{box-sizing:border-box}
+:root{
+  --gold:#ffc84a;
+  --gold2:#e8ad2d;
+  --ink:#0b0b0c;
+  --surface:#121214;
+  --surface2:#19191c;
+  --muted:#8a8a91;
+  --line:rgba(255,255,255,.085);
+  --white:#f7f7f7;
+  --green:#31c66a;
+  --red:#e54a4a;
+}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:transparent;font-family:Inter,Arial,'Malgun Gothic',sans-serif}
+body{pointer-events:none}
+button{font:inherit}
+
+.phone{
+  position:fixed;
+  right:2.8vw;
+  bottom:-780px;
+  width:348px;
+  height:710px;
+  opacity:0;
+  transform:translateY(20px) scale(.965) rotate(1.5deg);
+  transition:bottom .3s cubic-bezier(.18,.9,.24,1),opacity .2s ease,transform .3s cubic-bezier(.18,.9,.24,1);
+  pointer-events:none;
+}
+.phone.open{
+  bottom:3vh;
+  opacity:1;
+  transform:translateY(0) scale(1) rotate(0);
+  pointer-events:auto;
+}
+.device{
+  width:100%;height:100%;position:relative;padding:10px;border-radius:50px;
+  background:linear-gradient(145deg,#454549 0%,#111113 22%,#050506 72%,#29292c 100%);
+  border:1px solid rgba(255,255,255,.22);
+  box-shadow:0 32px 90px rgba(0,0,0,.62),0 0 0 1px rgba(0,0,0,.75),inset 0 1px 1px rgba(255,255,255,.18);
+}
+.hardware-top{position:absolute;z-index:10;left:50%;top:17px;transform:translateX(-50%);width:102px;height:26px;border-radius:20px;background:#030304;display:flex;align-items:center;justify-content:center;gap:10px}
+.camera{width:8px;height:8px;border-radius:50%;background:radial-gradient(circle at 38% 38%,#405a69,#10161c 45%,#030303 68%)}
+.speaker{width:48px;height:5px;border-radius:10px;background:#17171a}
+.screen{position:relative;width:100%;height:100%;overflow:hidden;border-radius:40px;color:var(--white);background:#0d0d0f;border:1px solid rgba(255,255,255,.06)}
+.statusbar{position:absolute;z-index:20;left:0;right:0;top:0;height:49px;padding:14px 20px 0;display:flex;align-items:flex-start;justify-content:space-between;font-size:10px;font-weight:800;letter-spacing:.2px;color:rgba(255,255,255,.78);pointer-events:none}
+.status-right{display:flex;align-items:center;gap:6px}
+.signal{height:10px;display:flex;align-items:flex-end;gap:1.5px}.signal i{display:block;width:2px;background:#eee;border-radius:2px}.signal i:nth-child(1){height:3px}.signal i:nth-child(2){height:5px}.signal i:nth-child(3){height:7px}.signal i:nth-child(4){height:9px}
+.network{font-size:8px}
+.battery{width:18px;height:9px;border:1px solid rgba(255,255,255,.75);border-radius:3px;padding:1px;position:relative}.battery:after{content:"";position:absolute;right:-3px;top:2px;width:2px;height:4px;border-radius:0 2px 2px 0;background:rgba(255,255,255,.65)}.battery i{display:block;height:100%;width:78%;border-radius:1px;background:#f5f5f5}
+
+.view{position:absolute;inset:0;padding:58px 18px 34px;opacity:0;visibility:hidden;transform:translateX(14px);transition:.2s ease;overflow:hidden}
+.view.active{opacity:1;visibility:visible;transform:translateX(0)}
+#homeView{background:radial-gradient(circle at 74% 8%,rgba(255,201,72,.22),transparent 32%),linear-gradient(160deg,#171719 0%,#0c0c0e 58%,#19150d 100%)}
+.wallpaper-orb{position:absolute;border-radius:50%;filter:blur(2px);pointer-events:none}.orb-a{width:180px;height:180px;right:-80px;top:70px;background:rgba(255,194,52,.07);border:1px solid rgba(255,210,93,.09)}.orb-b{width:140px;height:140px;left:-80px;bottom:130px;background:rgba(255,255,255,.025)}
+.home-head{position:relative;z-index:1;padding:35px 8px 20px}
+.eyebrow{margin:0;color:#b7a878;font-size:8px;font-weight:900;letter-spacing:1.6px}
+.home-head h1{margin:8px 0 0;font-size:54px;line-height:.95;letter-spacing:-3px;font-weight:300}
+.date{margin:9px 0 0;color:#9d9da3;font-size:11px}
+.number-chip{margin-top:24px;padding:12px 14px;border:1px solid rgba(255,207,85,.19);border-radius:16px;background:linear-gradient(135deg,rgba(255,201,68,.10),rgba(255,255,255,.028));display:flex;align-items:center;justify-content:space-between}
+.number-chip span{font-size:8px;letter-spacing:1px;color:#a69b7b}.number-chip b{font-size:12px;letter-spacing:.7px;color:#f1d17d}
+.app-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:2px 8px}
+.app-card{height:102px;border:1px solid var(--line);border-radius:22px;background:rgba(255,255,255,.045);color:#fff;padding:13px;text-align:left;cursor:pointer;display:flex;flex-direction:column;justify-content:space-between;transition:.15s}
+.app-card:not(.disabled):hover{transform:translateY(-2px);border-color:rgba(255,204,75,.32);background:rgba(255,255,255,.065)}
+.app-card.primary{background:linear-gradient(150deg,rgba(255,203,75,.17),rgba(255,255,255,.035));border-color:rgba(255,204,75,.24)}
+.app-card.disabled{opacity:.42;cursor:default}
+.app-icon{width:37px;height:37px;border-radius:13px;display:grid;place-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.07)}
+.app-card.primary .app-icon{background:linear-gradient(145deg,#ffd763,#eeb52d);color:#1d1708;border:0;box-shadow:0 7px 18px rgba(221,166,38,.18)}
+.app-icon svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.75;stroke-linecap:round;stroke-linejoin:round}.phone-icon svg{fill:currentColor;stroke:none}
+.app-copy{display:flex;flex-direction:column}.app-copy b{font-size:12px}.app-copy small{margin-top:4px;color:#8c8c93;font-size:8px}
+.home-footer{position:absolute;bottom:30px;left:0;right:0;text-align:center;font-size:8px;color:#5f5f64}
+
+#phoneView{background:linear-gradient(180deg,#111113,#0c0c0e);padding-top:60px}
+.app-header{height:64px;display:grid;grid-template-columns:40px 1fr 40px;align-items:center;gap:9px}.app-header h2{font-size:21px;margin:2px 0 0;letter-spacing:-.7px}.circle-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:#18181b;color:#ddd;display:grid;place-items:center;cursor:pointer}.circle-btn:hover{background:#202024}.circle-btn svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.phone-tabs{display:grid;grid-template-columns:1fr 1fr;background:#151518;border:1px solid var(--line);border-radius:13px;padding:3px;margin:4px 0 15px}.tab{border:0;border-radius:10px;padding:9px 5px;background:transparent;color:#77777e;font-size:10px;font-weight:800;cursor:pointer}.tab.active{background:#252529;color:#f0d58a;box-shadow:inset 0 0 0 1px rgba(255,213,104,.08)}
+.tab-pane{display:none}.tab-pane.active{display:block}
+.dial-display{height:83px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}.dial-display span{font-size:9px;color:#69696f}.dial-display b{margin-top:7px;min-height:22px;font-size:20px;font-weight:500;letter-spacing:1.5px}.delete-btn{position:absolute;right:5px;bottom:10px;border:0;background:transparent;color:#9a874f;font-size:9px;cursor:pointer}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 17px;padding:5px 25px 12px}.keypad button{width:57px;height:57px;border-radius:50%;border:1px solid rgba(255,255,255,.07);background:#1b1b1f;color:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;transition:.12s}.keypad button:hover{background:#29292e;transform:scale(1.035)}.keypad b{font-size:19px;font-weight:500;line-height:20px}.keypad small{font-size:6px;color:#85858b;letter-spacing:1px;margin-top:2px}
+.call-main{margin:3px auto 0;width:58px;height:58px;border-radius:50%;border:0;background:linear-gradient(145deg,#48d378,#28ad5d);color:white;display:grid;place-items:center;cursor:pointer;box-shadow:0 12px 25px rgba(48,195,103,.22)}.call-main:hover{transform:scale(1.04)}.call-main svg{width:24px;height:24px;fill:currentColor}
+.recent-list{height:477px;overflow-y:auto;padding-right:3px}.recent-list::-webkit-scrollbar{width:3px}.recent-list::-webkit-scrollbar-thumb{background:#2b2b30;border-radius:5px}
+.recent-empty{padding:70px 20px;text-align:center;color:#66666d;font-size:10px;line-height:1.7}
+.recent-row{display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:12px 4px;border-bottom:1px solid rgba(255,255,255,.045);cursor:pointer}.recent-row:hover{background:rgba(255,255,255,.025)}
+.recent-symbol{width:37px;height:37px;border-radius:50%;display:grid;place-items:center;background:#19191d;color:#b9b9bd}.recent-symbol svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}.recent-symbol.missed{color:#e66a6a;background:rgba(218,72,72,.08)}
+.recent-info{min-width:0}.recent-info b{display:block;font-size:11px;font-weight:700;letter-spacing:.3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.recent-info small{display:block;margin-top:4px;font-size:8px;color:#6e6e74}.recent-meta{text-align:right}.recent-meta b{font-size:8px;color:#98989d;font-weight:600}.recent-meta small{display:block;margin-top:4px;font-size:8px;color:#5f5f65}
+
+.call-view{position:absolute;z-index:30;inset:0;padding:62px 24px 38px;background:linear-gradient(160deg,#151517 0%,#09090b 65%,#17130b 100%);opacity:0;visibility:hidden;transform:scale(1.03);transition:.2s;overflow:hidden}
+.call-view.active{opacity:1;visibility:visible;transform:scale(1)}
+.call-glow{position:absolute;border-radius:50%;filter:blur(1px);pointer-events:none}.glow-a{width:280px;height:280px;top:-130px;right:-90px;background:rgba(255,197,50,.09)}.glow-b{width:220px;height:220px;bottom:-100px;left:-100px;background:rgba(64,191,112,.04)}
+.call-top{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between}.call-timer{font-size:10px;color:#7c7c82;font-variant-numeric:tabular-nums}
+.caller-block{position:relative;z-index:2;margin-top:107px;text-align:center}.caller-avatar{width:102px;height:102px;border-radius:50%;margin:0 auto;display:grid;place-items:center;background:linear-gradient(145deg,#272729,#101012);border:1px solid rgba(255,213,103,.19);box-shadow:0 22px 50px rgba(0,0,0,.32),inset 0 0 0 10px rgba(255,255,255,.018);color:#e7c86f;font-size:19px;font-weight:300;letter-spacing:2px}.caller-block p{margin:25px 0 6px;font-size:9px;color:#8b8b91}.caller-block h2{margin:0;font-size:22px;letter-spacing:1px;font-weight:450}
+.call-actions{position:absolute;z-index:2;left:0;right:0;bottom:95px;display:flex;justify-content:center;gap:70px}.call-actions.single{gap:0}.call-actions.hidden{display:none}
+.round-action{border:0;background:transparent;color:#ddd;display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer}.round-action svg{width:28px;height:28px;padding:15px;box-sizing:content-box;border-radius:50%;fill:currentColor}.round-action span{font-size:9px;color:#aaa}.round-action.danger svg{background:var(--red);transform:rotate(0deg)}.round-action.accept svg{background:var(--green)}.round-action.large svg{width:30px;height:30px}.round-action:hover svg{filter:brightness(1.08);transform:scale(1.04)}.round-action.danger:hover svg{transform:scale(1.04)}
+.call-bottom-note{position:absolute;bottom:38px;left:0;right:0;text-align:center;font-size:7.5px;color:#55555b}
+
+.toast{position:absolute;z-index:60;left:18px;right:18px;top:57px;padding:11px 13px;border-radius:13px;background:rgba(29,29,32,.97);border:1px solid rgba(255,255,255,.09);box-shadow:0 12px 28px rgba(0,0,0,.28);font-size:9px;color:#ddd;opacity:0;transform:translateY(-8px);pointer-events:none;transition:.18s}.toast.show{opacity:1;transform:translateY(0)}.toast.error{border-color:rgba(226,78,78,.28);color:#f2a0a0}
+.homebar{position:absolute;z-index:70;bottom:14px;left:50%;transform:translateX(-50%);width:104px;height:4px;border-radius:5px;background:rgba(255,255,255,.67);pointer-events:none}
+.hidden{display:none!important}
+
+@media (max-height:820px){
+  .phone{width:310px;height:635px}.caller-block{margin-top:75px}.call-actions{bottom:78px}.recent-list{height:405px}.keypad{gap:6px 14px}.keypad button{width:51px;height:51px}
+}
+
+
+/* ============================================================
+   COOKIE PHONE V3 - PREMIUM CONTACTS
+   ============================================================ */
+#contactsView{
+  background:
+    radial-gradient(circle at 76% 5%,rgba(255,201,72,.13),transparent 28%),
+    linear-gradient(180deg,#111113,#0b0b0d);
+  padding-top:60px;
+  overflow-y:auto;
+  scrollbar-width:none;
+}
+#contactsView::-webkit-scrollbar{display:none}
+.contacts-header{position:sticky;top:-2px;z-index:9;background:linear-gradient(180deg,rgba(17,17,19,.98),rgba(17,17,19,.82),transparent);padding-bottom:8px}
+.circle-btn.accent{background:linear-gradient(145deg,#f6cf68,#d9a725);color:#211900;border:0}
+.my-contact-card{
+  display:grid;grid-template-columns:58px 1fr auto;align-items:center;gap:11px;
+  margin:4px 0 11px;padding:13px;border-radius:20px;
+  background:linear-gradient(140deg,rgba(255,204,75,.14),rgba(255,255,255,.035));
+  border:1px solid rgba(255,210,92,.18);
+}
+.contact-avatar{
+  width:42px;height:42px;border-radius:50%;display:grid;place-items:center;overflow:hidden;
+  background:linear-gradient(145deg,#2d2d31,#151517);border:1px solid rgba(255,220,130,.18);
+  color:#e7c86f;font-size:11px;font-weight:800;letter-spacing:.5px;background-size:cover;background-position:center;
+}
+.contact-avatar.large{width:54px;height:54px;font-size:13px}
+.contact-avatar.xlarge{width:82px;height:82px;font-size:17px}
+.contact-avatar.has-photo{color:transparent}
+.my-contact-copy{min-width:0;display:flex;flex-direction:column}.my-contact-copy>span{font-size:7.5px;color:#9e8b57;letter-spacing:1px}.my-contact-copy b{margin-top:4px;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.my-contact-copy small{margin-top:4px;font-size:8.5px;color:#797980;letter-spacing:.3px}
+.mini-pill{border:1px solid rgba(255,211,95,.16);background:rgba(255,208,86,.08);color:#d8ba65;border-radius:999px;padding:7px 10px;font-size:8px;cursor:pointer}
+.nearby-share{
+  width:100%;border:1px solid rgba(255,255,255,.07);background:#151518;color:#fff;border-radius:17px;
+  padding:11px 12px;display:grid;grid-template-columns:30px 1fr 16px;gap:9px;align-items:center;text-align:left;cursor:pointer;
+}
+.nearby-share:hover{background:#1a1a1e;border-color:rgba(255,208,86,.16)}
+.nearby-share>span:nth-child(2){display:flex;flex-direction:column}.nearby-share b{font-size:10px}.nearby-share small{font-size:7.3px;color:#77777e;margin-top:3px}
+.nearby-share svg{width:14px;height:14px;fill:none;stroke:#8f8f94;stroke-width:1.8}
+.share-pulse{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle,#f0c95f 0 22%,rgba(240,201,95,.28) 24% 48%,rgba(240,201,95,.08) 50% 70%,transparent 72%)}
+.contact-search-wrap{margin:13px 0 8px;height:37px;display:flex;align-items:center;gap:8px;padding:0 11px;border:1px solid rgba(255,255,255,.07);background:#151518;border-radius:13px}
+.contact-search-wrap svg{width:14px;height:14px;fill:none;stroke:#696970;stroke-width:1.8}.contact-search-wrap input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#e5e5e6;font-size:10px}.contact-search-wrap input::placeholder{color:#5c5c62}
+.contact-section{margin-top:10px}.contact-section-title{display:flex;justify-content:space-between;align-items:center;padding:0 3px 7px}.contact-section-title span{font-size:8px;color:#9d8b58;font-weight:900;letter-spacing:1px;text-transform:uppercase}.contact-section-title small{font-size:8px;color:#5e5e64}
+.favorite-list{display:flex;gap:9px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}.favorite-list::-webkit-scrollbar{display:none}
+.favorite-card{min-width:79px;width:79px;border:1px solid rgba(255,255,255,.06);background:#151518;border-radius:17px;padding:10px 7px;color:#fff;text-align:center;cursor:pointer}.favorite-card:hover{background:#1b1b1f}.favorite-card .contact-avatar{margin:0 auto 7px}.favorite-card b{display:block;font-size:8.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.favorite-card small{display:block;margin-top:3px;color:#68686e;font-size:6.5px}
+.favorite-empty{font-size:8px;color:#5b5b61;padding:7px 4px 8px}
+.contact-list{padding-bottom:20px}.contact-row{width:100%;border:0;border-bottom:1px solid rgba(255,255,255,.045);background:transparent;color:#fff;display:grid;grid-template-columns:45px 1fr auto;gap:9px;align-items:center;padding:9px 2px;cursor:pointer;text-align:left}.contact-row:hover{background:rgba(255,255,255,.025)}.contact-row-info{min-width:0}.contact-row-info b{display:flex;align-items:center;gap:5px;font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.contact-row-info small{display:block;margin-top:4px;font-size:7.5px;color:#67676e}.fav-star{color:#e7c55f;font-size:9px}.blocked-mark{color:#d36a6a;font-size:8px}.contact-chevron{color:#56565c;font-size:15px}
+.contact-empty{padding:35px 8px;text-align:center;color:#626268;font-size:8.5px;line-height:1.7}
+
+.phone-modal{position:absolute;z-index:80;inset:0;background:rgba(0,0,0,.58);backdrop-filter:blur(5px);display:flex;align-items:flex-end;justify-content:center;padding:10px;opacity:1;transition:.16s}.phone-modal.hidden{display:none!important}.phone-modal.priority{z-index:95}
+.modal-sheet{width:100%;max-height:88%;overflow-y:auto;scrollbar-width:none;border-radius:25px;background:linear-gradient(180deg,#1b1b1f,#111113);border:1px solid rgba(255,255,255,.095);padding:17px;box-shadow:0 -18px 45px rgba(0,0,0,.35)}.modal-sheet::-webkit-scrollbar{display:none}.modal-sheet.compact{max-height:65%}
+.modal-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:15px}.modal-head h3{margin:3px 0 0;font-size:17px;letter-spacing:-.4px}.modal-close{width:31px;height:31px;border-radius:50%;border:1px solid rgba(255,255,255,.08);background:#252529;color:#aaa;font-size:20px;line-height:27px;cursor:pointer}
+.profile-editor{display:flex;flex-direction:column;gap:12px}.profile-photo-button{border:0;background:transparent;color:#d6b85f;display:flex;flex-direction:column;align-items:center;gap:6px;margin:2px auto 5px;cursor:pointer;font-size:8px}
+.field-label{display:flex;flex-direction:column;gap:6px;font-size:8px;color:#8b8b91}.phone-input{width:100%;border:1px solid rgba(255,255,255,.08);background:#101012;border-radius:12px;padding:11px 12px;color:#ededee;outline:0;font-size:10px}.phone-input:focus{border-color:rgba(239,199,87,.35)}.phone-textarea{height:66px;resize:none;line-height:1.45}
+.locked-field{padding:11px 12px;border-radius:12px;background:#121214;border:1px solid rgba(255,255,255,.055);display:grid;grid-template-columns:1fr auto;gap:4px}.locked-field span{font-size:8px;color:#7d7d83}.locked-field b{font-size:10px;color:#cbb46d}.locked-field small{grid-column:1/3;font-size:7px;color:#55555b}
+.sheet-primary,.sheet-secondary,.sheet-danger{border:0;border-radius:13px;padding:11px 12px;font-size:9px;font-weight:800;cursor:pointer}.sheet-primary{background:linear-gradient(145deg,#f3d06e,#d6a62e);color:#241b05}.sheet-secondary{background:#27272b;color:#c8c8cc}.sheet-danger{background:rgba(217,70,70,.13);color:#e98484;border:1px solid rgba(221,78,78,.16)}.sheet-primary.flex{flex:1}
+.profile-editor+.sheet-primary{width:100%;margin-top:14px}
+.contact-edit-avatar-row{display:flex;align-items:center;gap:11px;padding:2px 2px 13px}.contact-edit-avatar-row>div:last-child{display:flex;flex-direction:column}.contact-edit-avatar-row b{font-size:12px}.contact-edit-avatar-row small{margin-top:4px;font-size:8px;color:#6c6c72}
+.contact-switch-row{display:flex;flex-direction:column;gap:8px;margin-top:12px}.setting-toggle{border:1px solid rgba(255,255,255,.065);background:#141417;color:#fff;border-radius:14px;padding:9px 10px;display:grid;grid-template-columns:30px 1fr 30px;align-items:center;gap:8px;text-align:left;cursor:pointer}.setting-icon{width:27px;height:27px;border-radius:9px;display:grid;place-items:center;background:#202024;color:#aaa}.setting-icon.star{color:#e1bd50}.setting-toggle>span:nth-child(2){display:flex;flex-direction:column}.setting-toggle b{font-size:9px}.setting-toggle small{font-size:7px;color:#66666d;margin-top:3px}.setting-toggle i{width:28px;height:17px;border-radius:20px;background:#2a2a2f;position:relative;transition:.15s}.setting-toggle i:after{content:"";position:absolute;left:2px;top:2px;width:13px;height:13px;border-radius:50%;background:#777;transition:.15s}.setting-toggle[data-on="true"] i{background:#c59a2e}.setting-toggle[data-on="true"] i:after{left:13px;background:#fff3cd}.setting-toggle.danger[data-on="true"] i{background:#a94343}
+.sheet-actions{display:flex;gap:8px;margin-top:14px}.sheet-actions.two>*{flex:1}
+.modal-desc{margin:-7px 0 13px;color:#6d6d73;font-size:8px;line-height:1.5}
+.nearby-list{display:flex;flex-direction:column;gap:7px}.nearby-row{display:grid;grid-template-columns:43px 1fr auto;align-items:center;gap:9px;border:1px solid rgba(255,255,255,.065);background:#141417;border-radius:15px;padding:9px}.nearby-row-info{min-width:0;display:flex;flex-direction:column}.nearby-row-info b{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.nearby-row-info small{margin-top:4px;font-size:7px;color:#68686e}.nearby-send{border:0;border-radius:999px;background:rgba(226,188,81,.12);color:#ddbf67;padding:7px 9px;font-size:7.5px;cursor:pointer}.sheet-loading{padding:25px 4px;text-align:center;color:#66666d;font-size:8px}
+.share-offer{text-align:center;padding-top:25px}.share-offer .contact-avatar{margin:13px auto 11px}.share-offer p{margin:0;color:#727278;font-size:8px}.share-offer h3{margin:8px 0 3px;font-size:17px}.share-offer>b{font-size:10px;color:#c9ae60;letter-spacing:.4px}.share-offer .sheet-actions{margin-top:20px}
+
+
+/* ============================================================
+   COOKIE PHONE V4 - MESSAGES
+   ============================================================ */
+.messages-icon{position:relative}
+.app-badge{
+  position:absolute;right:-5px;top:-5px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;
+  background:#d95454;color:#fff;border:2px solid #121214;display:grid;place-items:center;font-size:7px;font-style:normal;font-weight:900;
+}
+#messagesView{
+  background:
+    radial-gradient(circle at 78% 2%,rgba(255,201,72,.12),transparent 28%),
+    linear-gradient(180deg,#111113,#0b0b0d);
+  padding-top:60px;overflow:hidden;
+}
+.messages-header{height:60px}
+.message-search-wrap{height:37px;display:flex;align-items:center;gap:8px;padding:0 11px;border:1px solid rgba(255,255,255,.07);background:#151518;border-radius:13px;margin:4px 0 9px}
+.message-search-wrap svg{width:14px;height:14px;fill:none;stroke:#696970;stroke-width:1.8}
+.message-search-wrap input{flex:1;min-width:0;border:0;outline:0;background:transparent;color:#e5e5e6;font-size:10px}
+.message-search-wrap input::placeholder{color:#5c5c62}
+.message-summary{display:flex;justify-content:space-between;align-items:center;padding:4px 3px 9px;color:#74747a;font-size:7.5px}
+.message-summary b{color:#d6b85f;font-weight:900}.message-summary small{font-size:7.5px;color:#69696f}
+.conversation-list{height:516px;overflow-y:auto;scrollbar-width:none;padding-bottom:15px}.conversation-list::-webkit-scrollbar{display:none}
+.conversation-row{width:100%;border:0;background:transparent;color:#fff;display:grid;grid-template-columns:47px 1fr auto;gap:10px;align-items:center;padding:11px 2px;border-bottom:1px solid rgba(255,255,255,.045);cursor:pointer;text-align:left}
+.conversation-row:hover{background:rgba(255,255,255,.025)}
+.conversation-main{min-width:0}.conversation-topline{display:flex;align-items:center;gap:6px}.conversation-topline b{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.conversation-preview{display:block;margin-top:5px;color:#68686f;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.conversation-preview.unread{color:#aaaab0}
+.conversation-meta{text-align:right;min-width:35px}.conversation-meta time{display:block;font-size:7px;color:#5f5f65}.conversation-unread{margin:6px 0 0 auto;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:#c59d36;color:#191307;display:grid;place-items:center;font-size:7px;font-weight:900}
+.message-empty{padding:85px 18px;text-align:center;color:#66666d;font-size:9px;line-height:1.8}.message-empty b{display:block;color:#aaa;font-size:11px;margin-bottom:5px}
+
+.conversation-view{padding:0!important;background:linear-gradient(180deg,#101012,#0a0a0c)!important;overflow:hidden!important}
+.conversation-header{position:absolute;z-index:5;left:0;right:0;top:0;height:76px;padding:28px 15px 9px;background:linear-gradient(180deg,rgba(16,16,18,.99),rgba(16,16,18,.92));border-bottom:1px solid rgba(255,255,255,.05);display:grid;grid-template-columns:34px 35px 1fr 34px;gap:8px;align-items:center}
+.conversation-header .circle-btn{width:32px;height:32px}.conversation-header .contact-avatar{width:34px;height:34px}
+.conversation-person{min-width:0;display:flex;flex-direction:column}.conversation-person b{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.conversation-person small{margin-top:3px;font-size:7px;color:#65656b}
+.call-shortcut{color:#d9bd67!important}
+.message-thread{position:absolute;left:0;right:0;top:76px;bottom:68px;padding:15px 12px 18px;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:7px}.message-thread::-webkit-scrollbar{display:none}
+.message-day{text-align:center;margin:5px 0 2px;color:#56565c;font-size:7px}
+.message-line{display:flex;flex-direction:column;max-width:80%}.message-line.out{align-self:flex-end;align-items:flex-end}.message-line.in{align-self:flex-start;align-items:flex-start}
+.message-bubble{padding:9px 11px;border-radius:16px;font-size:9.3px;line-height:1.45;word-break:break-word;white-space:pre-wrap}
+.message-line.out .message-bubble{background:linear-gradient(145deg,#dfb944,#be9128);color:#211806;border-bottom-right-radius:5px}
+.message-line.in .message-bubble{background:#202024;color:#e8e8ea;border:1px solid rgba(255,255,255,.045);border-bottom-left-radius:5px}
+.message-time{margin-top:3px;font-size:6.5px;color:#55555b}.message-line.out .message-time.read{color:#8f7d45}
+.message-composer{position:absolute;z-index:6;left:0;right:0;bottom:0;min-height:68px;padding:10px 11px 17px;background:rgba(15,15,17,.98);border-top:1px solid rgba(255,255,255,.055);display:grid;grid-template-columns:1fr 38px;gap:8px;align-items:end}
+.message-composer textarea{max-height:86px;min-height:38px;resize:none;overflow-y:auto;border:1px solid rgba(255,255,255,.075);outline:0;background:#19191c;color:#eee;border-radius:18px;padding:10px 13px;font:inherit;font-size:9.5px;line-height:1.45;scrollbar-width:none}.message-composer textarea::-webkit-scrollbar{display:none}.message-composer textarea::placeholder{color:#5e5e64}.message-composer textarea:focus{border-color:rgba(224,190,87,.25)}
+.message-composer button{width:38px;height:38px;border-radius:50%;border:0;background:linear-gradient(145deg,#f0ca62,#c8992b);color:#251b06;display:grid;place-items:center;cursor:pointer}.message-composer button svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+
+.recipient-suggestions{max-height:245px;overflow-y:auto;display:flex;flex-direction:column;gap:5px;margin:9px 0 12px;scrollbar-width:none}.recipient-suggestions::-webkit-scrollbar{display:none}
+.recipient-row{width:100%;border:1px solid rgba(255,255,255,.06);background:#141417;color:#fff;border-radius:13px;padding:8px;display:grid;grid-template-columns:37px 1fr;gap:9px;align-items:center;text-align:left;cursor:pointer}.recipient-row:hover{background:#1a1a1e}.recipient-row .contact-avatar{width:35px;height:35px}.recipient-row-info{min-width:0}.recipient-row-info b{display:block;font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.recipient-row-info small{display:block;margin-top:3px;font-size:7px;color:#66666d}
+
+
+/* ============================================================
+   COOKIE PHONE V5 - TAXI / ROADSIDE SERVICE
+   ============================================================ */
+.app-grid{grid-template-columns:1fr 1fr;gap:8px}
+.app-card{height:84px;border-radius:19px;padding:11px}
+.app-icon{width:32px;height:32px;border-radius:11px}.app-icon svg{width:17px;height:17px}
+.taxi-icon{background:linear-gradient(145deg,#ffd85e,#dca51e)!important;color:#251b03!important;border:0!important}
+.mechanic-icon{background:linear-gradient(145deg,#80a9bd,#456a7d)!important;color:#07141a!important;border:0!important}
+.service-card{background:linear-gradient(150deg,rgba(255,255,255,.055),rgba(255,255,255,.028))}
+.service-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.13);background:rgba(255,255,255,.065)}
+.home-head{padding-top:27px;padding-bottom:15px}.home-head h1{font-size:49px}.number-chip{margin-top:17px}
+.home-footer{bottom:25px}
+
+.service-view{padding:0!important;overflow-y:auto!important;scrollbar-width:none;background:#0c0c0e!important}
+.service-view::-webkit-scrollbar{display:none}
+.service-hero{position:relative;min-height:245px;padding:55px 18px 25px;overflow:hidden}
+.taxi-service-hero{background:
+  radial-gradient(circle at 78% 4%,rgba(255,213,86,.29),transparent 34%),
+  linear-gradient(155deg,#27210e 0%,#15130d 55%,#0f0f10 100%)}
+.mechanic-service-hero{background:
+  radial-gradient(circle at 80% 5%,rgba(112,170,196,.24),transparent 34%),
+  linear-gradient(155deg,#15232a 0%,#11191d 55%,#0e0f10 100%)}
+.service-header{height:54px;padding:0;position:absolute;left:18px;right:18px;top:55px}
+.service-header h2{font-size:20px}.circle-btn.dark{background:rgba(0,0,0,.24);border-color:rgba(255,255,255,.09)}
+.service-big-icon{width:61px;height:61px;border-radius:20px;margin-top:83px;display:grid;place-items:center;box-shadow:0 15px 32px rgba(0,0,0,.22)}
+.service-big-icon svg{width:30px;height:30px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.taxi-big{background:linear-gradient(145deg,#ffe176,#d8a11c);color:#271d04}
+.mechanic-big{background:linear-gradient(145deg,#8bb5c8,#476d80);color:#071419}
+.service-hero>p{margin:16px 0 3px;color:#8c8c91;font-size:8px}.service-hero>h3{margin:0;font-size:16px;letter-spacing:-.5px}
+.service-content{padding:15px 18px 34px}
+.route-card{border:1px solid rgba(255,255,255,.07);background:#151518;border-radius:18px;padding:13px 14px}
+.route-line{display:grid;grid-template-columns:14px 1fr;gap:9px;align-items:center}.route-line span{display:flex;flex-direction:column}.route-line small{font-size:7px;color:#6b6b71}.route-line b{margin-top:4px;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.route-dot{width:8px;height:8px;border-radius:50%;border:2px solid #d2a933}.route-dot.destination{border-color:#6c92a4}.route-divider{height:18px;border-left:1px dashed #343438;margin:3px 0 3px 3.5px}
+.service-secondary{width:100%;margin-top:8px;border:1px solid rgba(255,255,255,.07);background:#131316;color:#8c8c92;border-radius:12px;padding:9px;font-size:8px;cursor:pointer}.service-secondary:hover{color:#ccc;background:#18181c}
+.service-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:11px}.service-stats>div{min-width:0;padding:10px 8px;border-radius:13px;background:#131316;border:1px solid rgba(255,255,255,.055);display:flex;flex-direction:column}.service-stats span{font-size:6.8px;color:#66666d}.service-stats b{margin-top:5px;font-size:9px;color:#d4bd75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.service-note{margin:10px 2px 13px;color:#5d5d63;font-size:7.2px;line-height:1.55}
+.service-primary,.service-danger{width:100%;border:0;border-radius:15px;padding:12px 13px;font-size:9.5px;font-weight:900;cursor:pointer}
+.taxi-primary{background:linear-gradient(145deg,#f5d267,#c99927);color:#241b06}
+.mechanic-primary{background:linear-gradient(145deg,#7ca8bc,#496f82);color:#071419}
+.service-primary:disabled{opacity:.38;cursor:not-allowed}
+.service-danger{margin-top:8px;background:rgba(218,71,71,.11);border:1px solid rgba(218,71,71,.16);color:#e68181}
+.service-status-pulse{animation:servicePulse 1.35s ease-in-out infinite}@keyframes servicePulse{0%,100%{opacity:.55}50%{opacity:1}}
+
+.vehicle-scan-card{border:1px solid rgba(255,255,255,.07);background:#151518;border-radius:18px;padding:12px}
+.vehicle-scan-card.empty{opacity:.72}
+.vehicle-scan-head{display:flex;align-items:center;justify-content:space-between}.vehicle-scan-head>span{font-size:7px;color:#727278}.vehicle-scan-head button{border:0;background:transparent;color:#789caf;font-size:7.5px;cursor:pointer}
+.vehicle-main{display:grid;grid-template-columns:46px 1fr;align-items:center;gap:10px;margin-top:10px}.vehicle-glyph{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#1d2529;color:#78a1b4}.vehicle-glyph svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7}.vehicle-main>div:last-child{display:flex;flex-direction:column;min-width:0}.vehicle-main b{font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vehicle-main small{margin-top:4px;color:#66666d;font-size:7.5px}
+.health-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:11px}.health-grid>div{display:grid;grid-template-columns:1fr auto;gap:5px;align-items:center}.health-grid span{font-size:7px;color:#68686e}.health-grid b{font-size:7.5px;color:#8daebd}.health-grid i{grid-column:1/3;height:3px;border-radius:4px;background:#28282c;overflow:hidden}.health-grid em{display:block;height:100%;width:0;border-radius:4px;background:linear-gradient(90deg,#557f91,#87b4c7);transition:.2s}
+.mechanic-pricing b{color:#83aabc}
+
+
+/* ============================================================
+   COOKIE PHONE V6 - CUSTOM THEMES / WALLPAPER
+   ============================================================ */
+:root{
+  --phone-accent:#F0C85B;
+  --phone-accent2:#C69A2B;
+  --phone-accent-rgb:240,200,91;
+  --phone-accent2-rgb:198,154,43;
+  --phone-dim:.18;
+  --phone-blur:0px;
+  --phone-glass:.46;
+  --phone-custom-wallpaper:none;
+}
+.settings-icon{background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;color:#18140a!important;border:0!important}
+.settings-view{padding:58px 18px 27px!important;overflow:hidden!important;background:#0c0c0e!important}
+.settings-header{height:57px}
+.theme-preview-wrap{padding:4px 4px 12px}
+.theme-preview{height:181px;border-radius:24px;position:relative;overflow:hidden;padding:13px;color:#fff;border:1px solid rgba(255,255,255,.11);box-shadow:0 17px 34px rgba(0,0,0,.25);background-size:cover;background-position:center}
+.theme-preview:after{content:"";position:absolute;inset:0;background:rgba(0,0,0,var(--phone-dim));backdrop-filter:blur(var(--phone-blur));pointer-events:none}
+.theme-preview>*{position:relative;z-index:2}.theme-preview-status{display:flex;justify-content:space-between;font-size:6px;font-weight:800;opacity:.78}.theme-preview-clock{margin-top:31px;font-size:34px;font-weight:300;letter-spacing:-2px}.theme-preview-date{margin-top:2px;font-size:7px;opacity:.66}.theme-preview-apps{display:flex;gap:7px;margin-top:24px}.theme-preview-apps i{width:27px;height:27px;border-radius:9px;background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));box-shadow:0 5px 10px rgba(var(--phone-accent-rgb),.16)}
+.mini-wallpaper-cookie-night,.wp-cookie-night{background:radial-gradient(circle at 75% 8%,rgba(255,198,46,.28),transparent 34%),linear-gradient(155deg,#18181a 0%,#0d0d0f 55%,#211a09 100%)}
+.mini-wallpaper-midnight-gold,.wp-midnight-gold{background:radial-gradient(circle at 80% 12%,#6a4b0c 0%,transparent 30%),linear-gradient(140deg,#080809,#17130a 58%,#30220c)}
+.mini-wallpaper-ocean,.wp-ocean{background:radial-gradient(circle at 80% 18%,#1a698c 0%,transparent 33%),linear-gradient(145deg,#071017,#0a2331 55%,#103f53)}
+.mini-wallpaper-rose,.wp-rose{background:radial-gradient(circle at 78% 12%,#923956 0%,transparent 34%),linear-gradient(145deg,#180b11,#32131f 58%,#5a2136)}
+.mini-wallpaper-forest,.wp-forest{background:radial-gradient(circle at 80% 14%,#2a7557 0%,transparent 33%),linear-gradient(145deg,#07130f,#0e2c21 58%,#154a36)}
+.mini-wallpaper-mono,.wp-mono{background:radial-gradient(circle at 77% 12%,#555 0%,transparent 32%),linear-gradient(145deg,#090909,#222 58%,#3a3a3a)}
+.mini-wallpaper-sunset,.wp-sunset{background:radial-gradient(circle at 80% 12%,#ff8a4e 0%,transparent 26%),radial-gradient(circle at 12% 90%,#563d88 0%,transparent 37%),linear-gradient(145deg,#2a1720,#5c2937 52%,#192444)}
+.settings-scroll{height:385px;overflow-y:auto;scrollbar-width:none;padding:0 2px 25px}.settings-scroll::-webkit-scrollbar{display:none}
+.setting-section{padding:13px 0;border-top:1px solid rgba(255,255,255,.055)}.setting-title{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:10px}.setting-title>span{font-size:9px;font-weight:900;color:#d9d9dc}.setting-title small{font-size:6.8px;color:#606067}
+.color-presets{display:grid;grid-template-columns:repeat(6,1fr);gap:7px}.color-presets button{aspect-ratio:1;border-radius:50%;border:2px solid rgba(255,255,255,.08);background:linear-gradient(145deg,var(--sw),var(--sw2));cursor:pointer;position:relative}.color-presets button.selected:after{content:"✓";position:absolute;inset:0;display:grid;place-items:center;color:#0a0a0b;font-size:9px;font-weight:1000;text-shadow:0 1px rgba(255,255,255,.25)}
+.custom-color-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}.custom-color-row label{display:grid;grid-template-columns:auto 26px 1fr;align-items:center;gap:7px;padding:8px 9px;border-radius:12px;background:#151518;border:1px solid rgba(255,255,255,.06)}.custom-color-row span{font-size:7px;color:#707077}.custom-color-row input{width:25px;height:25px;border:0;padding:0;background:transparent;cursor:pointer}.custom-color-row input::-webkit-color-swatch-wrapper{padding:1px}.custom-color-row input::-webkit-color-swatch{border:0;border-radius:7px}.custom-color-row b{font-size:7.5px;color:#aaa;letter-spacing:.4px}
+.wallpaper-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}.wallpaper-option{height:67px;border-radius:13px;border:2px solid transparent;color:#fff;position:relative;overflow:hidden;cursor:pointer;background-size:cover;background-position:center}.wallpaper-option.selected{border-color:var(--phone-accent);box-shadow:0 0 0 2px rgba(var(--phone-accent-rgb),.10)}.wallpaper-option>span{position:absolute;left:7px;bottom:7px;font-size:6.5px;font-weight:900;letter-spacing:.7px;text-shadow:0 1px 6px #000}.wp-custom{background:linear-gradient(145deg,#222,#111)}.wp-custom small{position:absolute;right:7px;top:6px;font-size:15px;font-weight:300;color:var(--phone-accent)}
+.settings-hint{margin:7px 2px 0;color:#55555c;font-size:6.5px;line-height:1.45}.range-setting{display:block;padding:8px 0}.range-setting>span{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px}.range-setting b{font-size:8px;color:#aaa}.range-setting small{font-size:7px;color:var(--phone-accent)}.range-setting input{appearance:none;width:100%;height:4px;border-radius:5px;background:#29292e;outline:0}.range-setting input::-webkit-slider-thumb{appearance:none;width:14px;height:14px;border-radius:50%;background:var(--phone-accent);border:2px solid #151518;box-shadow:0 0 0 2px rgba(var(--phone-accent-rgb),.14);cursor:pointer}
+.settings-save{width:100%;margin-top:8px;border:0;border-radius:15px;padding:12px;background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));color:#1c1607;font-size:9px;font-weight:1000;cursor:pointer}.settings-save-note{text-align:center;margin:7px 0 0;font-size:6.5px;color:#55555b}
+
+/* Theme colors applied throughout the phone */
+.eyebrow{color:rgba(var(--phone-accent-rgb),.76)}
+.number-chip{border-color:rgba(var(--phone-accent-rgb),.20);background:linear-gradient(135deg,rgba(var(--phone-accent-rgb),.10),rgba(255,255,255,.028))}.number-chip b{color:var(--phone-accent)}
+.app-card.primary .app-icon,.phone-icon{background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;box-shadow:0 7px 18px rgba(var(--phone-accent-rgb),.18)!important}
+.call-main{background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));color:#181308;box-shadow:0 12px 25px rgba(var(--phone-accent-rgb),.18)}
+.tab.active{color:var(--phone-accent);box-shadow:inset 0 0 0 1px rgba(var(--phone-accent-rgb),.10)}
+.circle-btn.accent,.sheet-primary,.message-composer button,.settings-save{background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))}
+.my-contact-card{background:linear-gradient(140deg,rgba(var(--phone-accent-rgb),.14),rgba(255,255,255,.035));border-color:rgba(var(--phone-accent-rgb),.19)}
+.mini-pill{border-color:rgba(var(--phone-accent-rgb),.17);background:rgba(var(--phone-accent-rgb),.08);color:var(--phone-accent)}
+.fav-star,.setting-icon.star{color:var(--phone-accent)}
+.conversation-unread{background:var(--phone-accent);color:#171205}
+.message-line.out .message-bubble{background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));color:#1a1406}
+.taxi-primary{background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))}
+
+/* Wallpaper lives behind the home UI */
+#homeView{background-image:var(--phone-wallpaper)!important;background-size:cover!important;background-position:center!important}
+#homeView:before{content:"";position:absolute;inset:0;z-index:0;background:rgba(0,0,0,var(--phone-dim));backdrop-filter:blur(var(--phone-blur));pointer-events:none}
+#homeView:after{content:"";position:absolute;inset:0;z-index:0;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.18));pointer-events:none}
+#homeView>*{position:relative;z-index:1}
+.app-card{background:rgba(18,18,20,var(--phone-glass));backdrop-filter:blur(8px)}
+
+
+/* ============================================================
+   COOKIE PHONE V6.1 - FUTURE-PROOF HOME LAUNCHER
+   홈 화면 자체가 밑으로 밀리지 않도록 앱 영역만 독립 스크롤.
+   앱이 수십 개로 늘어나도 같은 레이아웃 유지.
+   ============================================================ */
+
+#homeView{
+  overflow:hidden!important;
+  padding:58px 16px 32px!important;
+}
+
+/* 상단 시간/번호 영역을 더 작고 고정적으로 */
+#homeView .home-head{
+  padding:18px 5px 10px!important;
+  height:196px;
+  overflow:hidden;
+}
+#homeView .home-head h1{
+  margin-top:6px!important;
+  font-size:45px!important;
+  line-height:.95!important;
+}
+#homeView .date{
+  margin-top:7px!important;
+}
+#homeView .number-chip{
+  margin-top:13px!important;
+  padding:10px 12px!important;
+  border-radius:14px!important;
+}
+
+/* 앱 영역 상단 작은 라벨 */
+.launcher-head{
+  position:absolute!important;
+  z-index:4!important;
+  left:21px;
+  right:21px;
+  top:254px;
+  height:23px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  pointer-events:none;
+}
+.launcher-head span{
+  font-size:7px;
+  font-weight:900;
+  letter-spacing:1.5px;
+  color:rgba(var(--phone-accent-rgb),.78);
+}
+.launcher-head small{
+  font-size:6.3px;
+  color:rgba(255,255,255,.30);
+}
+
+/* 핵심: 앱들만 스크롤되는 고정 크기 런처 */
+#homeView .app-grid{
+  position:absolute!important;
+  z-index:3!important;
+  left:16px!important;
+  right:16px!important;
+  top:278px!important;
+  bottom:49px!important;
+
+  display:grid!important;
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  grid-auto-rows:83px!important;
+  gap:9px 6px!important;
+
+  padding:6px 2px 20px!important;
+  margin:0!important;
+
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+  scroll-behavior:smooth;
+
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+#homeView .app-grid::-webkit-scrollbar{
+  display:none;
+}
+
+/* 기존 큰 카드형 -> 실제 스마트폰 아이콘형 */
+#homeView .app-card{
+  min-width:0!important;
+  width:100%!important;
+  height:83px!important;
+  padding:5px 2px!important;
+  border:0!important;
+  border-radius:14px!important;
+  background:transparent!important;
+  backdrop-filter:none!important;
+  box-shadow:none!important;
+
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:flex-start!important;
+  gap:6px!important;
+  text-align:center!important;
+  overflow:visible!important;
+  transform:none!important;
+}
+#homeView .app-card:not(.disabled):hover{
+  transform:translateY(-2px)!important;
+  background:rgba(255,255,255,.025)!important;
+}
+#homeView .app-card:active{
+  transform:scale(.96)!important;
+}
+
+/* 아이콘을 앱 런처용 정사각형으로 통일 */
+#homeView .app-icon{
+  position:relative;
+  flex:0 0 auto;
+  width:48px!important;
+  height:48px!important;
+  border-radius:15px!important;
+  display:grid!important;
+  place-items:center!important;
+
+  background:rgba(20,20,23,.58)!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  box-shadow:
+    0 7px 17px rgba(0,0,0,.22),
+    inset 0 1px rgba(255,255,255,.035)!important;
+  backdrop-filter:blur(10px)!important;
+}
+#homeView .app-icon svg{
+  width:21px!important;
+  height:21px!important;
+}
+
+/* 기존 개별 앱 색상은 아이콘 안에서 유지 */
+#homeView .app-card.primary .app-icon,
+#homeView .phone-icon{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#1b1506!important;
+  border:0!important;
+}
+#homeView .contacts-icon{
+  background:linear-gradient(145deg,#676c78,#3e424c)!important;
+  color:#fff!important;
+}
+#homeView .messages-icon{
+  background:linear-gradient(145deg,#68c982,#388e58)!important;
+  color:#071b0d!important;
+}
+#homeView .taxi-icon{
+  background:linear-gradient(145deg,#ffd85e,#dca51e)!important;
+  color:#251b03!important;
+  border:0!important;
+}
+#homeView .mechanic-icon{
+  background:linear-gradient(145deg,#80a9bd,#456a7d)!important;
+  color:#07141a!important;
+  border:0!important;
+}
+#homeView .settings-icon{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#18140a!important;
+  border:0!important;
+}
+
+/* 앱 이름만 표시. 설명은 홈에서 제거해 화면 낭비 방지 */
+#homeView .app-copy{
+  width:100%;
+  min-width:0;
+  display:block!important;
+  line-height:1.1!important;
+}
+#homeView .app-copy b{
+  display:block;
+  width:100%;
+  font-size:8.4px!important;
+  font-weight:800!important;
+  color:rgba(255,255,255,.91)!important;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+#homeView .app-copy small{
+  display:none!important;
+}
+
+/* 미개발 앱도 런처 자리만 자연스럽게 유지 */
+#homeView .app-card.disabled{
+  opacity:.38!important;
+}
+#homeView .app-card.disabled .app-icon{
+  filter:saturate(.5);
+}
+
+/* 메시지 숫자 배지는 작은 아이콘에 맞춰 재배치 */
+#homeView .app-badge{
+  right:-5px!important;
+  top:-5px!important;
+  min-width:16px!important;
+  height:16px!important;
+  border-width:2px!important;
+  font-size:6.5px!important;
+}
+
+/* 앱이 더 있다는 것을 자연스럽게 보여주는 하단 페이드 */
+.launcher-fade{
+  position:absolute!important;
+  z-index:5!important;
+  left:16px;
+  right:16px;
+  bottom:45px;
+  height:22px;
+  pointer-events:none;
+  background:linear-gradient(180deg,transparent,rgba(8,8,10,.48));
+  border-radius:0 0 14px 14px;
+}
+
+/* 하단 안내문은 화면 고정 */
+#homeView .home-footer{
+  position:absolute!important;
+  z-index:6!important;
+  bottom:20px!important;
+  left:0!important;
+  right:0!important;
+  color:rgba(255,255,255,.25)!important;
+  font-size:6.5px!important;
+}
+
+/* 작은 해상도도 앱이 잘리지 않게 */
+@media (max-height:820px){
+  #homeView .home-head{
+    height:174px!important;
+    padding-top:12px!important;
+  }
+  #homeView .home-head h1{
+    font-size:40px!important;
+  }
+  .launcher-head{
+    top:229px!important;
+  }
+  #homeView .app-grid{
+    top:251px!important;
+    bottom:43px!important;
+    grid-auto-rows:75px!important;
+  }
+  #homeView .app-card{
+    height:75px!important;
+  }
+  #homeView .app-icon{
+    width:43px!important;
+    height:43px!important;
+    border-radius:13px!important;
+  }
+  #homeView .app-icon svg{
+    width:19px!important;
+    height:19px!important;
+  }
+  .launcher-fade{
+    bottom:40px!important;
+  }
+  #homeView .home-footer{
+    bottom:16px!important;
+  }
+}
+
+
+/* ============================================================
+   COOKIE PHONE V6.2 - HOME LAYOUT HARD FIX
+   중요:
+   V6의 '#homeView>* { position:relative }'가 wallpaper-orb의 absolute를
+   덮어써 장식 원 2개가 실제 레이아웃 높이를 차지하던 문제를 완전히 차단.
+   홈의 주요 영역을 전부 명시적 absolute layout으로 고정한다.
+   ============================================================ */
+
+/* 장식 배경은 절대 레이아웃에 참여하면 안 됨 */
+#homeView .wallpaper-orb{
+  position:absolute!important;
+  z-index:0!important;
+  margin:0!important;
+  pointer-events:none!important;
+}
+#homeView .orb-a{
+  width:180px!important;
+  height:180px!important;
+  right:-72px!important;
+  top:72px!important;
+  left:auto!important;
+  bottom:auto!important;
+}
+#homeView .orb-b{
+  width:140px!important;
+  height:140px!important;
+  left:-78px!important;
+  bottom:132px!important;
+  right:auto!important;
+  top:auto!important;
+}
+
+/* 시간 / 날짜 / 번호는 항상 위쪽 고정 */
+#homeView .home-head{
+  position:absolute!important;
+  z-index:3!important;
+  left:22px!important;
+  right:22px!important;
+  top:78px!important;
+  height:177px!important;
+  padding:0!important;
+  margin:0!important;
+  overflow:visible!important;
+}
+#homeView .home-head .eyebrow{
+  margin:0!important;
+}
+#homeView .home-head h1{
+  margin:8px 0 0!important;
+  font-size:48px!important;
+  line-height:.94!important;
+}
+#homeView .home-head .date{
+  margin:8px 0 0!important;
+}
+#homeView .home-head .number-chip{
+  margin-top:16px!important;
+  padding:10px 12px!important;
+  min-height:42px!important;
+}
+
+/* 앱 라벨/런처는 시간 영역 아래에 완전히 분리 */
+#homeView .launcher-head{
+  position:absolute!important;
+  z-index:4!important;
+  left:22px!important;
+  right:22px!important;
+  top:267px!important;
+  height:20px!important;
+  margin:0!important;
+}
+#homeView .app-grid{
+  position:absolute!important;
+  z-index:3!important;
+  left:17px!important;
+  right:17px!important;
+  top:291px!important;
+  bottom:48px!important;
+  margin:0!important;
+  padding:5px 1px 18px!important;
+}
+
+/* 하단 페이드도 런처에만 겹치게 */
+#homeView .launcher-fade{
+  position:absolute!important;
+  z-index:5!important;
+  left:17px!important;
+  right:17px!important;
+  bottom:45px!important;
+}
+
+/* 테마의 범용 자식 position 규칙보다 이 레이아웃이 항상 우선 */
+#homeView .home-head,
+#homeView .launcher-head,
+#homeView .app-grid,
+#homeView .launcher-fade,
+#homeView .home-footer{
+  box-sizing:border-box!important;
+}
+
+/* 635px 전후의 낮은 화면에서도 겹치지 않는 별도 배치 */
+@media (max-height:820px){
+  #homeView .home-head{
+    top:72px!important;
+    height:157px!important;
+  }
+  #homeView .home-head h1{
+    font-size:43px!important;
+  }
+  #homeView .home-head .number-chip{
+    margin-top:13px!important;
+    min-height:39px!important;
+  }
+  #homeView .launcher-head{
+    top:239px!important;
+  }
+  #homeView .app-grid{
+    top:263px!important;
+    bottom:43px!important;
+    grid-auto-rows:72px!important;
+    gap:7px 5px!important;
+  }
+  #homeView .app-card{
+    height:72px!important;
+  }
+  #homeView .app-icon{
+    width:42px!important;
+    height:42px!important;
+  }
+  #homeView .launcher-fade{
+    bottom:39px!important;
+  }
+}
+
+
+/* ============================================================
+   COOKIE PHONE V6.3 - GLOBAL ACCENT THEME
+   설정에서 고른 메인/보조 색상이 일부 버튼만이 아니라
+   전화/연락처/메시지/택시/정비/설정 포함 폰 전체에 적용.
+   고정 녹색/파랑/노랑/빨강 계열을 제거하고 theme vars로 통일.
+   ============================================================ */
+
+/* ---------- 홈 앱 아이콘 전체 ---------- */
+#homeView .phone-icon,
+#homeView .contacts-icon,
+#homeView .messages-icon,
+#homeView .taxi-icon,
+#homeView .mechanic-icon,
+#homeView .settings-icon,
+#homeView .app-card.primary .app-icon,
+#homeView .service-card .app-icon{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#171308!important;
+  border:0!important;
+  box-shadow:
+    0 8px 18px rgba(var(--phone-accent-rgb),.18),
+    inset 0 1px rgba(255,255,255,.18)!important;
+}
+
+/* 비활성 앱은 같은 테마지만 흐리게 */
+#homeView .app-card.disabled .app-icon{
+  background:linear-gradient(145deg,
+    rgba(var(--phone-accent-rgb),.28),
+    rgba(var(--phone-accent2-rgb),.18))!important;
+  color:rgba(255,255,255,.52)!important;
+}
+
+/* ---------- 공통 버튼 ---------- */
+.circle-btn.accent,
+.sheet-primary,
+.settings-save,
+.message-composer button,
+.call-main,
+.service-primary,
+.taxi-primary,
+.mechanic-primary,
+.nearby-send,
+.mini-pill{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#181307!important;
+  border-color:rgba(var(--phone-accent-rgb),.18)!important;
+  box-shadow:0 8px 18px rgba(var(--phone-accent-rgb),.12)!important;
+}
+
+/* 보조 버튼도 포인트 계열을 살짝 반영 */
+.sheet-secondary,
+.service-secondary,
+.circle-btn,
+.mini-pill{
+  border-color:rgba(var(--phone-accent-rgb),.13)!important;
+}
+.sheet-secondary:hover,
+.service-secondary:hover,
+.circle-btn:hover{
+  border-color:rgba(var(--phone-accent-rgb),.28)!important;
+  background:rgba(var(--phone-accent-rgb),.08)!important;
+}
+
+/* ---------- 전화 앱 ---------- */
+.call-view{
+  background:
+    radial-gradient(circle at 78% 5%,rgba(var(--phone-accent-rgb),.13),transparent 34%),
+    radial-gradient(circle at 8% 93%,rgba(var(--phone-accent2-rgb),.08),transparent 30%),
+    linear-gradient(160deg,#141416 0%,#09090b 65%,#11100c 100%)!important;
+}
+.glow-a{background:rgba(var(--phone-accent-rgb),.10)!important}
+.glow-b{background:rgba(var(--phone-accent2-rgb),.07)!important}
+.caller-avatar{
+  border-color:rgba(var(--phone-accent-rgb),.23)!important;
+  color:var(--phone-accent)!important;
+}
+.call-timer,
+.caller-block p{
+  color:rgba(var(--phone-accent-rgb),.56)!important;
+}
+
+/* 수락/거절/종료도 선택한 팔레트로 통일 */
+.round-action.accept svg,
+.round-action.danger svg{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#181307!important;
+  box-shadow:0 10px 22px rgba(var(--phone-accent-rgb),.18)!important;
+}
+.round-action span{
+  color:rgba(var(--phone-accent-rgb),.72)!important;
+}
+
+/* 키패드/전화번호/최근통화 */
+.keypad button:hover{
+  border-color:rgba(var(--phone-accent-rgb),.22)!important;
+  background:rgba(var(--phone-accent-rgb),.08)!important;
+}
+.delete-btn{color:var(--phone-accent)!important}
+.recent-symbol.missed{
+  color:var(--phone-accent)!important;
+  background:rgba(var(--phone-accent-rgb),.08)!important;
+}
+
+/* ---------- 연락처 ---------- */
+.contact-avatar,
+.caller-avatar{
+  border-color:rgba(var(--phone-accent-rgb),.20)!important;
+}
+.my-contact-card{
+  border-color:rgba(var(--phone-accent-rgb),.22)!important;
+  background:linear-gradient(140deg,
+    rgba(var(--phone-accent-rgb),.13),
+    rgba(var(--phone-accent2-rgb),.06))!important;
+}
+.share-pulse{
+  background:
+    radial-gradient(circle,
+      var(--phone-accent) 0 22%,
+      rgba(var(--phone-accent-rgb),.28) 24% 48%,
+      rgba(var(--phone-accent-rgb),.08) 50% 70%,
+      transparent 72%)!important;
+}
+.setting-icon.star,
+.fav-star{
+  color:var(--phone-accent)!important;
+}
+.setting-toggle[data-on="true"] i,
+.setting-toggle.danger[data-on="true"] i{
+  background:var(--phone-accent2)!important;
+}
+.setting-toggle[data-on="true"] i:after{
+  background:var(--phone-accent)!important;
+}
+
+/* ---------- 메시지 ---------- */
+.messages-icon,
+.app-badge,
+.conversation-unread{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#181307!important;
+}
+.message-line.out .message-bubble{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#181307!important;
+}
+.message-line.out .message-time.read{
+  color:rgba(var(--phone-accent-rgb),.65)!important;
+}
+.message-composer textarea:focus{
+  border-color:rgba(var(--phone-accent-rgb),.35)!important;
+}
+
+/* ---------- 택시 ---------- */
+.taxi-service-hero{
+  background:
+    radial-gradient(circle at 78% 4%,rgba(var(--phone-accent-rgb),.28),transparent 34%),
+    linear-gradient(155deg,#201f18 0%,#141411 55%,#0f0f10 100%)!important;
+}
+.taxi-big,
+.taxi-icon{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#181307!important;
+}
+.route-dot{
+  border-color:var(--phone-accent)!important;
+}
+.route-dot.destination{
+  border-color:var(--phone-accent2)!important;
+}
+.service-stats b{
+  color:var(--phone-accent)!important;
+}
+
+/* ---------- 정비 ---------- */
+.mechanic-service-hero{
+  background:
+    radial-gradient(circle at 80% 5%,rgba(var(--phone-accent-rgb),.23),transparent 34%),
+    linear-gradient(155deg,#171a1c 0%,#111315 55%,#0e0f10 100%)!important;
+}
+.mechanic-big,
+.mechanic-icon{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#181307!important;
+}
+.vehicle-glyph{
+  background:rgba(var(--phone-accent-rgb),.10)!important;
+  color:var(--phone-accent)!important;
+}
+.vehicle-scan-head button{
+  color:var(--phone-accent)!important;
+}
+.health-grid b{
+  color:var(--phone-accent)!important;
+}
+.health-grid em{
+  background:linear-gradient(90deg,var(--phone-accent2),var(--phone-accent))!important;
+}
+.mechanic-pricing b{
+  color:var(--phone-accent)!important;
+}
+
+/* ---------- 설정 자체 ---------- */
+.color-presets button.selected{
+  border-color:var(--phone-accent)!important;
+  box-shadow:0 0 0 2px rgba(var(--phone-accent-rgb),.16)!important;
+}
+.wallpaper-option.selected{
+  border-color:var(--phone-accent)!important;
+  box-shadow:0 0 0 2px rgba(var(--phone-accent-rgb),.13)!important;
+}
+.range-setting input::-webkit-slider-thumb{
+  background:var(--phone-accent)!important;
+  box-shadow:0 0 0 2px rgba(var(--phone-accent-rgb),.16)!important;
+}
+
+/* ---------- 공통 선택/강조 ---------- */
+.tab.active,
+.number-chip b,
+.eyebrow,
+.settings-hint strong{
+  color:var(--phone-accent)!important;
+}
+.number-chip,
+.phone-tabs,
+.contact-search-wrap,
+.message-search-wrap{
+  border-color:rgba(var(--phone-accent-rgb),.12)!important;
+}
+
+/* 사용자가 고른 보조색도 파괴적/취소계열에 사용해서
+   '모든 색상'이 두 선택색에 묶이도록 함 */
+.service-danger,
+.sheet-danger{
+  background:rgba(var(--phone-accent2-rgb),.12)!important;
+  border-color:rgba(var(--phone-accent2-rgb),.22)!important;
+  color:var(--phone-accent2)!important;
+}
+.blocked-mark{
+  color:var(--phone-accent2)!important;
+}
+
+/* 포커스/호버 */
+.phone-input:focus,
+.contact-search-wrap:focus-within,
+.message-search-wrap:focus-within{
+  border-color:rgba(var(--phone-accent-rgb),.34)!important;
+}
+
+
+/* COOKIE PHONE V6.4 - CUSTOM WALLPAPER PICKER */
+.wallpaper-file-input{
+  position:absolute!important;width:1px!important;height:1px!important;
+  opacity:0!important;pointer-events:none!important;overflow:hidden!important;
+}
+#customWallpaperButton{display:block;box-sizing:border-box}
+.custom-wallpaper-actions{display:flex;gap:6px;margin-top:8px}
+.custom-wallpaper-upload,.custom-wallpaper-use,.custom-wallpaper-remove{
+  flex:1;min-width:0;border:1px solid rgba(var(--phone-accent-rgb),.14);border-radius:11px;
+  padding:8px 7px;background:rgba(var(--phone-accent-rgb),.06);color:var(--phone-accent);
+  font-size:7px;text-align:center;cursor:pointer
+}
+.custom-wallpaper-use{background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));color:#171206;border:0}
+.custom-wallpaper-remove{color:rgba(255,255,255,.55);background:#151518;border-color:rgba(255,255,255,.07)}
+
+
+/* ============================================================
+   COOKIE PHONE V6.5 - FIVE M NUI SAFE CUSTOM WALLPAPER
+   ============================================================ */
+.wallpaper-paste-zone{
+  margin-top:9px;
+  min-height:61px;
+  padding:11px 12px;
+  display:grid;
+  grid-template-columns:37px 1fr;
+  gap:10px;
+  align-items:center;
+  border-radius:14px;
+  border:1px dashed rgba(var(--phone-accent-rgb),.28);
+  background:rgba(var(--phone-accent-rgb),.055);
+  outline:none;
+  cursor:text;
+}
+.wallpaper-paste-zone:focus{
+  border-style:solid;
+  border-color:rgba(var(--phone-accent-rgb),.58);
+  background:rgba(var(--phone-accent-rgb),.09);
+  box-shadow:0 0 0 2px rgba(var(--phone-accent-rgb),.08);
+}
+.paste-icon{
+  width:35px;height:35px;border-radius:11px;
+  display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));
+  color:#181307;
+}
+.paste-icon svg{
+  width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+}
+.wallpaper-paste-zone>div:last-child{display:flex;flex-direction:column}
+.wallpaper-paste-zone b{font-size:8.5px;color:#ddd}
+.wallpaper-paste-zone small{margin-top:4px;font-size:6.7px;color:#66666d}
+
+.wallpaper-url-row{
+  margin-top:7px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:6px;
+}
+.wallpaper-url-row input{
+  min-width:0;
+  border:1px solid rgba(255,255,255,.07);
+  border-radius:11px;
+  background:#121215;
+  color:#ddd;
+  outline:0;
+  padding:8px 9px;
+  font-size:7px;
+}
+.wallpaper-url-row input:focus{
+  border-color:rgba(var(--phone-accent-rgb),.35);
+}
+.wallpaper-url-row button{
+  border:0;
+  border-radius:11px;
+  padding:0 10px;
+  background:rgba(var(--phone-accent-rgb),.12);
+  color:var(--phone-accent);
+  font-size:7px;
+  cursor:pointer;
+}
+
+
+/* ============================================================
+   COOKIE PHONE V6.6 - REAL PRESET WALLPAPER LIBRARY
+   ============================================================ */
+.wallpaper-setting-section{padding-bottom:14px}
+.wallpaper-library{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:9px;
+}
+.wallpaper-card{
+  position:relative;
+  min-width:0;
+  border:1px solid rgba(255,255,255,.075);
+  background:#111113;
+  border-radius:16px;
+  padding:5px;
+  color:#fff;
+  cursor:pointer;
+  overflow:hidden;
+  text-align:left;
+  transition:transform .16s ease,border-color .16s ease,box-shadow .16s ease;
+}
+.wallpaper-card:hover{
+  transform:translateY(-2px);
+  border-color:rgba(var(--phone-accent-rgb),.28);
+}
+.wallpaper-card.selected{
+  border-color:var(--phone-accent);
+  box-shadow:0 0 0 2px rgba(var(--phone-accent-rgb),.11),0 9px 20px rgba(0,0,0,.22);
+}
+.wallpaper-card-image{
+  display:block;
+  height:118px;
+  border-radius:12px;
+  background-image:var(--wp);
+  background-size:cover;
+  background-position:center;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.045);
+}
+.wallpaper-card-name{
+  display:block;
+  padding:7px 5px 4px;
+  font-size:7.6px;
+  font-weight:800;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.wallpaper-check{
+  position:absolute;
+  z-index:3;
+  right:10px;
+  top:10px;
+  width:20px;
+  height:20px;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  background:var(--phone-accent);
+  color:#181307;
+  font-size:8px;
+  font-weight:1000;
+  opacity:0;
+  transform:scale(.72);
+  transition:.15s ease;
+  box-shadow:0 4px 12px rgba(0,0,0,.28);
+}
+.wallpaper-card.selected .wallpaper-check{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* The home wallpaper is a real image, not a CSS gradient. */
+#homeView{
+  background-image:var(--phone-wallpaper)!important;
+  background-size:cover!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+}
+
+/* Light wallpaper readability */
+.screen.home-light-wallpaper #homeView .home-head h1,
+.screen.home-light-wallpaper #homeView .date,
+.screen.home-light-wallpaper #homeView .app-copy b,
+.screen.home-light-wallpaper #homeView .home-footer{
+  color:rgba(20,18,16,.88)!important;
+  text-shadow:0 1px 10px rgba(255,255,255,.28);
+}
+.screen.home-light-wallpaper #homeView .launcher-head small{
+  color:rgba(20,18,16,.46)!important;
+}
+.screen.home-light-wallpaper #homeView .number-chip{
+  background:rgba(255,255,255,.42)!important;
+  border-color:rgba(25,20,12,.10)!important;
+  backdrop-filter:blur(12px)!important;
+}
+.screen.home-light-wallpaper #homeView .number-chip span{
+  color:rgba(30,25,18,.50)!important;
+}
+.screen.home-light-wallpaper #homeView .app-card:not(.disabled):hover{
+  background:rgba(255,255,255,.20)!important;
+}
+.screen.home-light-wallpaper .statusbar{
+  color:rgba(18,18,18,.86);
+  text-shadow:0 1px 8px rgba(255,255,255,.35);
+}
+
+/* Keep dark wallpaper statusbar white when not light */
+.screen:not(.home-light-wallpaper) .statusbar{
+  color:rgba(255,255,255,.78);
+}
+
+/* Settings preview should show actual wallpaper */
+.theme-preview{
+  background-size:cover!important;
+  background-position:center!important;
+}
+
+
+/* ============================================================
+   COOKIE PHONE V6.7 - RENDER / CLARITY FIX
+   ============================================================ */
+
+/* Global status bar must stay visible on dark app screens.
+   Previous light-wallpaper rule made it dark even inside Settings. */
+.screen .statusbar,
+.screen.home-light-wallpaper .statusbar,
+.screen:not(.home-light-wallpaper) .statusbar{
+  color:rgba(255,255,255,.98)!important;
+  opacity:1!important;
+  text-shadow:0 1px 5px rgba(0,0,0,.95)!important;
+  filter:none!important;
+}
+
+/* Dark top veil guarantees readable white clock/status on white/light wallpapers. */
+#homeView:after{
+  background:
+    linear-gradient(180deg,
+      rgba(0,0,0,.64) 0%,
+      rgba(0,0,0,.28) 18%,
+      rgba(0,0,0,.07) 40%,
+      rgba(0,0,0,.13) 100%)!important;
+}
+
+/* Keep home typography crisp instead of swapping it to low-contrast dark text. */
+.screen.home-light-wallpaper #homeView .home-head h1,
+.screen.home-light-wallpaper #homeView .date,
+.screen.home-light-wallpaper #homeView .app-copy b,
+.screen.home-light-wallpaper #homeView .home-footer,
+#homeView .home-head h1,
+#homeView .date,
+#homeView .app-copy b{
+  color:rgba(255,255,255,.98)!important;
+  opacity:1!important;
+  text-shadow:0 2px 8px rgba(0,0,0,.82)!important;
+  filter:none!important;
+}
+.screen.home-light-wallpaper #homeView .number-chip{
+  background:rgba(8,8,10,.58)!important;
+  border-color:rgba(255,255,255,.13)!important;
+  backdrop-filter:blur(4px)!important;
+}
+.screen.home-light-wallpaper #homeView .number-chip span{
+  color:rgba(255,255,255,.60)!important;
+}
+.screen.home-light-wallpaper #homeView .launcher-head small{
+  color:rgba(255,255,255,.55)!important;
+}
+
+/* Settings UI contrast */
+.settings-header h2{
+  color:#fff!important;
+  opacity:1!important;
+  font-weight:850!important;
+}
+.setting-title>span{
+  color:rgba(255,255,255,.95)!important;
+  opacity:1!important;
+  font-weight:900!important;
+}
+.setting-title small{
+  color:rgba(255,255,255,.55)!important;
+  opacity:1!important;
+}
+.wallpaper-card-name{
+  color:rgba(255,255,255,.96)!important;
+  opacity:1!important;
+  font-weight:850!important;
+}
+.settings-hint,.settings-save-note{
+  color:rgba(255,255,255,.48)!important;
+}
+.range-setting b{
+  color:rgba(255,255,255,.86)!important;
+}
+.range-setting small{
+  opacity:1!important;
+}
+
+/* Do not blur preview text. Blur setting is for the home wallpaper itself. */
+.theme-preview:after{
+  backdrop-filter:none!important;
+}
+.theme-preview-status,
+.theme-preview-clock,
+.theme-preview-date,
+.theme-preview-apps{
+  opacity:1!important;
+  filter:none!important;
+  text-shadow:0 1px 7px rgba(0,0,0,.78)!important;
+}
+
+/* Thumbnails are now painted from embedded JPEG data by JS. */
+.wallpaper-card-image{
+  background-color:#141416!important;
+  background-repeat:no-repeat!important;
+  image-rendering:auto!important;
+}
+
+
+/* ============================================================
+   COOKIE PHONE V7 - COOKIE BANK
+   ============================================================ */
+#homeView .bank-icon{
+  background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2))!important;
+  color:#171207!important;border:0!important;
+}
+#homeView .camera-icon{
+  background:linear-gradient(145deg,#cfd7df,#7b8996)!important;
+  color:#0c1218!important;border:0!important;
+}
+#homeView .gallery-icon{
+  background:linear-gradient(145deg,#b8a7ff,#6759b7)!important;
+  color:#100d1c!important;border:0!important;
+}
+.bank-view{padding:0!important;overflow:hidden!important;background:#0b0b0d!important}
+.bank-top{
+  height:300px;padding:58px 18px 18px;
+  background:
+    radial-gradient(circle at 80% 6%,rgba(var(--phone-accent-rgb),.22),transparent 34%),
+    linear-gradient(155deg,#171612,#0e0e10 67%,#0b0b0d);
+}
+.bank-header{height:58px}
+.bank-circle{background:rgba(0,0,0,.22)!important}
+.bank-balance-card{
+  position:relative;overflow:hidden;height:162px;margin-top:10px;padding:18px;border-radius:25px;
+  background:
+    radial-gradient(circle at 86% 12%,rgba(255,255,255,.15),transparent 25%),
+    linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));
+  color:#181307;box-shadow:0 21px 45px rgba(0,0,0,.32);
+}
+.bank-card-shine{position:absolute;width:180px;height:180px;border-radius:50%;right:-75px;top:-95px;border:1px solid rgba(255,255,255,.16)}
+.bank-card-head,.bank-card-foot{position:relative;z-index:2;display:flex;justify-content:space-between;align-items:center}
+.bank-card-head span{font-size:6.8px;font-weight:900;letter-spacing:1.2px;opacity:.58}.bank-card-head i{font-size:8px;font-style:normal;font-weight:1000;letter-spacing:1px}
+.bank-balance-card>strong{position:relative;z-index:2;display:block;margin-top:26px;font-size:29px;letter-spacing:-1.2px;font-weight:850}
+.bank-card-foot{margin-top:24px}.bank-card-foot span{font-size:6.5px;opacity:.55}.bank-card-foot b{font-size:8.5px;letter-spacing:.5px}
+.bank-content{height:400px;padding:14px 18px 28px;overflow-y:auto;scrollbar-width:none}.bank-content::-webkit-scrollbar{display:none}
+.bank-quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.bank-quick{
+  min-height:83px;border:1px solid rgba(255,255,255,.065);background:#151518;color:#fff;border-radius:18px;padding:11px;
+  display:flex;flex-direction:column;justify-content:space-between;text-align:left;cursor:pointer;
+}
+.bank-quick:hover{border-color:rgba(var(--phone-accent-rgb),.24);background:rgba(var(--phone-accent-rgb),.06)}
+.bank-quick-icon{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:rgba(var(--phone-accent-rgb),.11);color:var(--phone-accent)}
+.bank-quick-icon svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.bank-quick>span{display:flex;flex-direction:column}.bank-quick b{font-size:9.5px}.bank-quick small{margin-top:4px;font-size:6.8px;color:#68686f}
+.bank-section-head{display:flex;justify-content:space-between;align-items:center;margin:17px 2px 7px}.bank-section-head span{font-size:8px;font-weight:900;color:#ddd}.bank-section-head small{font-size:6.5px;color:#5e5e64}
+.bank-history{display:flex;flex-direction:column}
+.bank-history-empty{padding:42px 10px;text-align:center;color:#626268;font-size:8px;line-height:1.7}
+.bank-history-row{display:grid;grid-template-columns:39px 1fr auto;gap:9px;align-items:center;padding:10px 2px;border-bottom:1px solid rgba(255,255,255,.045)}
+.bank-history-icon{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:rgba(var(--phone-accent-rgb),.08);color:var(--phone-accent)}
+.bank-history-row.incoming .bank-history-icon{background:rgba(var(--phone-accent2-rgb),.09);color:var(--phone-accent2)}
+.bank-history-icon svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8}
+.bank-history-info{min-width:0}.bank-history-info b{display:block;font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bank-history-info small{display:block;margin-top:4px;color:#626268;font-size:6.8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bank-history-money{text-align:right}.bank-history-money b{display:block;font-size:9px}.bank-history-row.outgoing .bank-history-money b{color:#ddd}.bank-history-row.incoming .bank-history-money b{color:var(--phone-accent)}.bank-history-money small{display:block;margin-top:4px;font-size:6.5px;color:#5d5d63}
+
+.bank-sheet .field-label{margin-top:10px}.bank-sheet-primary{width:100%;margin-top:14px}
+.bank-amount-input{height:52px;border:1px solid rgba(255,255,255,.08);background:#101012;border-radius:14px;display:grid;grid-template-columns:1fr auto;align-items:center;padding:0 13px}
+.bank-amount-input:focus-within{border-color:rgba(var(--phone-accent-rgb),.36)}
+.bank-amount-input input{min-width:0;border:0;outline:0;background:transparent;color:#fff;font-size:20px;font-weight:700;text-align:right}
+.bank-amount-input span{margin-left:6px;font-size:9px;color:#7a7a80}
+.bank-quick-amounts{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:7px}
+.bank-quick-amounts button{border:1px solid rgba(var(--phone-accent-rgb),.10);background:rgba(var(--phone-accent-rgb),.055);color:var(--phone-accent);border-radius:10px;padding:7px 2px;font-size:7px;cursor:pointer}
+.bank-contact-hints{max-height:126px;overflow-y:auto;display:flex;gap:5px;flex-direction:column;margin-top:7px;scrollbar-width:none}.bank-contact-hints::-webkit-scrollbar{display:none}
+.bank-contact-hint{border:1px solid rgba(255,255,255,.06);background:#141417;color:#fff;border-radius:11px;padding:7px 9px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;text-align:left}
+.bank-contact-hint b{font-size:8px}.bank-contact-hint small{font-size:6.5px;color:#66666d}
+
+.bank-nearby-list{display:flex;flex-direction:column;gap:7px;max-height:360px;overflow-y:auto;scrollbar-width:none}.bank-nearby-list::-webkit-scrollbar{display:none}
+.bank-nearby-row{display:grid;grid-template-columns:43px 1fr auto;gap:9px;align-items:center;padding:9px;border-radius:15px;border:1px solid rgba(255,255,255,.06);background:#141417}
+.bank-nearby-info{min-width:0;display:flex;flex-direction:column}.bank-nearby-info b{font-size:9.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bank-nearby-info small{margin-top:3px;font-size:6.7px;color:#66666d}
+.bank-nearby-send{border:0;border-radius:999px;background:rgba(var(--phone-accent-rgb),.11);color:var(--phone-accent);padding:7px 9px;font-size:7px;cursor:pointer}
+.bank-target-card{display:grid;grid-template-columns:55px 1fr;gap:11px;align-items:center;margin-bottom:12px;padding:11px;border-radius:15px;background:rgba(var(--phone-accent-rgb),.055);border:1px solid rgba(var(--phone-accent-rgb),.10)}
+.bank-target-card>div:last-child{display:flex;flex-direction:column}.bank-target-card b{font-size:11px}.bank-target-card small{margin-top:4px;font-size:7.5px;color:#77777d}
+
+.bank-confirm-sheet{text-align:center;padding-top:25px}
+.bank-confirm-icon{width:62px;height:62px;border-radius:20px;margin:11px auto 13px;display:grid;place-items:center;background:linear-gradient(145deg,var(--phone-accent),var(--phone-accent2));color:#181307}
+.bank-confirm-icon svg{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.bank-confirm-sheet>p{margin:0;color:#74747a;font-size:8px}.bank-confirm-sheet>h3{margin:9px 0 3px;font-size:17px}.bank-confirm-sheet>b{font-size:8.5px;color:#77777e}.bank-confirm-sheet>strong{display:block;margin-top:15px;font-size:27px;color:var(--phone-accent)}.bank-confirm-sheet>small{display:block;min-height:12px;margin-top:7px;color:#68686e;font-size:7px}
+
+@media(max-height:820px){
+  .bank-top{height:264px;padding-top:50px}.bank-balance-card{height:142px}.bank-balance-card>strong{margin-top:19px;font-size:25px}.bank-card-foot{margin-top:19px}.bank-content{height:345px}
+}
+
+
+/* ============================================================
+   COOKIE PHONE V7.1 - CAMERA GALLERY
+   ============================================================ */
+.gallery-view{padding:0!important;background:#0d0d10!important;overflow:hidden!important}
+.gallery-header{padding-bottom:10px!important;background:linear-gradient(180deg,#17171b,#101012)!important;border-bottom:1px solid rgba(255,255,255,.05)}
+.gallery-summary{height:56px;padding:10px 17px 8px;display:flex;flex-direction:column;border-bottom:1px solid rgba(255,255,255,.045)}
+.gallery-summary b{font-size:10px;color:#e6d8ff}.gallery-summary small{margin-top:4px;font-size:7px;color:#696970}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:5px;overflow-y:auto;align-content:start;scrollbar-width:none}
+#galleryView .gallery-grid{height:545px;padding-bottom:24px}.gallery-grid::-webkit-scrollbar{display:none}
+.gallery-tile{position:relative;aspect-ratio:1/1;border:0;background:#17171a;padding:0;overflow:hidden;cursor:pointer;border-radius:5px}
+.gallery-tile img{width:100%;height:100%;object-fit:cover;display:block;transition:.16s}
+.gallery-tile:hover img{transform:scale(1.045);filter:brightness(1.08)}
+.gallery-tile span{position:absolute;left:0;right:0;bottom:0;padding:12px 4px 4px;background:linear-gradient(transparent,rgba(0,0,0,.76));font-size:5.4px;color:rgba(255,255,255,.8);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gallery-tile.selected{outline:2px solid var(--phone-accent);outline-offset:-2px}
+.gallery-empty{grid-column:1/-1;min-height:190px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#66666d;font-size:8px;line-height:1.7;padding:20px}
+.gallery-empty b{font-size:10px;color:#a9a9af;margin-bottom:4px}.gallery-empty small{font-size:7.5px;color:#66666d}
+.gallery-picker-sheet{max-height:82%!important}.gallery-picker-sheet .gallery-grid{max-height:430px;grid-template-columns:repeat(3,1fr);padding:3px 0 8px}
+.gallery-photo-sheet{padding-bottom:16px!important}.gallery-photo-frame{width:100%;aspect-ratio:16/9;border-radius:17px;overflow:hidden;background:#09090a;border:1px solid rgba(255,255,255,.07)}
+.gallery-photo-frame img{width:100%;height:100%;display:block;object-fit:contain;background:#050505}
+.gallery-photo-meta{display:flex;align-items:center;justify-content:space-between;padding:10px 3px 5px}.gallery-photo-meta b{font-size:8px;color:#bdbdc3}.gallery-photo-meta small{font-size:6.5px;color:#6d638d;letter-spacing:.8px}
+.gallery-delete{width:100%;margin-top:8px!important}
+.profile-photo-clear{border:0;background:transparent;color:#a87373;font-size:7.5px;cursor:pointer;margin-top:-5px}.profile-photo-clear:hover{color:#dc8c8c}
+.profile-photo-rule{text-align:center;color:#65656c;font-size:6.8px;line-height:1.5;margin-top:-4px}
+
+
+/* Gallery metadata from COOKIE Pro Camera */
+.gallery-photo-frame.portrait{aspect-ratio:9/16;width:62%;margin:0 auto}
+.gallery-photo-frame.portrait img{object-fit:contain}
+.gallery-photo-frame.landscape{aspect-ratio:16/9;width:100%;margin:0}
+.gallery-tile.portrait img{object-fit:cover;transform:scale(1.12)}
+.gallery-tile.portrait:hover img{transform:scale(1.16)}
+
+
+/* ============================================================
+   COOKIE PHONE V7.2 - PRO CAMERA
+   Full-screen viewfinder HUD. Controls are handled in client Lua.
+   ============================================================ */
+.camera-hud{position:fixed;inset:0;z-index:9999;display:none;pointer-events:none;color:#fff;font-family:Inter,Arial,'Malgun Gothic',sans-serif;overflow:hidden}
+.camera-hud.active{display:block}
+.camera-frame{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.16);transition:width .24s ease,height .24s ease,border-radius .24s ease,box-shadow .24s ease;overflow:hidden}
+.camera-hud.landscape .camera-frame{width:100vw;height:100vh;border-radius:0;box-shadow:inset 0 0 120px rgba(0,0,0,.12)}
+.camera-hud.portrait .camera-frame{height:92vh;width:51.75vh;max-width:96vw;border-radius:16px;box-shadow:0 0 0 100vmax rgba(0,0,0,.52),inset 0 0 100px rgba(0,0,0,.08)}
+.camera-grid{position:absolute;inset:0;opacity:.58;transition:opacity .16s}.camera-grid.hidden{opacity:0}
+.camera-grid i{position:absolute;background:rgba(255,255,255,.55);box-shadow:0 0 1px rgba(0,0,0,.75)}
+.camera-grid .v{top:0;bottom:0;width:1px}.camera-grid .v1{left:33.333%}.camera-grid .v2{left:66.666%}
+.camera-grid .h{left:0;right:0;height:1px}.camera-grid .h1{top:33.333%}.camera-grid .h2{top:66.666%}
+.camera-focus-box{position:absolute;left:50%;top:50%;width:62px;height:62px;transform:translate(-50%,-50%);opacity:.55}
+.camera-focus-box i{position:absolute;width:14px;height:14px;border-color:rgba(255,222,95,.9);border-style:solid}
+.camera-focus-box i:nth-child(1){left:0;top:0;border-width:2px 0 0 2px}.camera-focus-box i:nth-child(2){right:0;top:0;border-width:2px 2px 0 0}.camera-focus-box i:nth-child(3){right:0;bottom:0;border-width:0 2px 2px 0}.camera-focus-box i:nth-child(4){left:0;bottom:0;border-width:0 0 2px 2px}
+.camera-ui{position:absolute;z-index:4;left:0;right:0;transition:opacity .12s,transform .16s}
+.camera-topbar{top:0;height:82px;padding:18px 26px 12px;display:flex;align-items:flex-start;justify-content:space-between;background:linear-gradient(180deg,rgba(0,0,0,.58),transparent)}
+.camera-brand{display:flex;align-items:baseline;gap:8px;text-shadow:0 1px 4px #000}.camera-brand b{font-size:14px;letter-spacing:2.4px}.camera-brand span{font-size:8px;letter-spacing:2px;color:rgba(255,255,255,.62)}
+.camera-status-row{display:flex;gap:7px}.cam-status{padding:7px 10px;border-radius:999px;background:rgba(10,10,12,.52);border:1px solid rgba(255,255,255,.13);backdrop-filter:blur(8px);font-size:9px;font-weight:800;text-shadow:0 1px 3px #000}
+.camera-bottom{bottom:0;min-height:172px;padding:18px 28px 20px;background:linear-gradient(0deg,rgba(0,0,0,.70),rgba(0,0,0,.26) 68%,transparent)}
+.camera-lens-row{height:31px;display:flex;justify-content:center;align-items:center;gap:12px}.camera-lens-row span{font-size:9px;color:rgba(255,255,255,.48)}.camera-lens-row b{min-width:55px;text-align:center;font-size:13px;background:rgba(0,0,0,.55);border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:6px 10px;color:#ffe275}
+.camera-controls-row{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:center;max-width:560px;margin:2px auto 0}
+.camera-last-photo{width:54px;height:54px;border-radius:12px;border:2px solid rgba(255,255,255,.72);background:rgba(255,255,255,.08);background-size:cover;background-position:center;display:grid;place-items:center;justify-self:start;overflow:hidden;box-shadow:0 8px 26px rgba(0,0,0,.25)}
+.camera-last-photo span{font-size:7px;color:rgba(255,255,255,.56);text-align:center}.camera-last-photo.has-photo{background-size:cover;background-position:center}
+.camera-shutter-wrap{text-align:center}.camera-shutter{width:68px;height:68px;border-radius:50%;border:4px solid #fff;background:rgba(255,255,255,.12);padding:5px;pointer-events:none}.camera-shutter i{display:block;width:100%;height:100%;border-radius:50%;background:#fff;transition:transform .08s}.camera-hud.shutter .camera-shutter i{transform:scale(.82)}.camera-shutter-wrap small{display:block;margin-top:6px;font-size:7px;color:rgba(255,255,255,.65)}
+.camera-flip-icon{justify-self:end;width:58px;text-align:center}.camera-flip-icon>span{width:46px;height:46px;margin:0 auto;border-radius:50%;display:grid;place-items:center;background:rgba(16,16,18,.62);border:1px solid rgba(255,255,255,.16);font-size:25px;backdrop-filter:blur(7px)}.camera-flip-icon small{display:block;margin-top:5px;font-size:7px;color:rgba(255,255,255,.7)}
+.camera-help{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 12px;margin-top:10px;font-size:7.5px;color:rgba(255,255,255,.56)}.camera-help b{color:#fff;border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.42);padding:2px 5px;border-radius:4px;margin-right:3px}
+.camera-countdown{position:absolute;z-index:7;left:50%;top:50%;transform:translate(-50%,-50%) scale(.75);font-size:104px;font-weight:200;text-shadow:0 4px 30px rgba(0,0,0,.8);opacity:0;transition:.12s}.camera-countdown.show{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.camera-shutter-flash{position:absolute;z-index:20;inset:0;background:rgba(255,255,255,.46);opacity:0;transition:opacity .05s}.camera-shutter-flash.strong{background:rgba(255,255,255,.72)}.camera-shutter-flash.show{opacity:1}
+.camera-hud.capture-clean .camera-ui,.camera-hud.capture-clean .camera-grid,.camera-hud.capture-clean .camera-focus-box,.camera-hud.capture-clean .camera-frame{opacity:0!important;border-color:transparent!important;box-shadow:none!important}
+.camera-hud.flipping .camera-frame{filter:blur(5px);transform:translate(-50%,-50%) scale(.94)}
+.camera-hud.front .camera-brand span:after{content:' · SELFIE';color:#ffe275}
+.camera-hud.busy .camera-shutter{opacity:.48}
+@media(max-width:900px){.camera-help{display:none}.camera-bottom{min-height:140px}.camera-topbar{padding:14px}.camera-status-row{gap:4px}.cam-status{padding:5px 7px;font-size:7px}}
+
+
+/* ============================================================
+   COOKIE PHONE V8 - DISPATCH / EMERGENCY CONTACT
+   ============================================================ */
+#homeView .dispatch-icon{background:linear-gradient(145deg,#ff6b6b,#b92f3a)!important;color:#fff!important;border:0!important;box-shadow:0 7px 18px rgba(210,55,65,.18)}
+.dispatch-view{padding:60px 0 0!important;background:linear-gradient(180deg,#101012,#0b0b0d)!important;overflow:hidden!important}
+.dispatch-header{padding:0 18px}.dispatch-scroll{position:absolute;left:0;right:0;top:124px;bottom:18px;overflow-y:auto;padding:0 18px 30px;scrollbar-width:none}.dispatch-scroll::-webkit-scrollbar{display:none}
+.dispatch-intro{border:1px solid rgba(255,107,107,.13);background:linear-gradient(145deg,rgba(255,89,89,.09),rgba(255,255,255,.02));border-radius:18px;padding:12px 13px;display:flex;flex-direction:column}.dispatch-intro b{font-size:10px;color:#f0b0b0}.dispatch-intro small{margin-top:5px;color:#707078;font-size:7.5px;line-height:1.55}
+.dispatch-section-title{display:flex;align-items:center;justify-content:space-between;margin:15px 2px 7px}.dispatch-section-title.spaced{margin-top:18px}.dispatch-section-title span{font-size:8px;font-weight:900;letter-spacing:1px;color:#a68e8e}.dispatch-section-title small{font-size:7px;color:#606068}
+.dispatch-target-list,.dispatch-call-list{display:flex;flex-direction:column;gap:7px}.dispatch-target{width:100%;min-height:59px;border:1px solid rgba(255,255,255,.065);background:#151518;color:#fff;border-radius:16px;padding:9px 10px;display:grid;grid-template-columns:38px 1fr 55px;gap:9px;align-items:center;text-align:left;cursor:pointer}.dispatch-target:hover{background:#1b1b1f;border-color:rgba(255,112,112,.18)}.dispatch-target.offline{opacity:.58}.dispatch-target-icon{width:36px;height:36px;border-radius:12px;display:grid;place-items:center;background:rgba(255,96,96,.08);font-size:16px}.dispatch-target-copy{display:flex;flex-direction:column;min-width:0}.dispatch-target-copy b{font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dispatch-target-copy small{margin-top:4px;color:#6d6d74;font-size:7px}.dispatch-available{text-align:right;display:flex;flex-direction:column}.dispatch-available b{color:#66d78b;font-size:12px}.dispatch-available small{margin-top:2px;font-size:6px;color:#626269}
+.dispatch-empty{padding:25px 8px;text-align:center;color:#626269;font-size:8px;border:1px dashed rgba(255,255,255,.06);border-radius:14px}.dispatch-empty.compact{padding:15px 8px}
+.dispatch-call-card{border:1px solid rgba(255,255,255,.065);background:#151518;border-radius:16px;padding:11px}.dispatch-call-card.assigned{border-color:rgba(90,202,128,.12)}.dispatch-call-top{display:flex;align-items:center;justify-content:space-between}.dispatch-call-top>b{font-size:9px;color:#d7bd77}.dispatch-call-card>strong{display:block;margin-top:7px;font-size:10px}.dispatch-call-card>p{margin:6px 0 0;color:#a0a0a6;font-size:8px;line-height:1.5;white-space:pre-wrap;word-break:break-word}.dispatch-call-card>small{display:block;margin-top:7px;color:#65656c;font-size:7px}.dispatch-call-top .status{padding:3px 6px;border-radius:999px;font-size:6px;background:#242429;color:#aaa}.dispatch-call-top .status.pending{color:#e4c462}.dispatch-call-top .status.accepted{color:#63d889;background:rgba(61,185,105,.08)}.dispatch-cancel-btn{width:100%;margin-top:9px;border:1px solid rgba(222,75,75,.16);background:rgba(222,75,75,.07);color:#da7777;border-radius:10px;padding:7px;font-size:7.5px;cursor:pointer}
+.dispatch-call-actions{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:9px}.dispatch-call-actions button{border:1px solid rgba(255,255,255,.07);background:#1b1b1f;color:#999;border-radius:9px;padding:7px 3px;font-size:6.8px;cursor:pointer}.dispatch-call-actions button.finish{background:rgba(62,183,104,.08);border-color:rgba(62,183,104,.15);color:#72d591}
+.dispatch-textarea{width:100%;height:88px;resize:none;border:1px solid rgba(255,255,255,.08);outline:0;background:#121215;color:#eee;border-radius:13px;padding:10px;font:inherit;font-size:9px;line-height:1.5}.dispatch-textarea:focus{border-color:rgba(255,117,117,.22)}.dispatch-modal-actions{display:grid;grid-template-columns:1fr 1.3fr;gap:7px;margin-top:11px}.dispatch-modal-actions .sheet-primary{border:0;border-radius:12px;background:linear-gradient(145deg,#f06a6a,#b73642);color:#fff;padding:10px;font-size:8.5px;font-weight:900;cursor:pointer}.dispatch-presets{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0 12px}.dispatch-presets button{border:1px solid rgba(255,255,255,.07);background:#18181c;color:#aaa;border-radius:999px;padding:6px 8px;font-size:7px;cursor:pointer}.dispatch-presets button:hover{color:#fff;border-color:rgba(255,107,107,.2)}
+.dispatch-alerts{position:fixed;right:28px;top:26px;width:330px;z-index:120;display:flex;flex-direction:column;gap:8px;pointer-events:none}.dispatch-alert{padding:11px 13px;border-radius:14px;background:rgba(18,18,21,.96);border:1px solid rgba(255,255,255,.09);box-shadow:0 12px 34px rgba(0,0,0,.35);display:flex;flex-direction:column;opacity:0;transform:translateX(18px);transition:.2s}.dispatch-alert.show{opacity:1;transform:translateX(0)}.dispatch-alert b{font-size:10px;color:#e7c66e}.dispatch-alert span{margin-top:5px;color:#d1d1d4;font-size:9px;line-height:1.45}.dispatch-alert.success{border-color:rgba(65,198,109,.2)}.dispatch-alert.error{border-color:rgba(224,76,76,.22)}
+.dispatch-incoming{position:fixed;right:28px;top:118px;width:330px;z-index:119;padding:14px;border-radius:18px;background:linear-gradient(145deg,rgba(24,24,28,.98),rgba(12,12,14,.98));border:1px solid rgba(255,89,89,.22);box-shadow:0 16px 45px rgba(0,0,0,.42);color:#fff;pointer-events:none}.dispatch-incoming-head{display:flex;justify-content:space-between;align-items:center}.dispatch-incoming-head span{font-size:8px;color:#e18484;font-weight:900;letter-spacing:1px}.dispatch-incoming-head b{font-size:9px;color:#e8c870}.dispatch-incoming-target{margin-top:9px;font-size:13px;font-weight:900}.dispatch-incoming-caller{margin-top:4px;color:#8c8c93;font-size:8px}.dispatch-incoming p{margin:10px 0;padding:9px;border-radius:10px;background:rgba(255,255,255,.035);color:#d7d7da;font-size:9px;line-height:1.5}.dispatch-incoming-foot{display:flex;align-items:center;justify-content:space-between}.dispatch-incoming-foot span{font-size:7px;color:#717177}.dispatch-incoming-foot b{font-size:7px;color:#efb4b4}
+body.camera-clean-ui .dispatch-alerts,body.camera-clean-ui .dispatch-incoming{display:none!important}
+
+
+/* ============================================================
+   COOKIE PHONE V8.1 - SAFE TEXT / MESSAGE PHOTOS
+   ============================================================ */
+/* Keep app headers below the hardware island and make long text shrink safely. */
+.app-header>div,
+.modal-head>div,
+.conversation-person,
+.conversation-main,
+.my-contact-copy,
+.app-copy{min-width:0}
+.app-header .eyebrow,.app-header h2,
+.modal-head .eyebrow,.modal-head h3{
+  max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
+}
+.app-header h2,.modal-head h3{line-height:1.12}
+
+/* Gallery used padding:0, so its old header sat behind the clock/dynamic island. */
+#galleryView .gallery-header{
+  height:112px!important;
+  padding:52px 16px 10px!important;
+  grid-template-columns:40px minmax(0,1fr) 40px!important;
+  align-items:center!important;
+}
+#galleryView .gallery-summary{height:56px!important;padding-left:17px!important;padding-right:17px!important}
+#galleryView .gallery-summary small{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#galleryView .gallery-grid{height:calc(100% - 168px)!important}
+
+/* Prevent narrow-screen labels from leaking outside the phone glass. */
+.field-label,.locked-field,.setting-toggle,.nearby-row,.recipient-row,.dispatch-target-card,.dispatch-call-card{min-width:0;max-width:100%}
+.field-label input,.field-label textarea,.phone-input,.dispatch-textarea{width:100%;max-width:100%}
+.locked-field b,.locked-field small,.setting-toggle b,.setting-toggle small,.nearby-row-info b,.nearby-row-info small{
+  max-width:100%;overflow:hidden;text-overflow:ellipsis
+}
+
+/* Conversation photo attachment button + photo bubbles. */
+.message-composer{grid-template-columns:38px minmax(0,1fr) 38px!important}
+.message-composer .message-photo-attach{
+  background:#202025!important;color:#cfcfd5!important;border:1px solid rgba(255,255,255,.075)!important
+}
+.message-composer .message-photo-attach:hover{background:#29292f!important;color:#fff!important}
+.message-bubble.has-photo{padding:4px;overflow:hidden;max-width:228px}
+.message-bubble.has-photo .message-text{padding:7px 8px 6px;white-space:pre-wrap;word-break:break-word}
+.message-photo-wrap{display:block;width:220px;max-width:100%;border:0;padding:0;background:#09090b;border-radius:12px;overflow:hidden;cursor:pointer}
+.message-photo-wrap img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.message-photo-wrap.portrait{width:154px}
+.message-photo-wrap.portrait img{aspect-ratio:9/16;object-fit:cover}
+.message-line.in .message-bubble.has-photo{background:#202024}
+.message-line.out .message-bubble.has-photo{background:linear-gradient(145deg,#dfb944,#be9128)}
+.message-photo-picker-sheet{max-height:86%!important}
+.message-photo-picker-sheet #messagePhotoGrid{max-height:430px;overflow-y:auto}
+.message-photo-selected{margin:6px 0 9px;padding:8px 10px;border-radius:10px;background:rgba(var(--phone-accent-rgb),.08);color:var(--phone-accent);font-size:7.5px;text-align:center}
+#messagePhotoSend:disabled{opacity:.38;cursor:not-allowed}
+
+
+/* COOKIE CURSOR SAFETY V1 */
+html, body { cursor: default !important; }
+button, a, [role="button"], input[type="button"], input[type="submit"] { cursor: pointer; }
+
+
+/* COOKIE PHONE MAP */
+.map-view{padding:16px 14px 20px;overflow:hidden}.map-head-spacer{width:38px}.map-search-wrap{padding:8px 2px 10px}.map-search-wrap input{width:100%;box-sizing:border-box;border:1px solid rgba(255,255,255,.12);background:rgba(0,0,0,.26);color:var(--text,#fff);border-radius:14px;padding:12px 14px;outline:none}.map-search-wrap input:focus{border-color:var(--accent,#f0c85b)}.map-list{height:calc(100% - 92px);overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:2px}.map-place{display:flex;align-items:center;justify-content:space-between;text-align:left;border:1px solid rgba(255,255,255,.09);background:rgba(255,255,255,.045);border-radius:14px;padding:12px;color:#fff}.map-place b{display:block;font-size:13px}.map-place small{display:block;color:rgba(255,255,255,.48);font-size:9px;margin-top:3px}.map-place em{font-style:normal;font-size:9px;font-weight:900;color:#17130a;background:var(--accent,#f0c85b);padding:6px 9px;border-radius:9px}
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}

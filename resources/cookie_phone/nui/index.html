@@ -1,0 +1,898 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main id="phone" class="phone" aria-label="COOKIE 휴대전화">
+    <div class="device">
+      <div class="hardware-top">
+        <span class="camera"></span>
+        <span class="speaker"></span>
+      </div>
+
+      <section class="screen">
+        <header class="statusbar">
+          <span id="statusClock">20:40</span>
+          <div class="status-right">
+            <span class="signal"><i></i><i></i><i></i><i></i></span>
+            <span class="network">5G</span>
+            <span class="battery"><i></i></span>
+          </div>
+        </header>
+
+        <section id="homeView" class="view active">
+          <div class="wallpaper-orb orb-a"></div>
+          <div class="wallpaper-orb orb-b"></div>
+
+          <div class="home-head">
+            <p class="eyebrow">COOKIE MOBILE</p>
+            <h1 id="homeClock">20:40</h1>
+            <p id="homeDate" class="date">8월 23일 일요일</p>
+            <div class="number-chip">
+              <span>MY NUMBER</span>
+              <b id="myNumber">불러오는 중</b>
+            </div>
+          </div>
+
+          <div class="launcher-head">
+            <span>APPS</span>
+            <small>위아래로 스크롤</small>
+          </div>
+
+          <div class="app-grid" id="homeAppGrid">
+            <button class="app-card primary" data-app="phone">
+              <span class="app-icon phone-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6.4 3.5l3 4.4-2.1 2.1c1.5 3.1 3.6 5.2 6.7 6.7l2.1-2.1 4.4 3c.4.3.6.8.4 1.3-.6 1.5-1.8 2.4-3.5 2.4C10.1 21.3 2.7 13.9 2.7 6.6c0-1.7.9-2.9 2.4-3.5.5-.2 1 0 1.3.4z"/></svg>
+              </span>
+              <span class="app-copy"><b>전화</b><small>통화 · 최근 기록</small></span>
+            </button>
+
+            <button class="app-card contacts-app" data-app="contacts" type="button">
+              <span class="app-icon contacts-icon"><svg viewBox="0 0 24 24"><path d="M7 4h10a3 3 0 013 3v10a3 3 0 01-3 3H7a3 3 0 01-3-3V7a3 3 0 013-3zm2.5 5a2.5 2.5 0 105 0 2.5 2.5 0 00-5 0zM7 18c.5-2.5 2.2-3.7 5-3.7s4.5 1.2 5 3.7"/></svg></span>
+              <span class="app-copy"><b>연락처</b><small>카드 · 즐겨찾기 · 공유</small></span>
+            </button>
+
+            <button class="app-card messages-app" data-app="messages" type="button">
+              <span class="app-icon messages-icon"><svg viewBox="0 0 24 24"><path d="M5 5h14v10H9l-4 4V5z"/></svg><i id="messageBadge" class="app-badge hidden">0</i></span>
+              <span class="app-copy"><b>메시지</b><small>개인 대화 · 오프라인 수신</small></span>
+            </button>
+
+            <button class="app-card service-card dispatch-card" data-app="dispatch" type="button">
+              <span class="app-icon dispatch-icon"><svg viewBox="0 0 24 24"><path d="M5 5h14v11H9l-4 4V5z"/><path d="M8 9h8M8 12h5"/></svg></span>
+              <span class="app-copy"><b>긴급연락</b><small>공무원 · 팩션 · 서비스 콜</small></span>
+            </button>
+
+            <button class="app-card bank-app" data-app="bank" type="button">
+              <span class="app-icon bank-icon">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-5 9 5M5 10v7m4-7v7m6-7v7m4-7v7M3 19h18M2 21h20"/></svg>
+              </span>
+              <span class="app-copy"><b>은행</b><small>잔액 · 송금 · 근처 송금</small></span>
+            </button>
+
+            <button class="app-card service-card camera-card" data-app="camera" type="button">
+              <span class="app-icon camera-icon"><svg viewBox="0 0 24 24"><path d="M8 7l1.5-2h5L16 7h2a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2V9a2 2 0 012-2h2zm4 3.2A3.8 3.8 0 1015.8 14 3.8 3.8 0 0012 10.2z"/></svg></span>
+              <span class="app-copy"><b>카메라</b><small>휴대전화 카메라 실행</small></span>
+            </button>
+
+            <button class="app-card service-card gallery-card" data-app="gallery" type="button">
+              <span class="app-icon gallery-icon"><svg viewBox="0 0 24 24"><path d="M5 4h14a2 2 0 012 2v12a2 2 0 01-2 2H5a2 2 0 01-2-2V6a2 2 0 012-2h2zm1 12l4-4 3 3 2-2 3 3M16 8h.01"/></svg></span>
+              <span class="app-copy"><b>갤러리</b><small>카메라로 찍은 사진</small></span>
+            </button>
+
+            <button class="app-card service-card settings-card" data-app="settings" type="button">
+              <span class="app-icon settings-icon"><svg viewBox="0 0 24 24"><path d="M12 8a4 4 0 100 8 4 4 0 000-8zm0-5v2m0 14v2M3 12h2m14 0h2M5.6 5.6L7 7m10 10 1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg></span>
+              <span class="app-copy"><b>설정</b><small>테마 · 배경화면 · 색상</small></span>
+            </button>
+
+            <button class="app-card map-app" data-app="map" type="button">
+              <span class="app-icon"><svg viewBox="0 0 24 24"><path d="M5 4l5 2 5-2 4 2v14l-4-2-5 2-5-2V4zm5 2v14m5-16v14"/></svg></span>
+              <span class="app-copy"><b>지도</b><small>ESC 지도 열기</small></span>
+            </button>
+          </div>
+
+          <div class="launcher-fade"></div>
+          <div class="home-footer">P를 다시 누르면 휴대전화를 넣습니다.</div>
+        </section>
+
+
+        <section id="mapView" class="view map-view">
+          <div class="app-header">
+            <button id="mapBack" class="circle-btn" type="button"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <div><span class="eyebrow">COOKIE MAP</span><h2>지도</h2></div>
+            <span class="map-head-spacer"></span>
+          </div>
+          <div class="map-search-wrap"><input id="mapSearch" type="text" maxlength="40" placeholder="장소 검색"></div>
+          <div id="mapList" class="map-list"></div>
+        </section>
+
+        <section id="phoneView" class="view">
+          <div class="app-header">
+            <button id="phoneBack" class="circle-btn" type="button" aria-label="뒤로">
+              <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <div>
+              <span class="eyebrow">COOKIE MOBILE</span>
+              <h2>전화</h2>
+            </div>
+            <button id="refreshHistory" class="circle-btn" type="button" aria-label="새로고침">
+              <svg viewBox="0 0 24 24"><path d="M19 8a7 7 0 10.5 7M19 4v4h-4"/></svg>
+            </button>
+          </div>
+
+          <div class="phone-tabs">
+            <button class="tab active" data-tab="keypad" type="button">키패드</button>
+            <button class="tab" data-tab="recent" type="button">최근 통화</button>
+          </div>
+
+          <div id="keypadPane" class="tab-pane active">
+            <div class="dial-display">
+              <span id="dialHint">전화번호 입력</span>
+              <b id="dialNumber"></b>
+              <button id="dialDelete" class="delete-btn" type="button">지우기</button>
+            </div>
+
+            <div id="keypad" class="keypad">
+              <button data-key="1"><b>1</b><small>&nbsp;</small></button>
+              <button data-key="2"><b>2</b><small>ABC</small></button>
+              <button data-key="3"><b>3</b><small>DEF</small></button>
+              <button data-key="4"><b>4</b><small>GHI</small></button>
+              <button data-key="5"><b>5</b><small>JKL</small></button>
+              <button data-key="6"><b>6</b><small>MNO</small></button>
+              <button data-key="7"><b>7</b><small>PQRS</small></button>
+              <button data-key="8"><b>8</b><small>TUV</small></button>
+              <button data-key="9"><b>9</b><small>WXYZ</small></button>
+              <button data-key="*"><b>*</b><small>&nbsp;</small></button>
+              <button data-key="0"><b>0</b><small>+</small></button>
+              <button data-key="#"><b>#</b><small>&nbsp;</small></button>
+            </div>
+
+            <button id="dialCall" class="call-main" type="button">
+              <svg viewBox="0 0 24 24"><path d="M6.4 3.5l3 4.4-2.1 2.1c1.5 3.1 3.6 5.2 6.7 6.7l2.1-2.1 4.4 3c.4.3.6.8.4 1.3-.6 1.5-1.8 2.4-3.5 2.4C10.1 21.3 2.7 13.9 2.7 6.6c0-1.7.9-2.9 2.4-3.5.5-.2 1 0 1.3.4z"/></svg>
+            </button>
+          </div>
+
+          <div id="recentPane" class="tab-pane">
+            <div id="recentList" class="recent-list"></div>
+          </div>
+        </section>
+
+        <section id="bankView" class="view bank-view">
+          <div class="bank-top">
+            <div class="app-header bank-header">
+              <button id="bankBack" class="circle-btn bank-circle" type="button">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <div>
+                <span class="eyebrow">COOKIE BANK</span>
+                <h2>모바일 뱅킹</h2>
+              </div>
+              <button id="bankRefresh" class="circle-btn bank-circle" type="button">
+                <svg viewBox="0 0 24 24"><path d="M19 8a7 7 0 10.5 7M19 4v4h-4"/></svg>
+              </button>
+            </div>
+
+            <div class="bank-balance-card">
+              <div class="bank-card-shine"></div>
+              <div class="bank-card-head">
+                <span>AVAILABLE BALANCE</span>
+                <i>COOKIE</i>
+              </div>
+              <strong id="bankBalance">0원</strong>
+              <div class="bank-card-foot">
+                <span>연결 전화번호</span>
+                <b id="bankMyPhone">-</b>
+              </div>
+            </div>
+          </div>
+
+          <div class="bank-content">
+            <div class="bank-quick-grid">
+              <button id="bankPhoneTransfer" class="bank-quick" type="button">
+                <i class="bank-quick-icon">
+                  <svg viewBox="0 0 24 24"><path d="M8 4h8a2 2 0 012 2v12a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2zm2 3h4M10 17h4"/></svg>
+                </i>
+                <span><b>전화번호 송금</b><small>어디서든 번호로 보내기</small></span>
+              </button>
+
+              <button id="bankNearbyTransfer" class="bank-quick" type="button">
+                <i class="bank-quick-icon">
+                  <svg viewBox="0 0 24 24"><path d="M12 12a3 3 0 100-6 3 3 0 000 6zm-6 7c.6-3 2.6-4.5 6-4.5s5.4 1.5 6 4.5M4 9a8 8 0 000 6m16-6a8 8 0 010 6"/></svg>
+                </i>
+                <span><b>근처 송금</b><small>켜진 폰에 바로 보내기</small></span>
+              </button>
+            </div>
+
+            <div class="bank-section-head">
+              <span>최근 송금</span>
+              <small>최대 40건</small>
+            </div>
+            <div id="bankHistory" class="bank-history"></div>
+          </div>
+        </section>
+
+        <section id="settingsView" class="view settings-view">
+          <div class="app-header settings-header">
+            <button id="settingsBack" class="circle-btn" type="button">
+              <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <div><span class="eyebrow">COOKIE PERSONALIZE</span><h2>디자인 설정</h2></div>
+            <button id="settingsReset" class="circle-btn" type="button" title="초기화">
+              <svg viewBox="0 0 24 24"><path d="M19 8a7 7 0 10.5 7M19 4v4h-4"/></svg>
+            </button>
+          </div>
+
+          <div class="theme-preview-wrap">
+            <div id="themePreview" class="theme-preview mini-wallpaper-cookie-night">
+              <div class="theme-preview-status"><span>21:39</span><span>COOKIE · 5G</span></div>
+              <div class="theme-preview-clock">21:39</div>
+              <div class="theme-preview-date">나만의 COOKIE PHONE</div>
+              <div class="theme-preview-apps">
+                <i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-scroll">
+            <section class="setting-section">
+              <div class="setting-title"><span>UI 포인트 색상</span><small>버튼, 아이콘, 강조색</small></div>
+              <div id="accentPresets" class="color-presets">
+                <button type="button" data-accent="#F0C85B" data-accent2="#C69A2B" style="--sw:#F0C85B;--sw2:#C69A2B" aria-label="Cookie Gold"></button>
+                <button type="button" data-accent="#6FA8FF" data-accent2="#4A70D6" style="--sw:#6FA8FF;--sw2:#4A70D6" aria-label="Blue"></button>
+                <button type="button" data-accent="#FF7194" data-accent2="#D84D72" style="--sw:#FF7194;--sw2:#D84D72" aria-label="Rose"></button>
+                <button type="button" data-accent="#67D7A0" data-accent2="#35956A" style="--sw:#67D7A0;--sw2:#35956A" aria-label="Mint"></button>
+                <button type="button" data-accent="#B88CFF" data-accent2="#7654C9" style="--sw:#B88CFF;--sw2:#7654C9" aria-label="Purple"></button>
+                <button type="button" data-accent="#F1F1F2" data-accent2="#9B9BA1" style="--sw:#F1F1F2;--sw2:#9B9BA1" aria-label="Mono"></button>
+              </div>
+              <div class="custom-color-row">
+                <label><span>메인</span><input id="accentPicker" type="color" value="#F0C85B"><b id="accentHex">#F0C85B</b></label>
+                <label><span>보조</span><input id="accent2Picker" type="color" value="#C69A2B"><b id="accent2Hex">#C69A2B</b></label>
+              </div>
+            </section>
+
+            <section class="setting-section wallpaper-setting-section">
+              <div class="setting-title"><span>배경화면</span><small>선택 즉시 미리보기</small></div>
+              <div id="wallpaperGrid" class="wallpaper-library">
+                <button type="button" data-wallpaper="solid-black" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">완전한 검정</span>
+                </button>
+                <button type="button" data-wallpaper="solid-white" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">순백</span>
+                </button>
+                <button type="button" data-wallpaper="starry-night" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">별빛 밤</span>
+                </button>
+                <button type="button" data-wallpaper="caramel-gloss" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">카라멜 글로시</span>
+                </button>
+                <button type="button" data-wallpaper="pink-flower" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">핑크 플라워</span>
+                </button>
+                <button type="button" data-wallpaper="cookie-bakery" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">쿠키 베이커리</span>
+                </button>
+                <button type="button" data-wallpaper="mint-glass" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">민트 글라스</span>
+                </button>
+                <button type="button" data-wallpaper="lavender-aurora" class="wallpaper-card">
+                  <span class="wallpaper-check">✓</span>
+                  <span class="wallpaper-card-image"></span>
+                  <span class="wallpaper-card-name">라벤더 오로라</span>
+                </button>
+              </div>
+              <p class="settings-hint">COOKIE PHONE 전용 배경 8종입니다. 커스텀 사진 기능은 추후 별도로 추가할 수 있습니다.</p>
+            </section>
+
+            <section class="setting-section">
+              <div class="setting-title"><span>화면 효과</span><small>원하는 분위기로 조절</small></div>
+              <label class="range-setting"><span><b>배경 어둡기</b><small id="dimValue">18%</small></span><input id="dimRange" type="range" min="0" max="55" value="18"></label>
+              <label class="range-setting"><span><b>배경 흐림</b><small id="blurValue">0px</small></span><input id="blurRange" type="range" min="0" max="24" value="0"></label>
+              <label class="range-setting"><span><b>UI 유리 투명도</b><small id="glassValue">46%</small></span><input id="glassRange" type="range" min="20" max="85" value="46"></label>
+            </section>
+
+            <button id="settingsSave" class="settings-save" type="button">이 디자인 저장하기</button>
+            <p class="settings-save-note">저장한 디자인은 재접속하거나 서버를 재시작해도 유지됩니다.</p>
+          </div>
+        </section>
+
+        <section id="taxiView" class="view service-view">
+          <div class="service-hero taxi-service-hero">
+            <div class="app-header service-header">
+              <button id="taxiBack" class="circle-btn dark" type="button">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <div><span class="eyebrow">COOKIE MOBILITY</span><h2>택시 호출</h2></div>
+              <button id="taxiRefresh" class="circle-btn dark" type="button">
+                <svg viewBox="0 0 24 24"><path d="M19 8a7 7 0 10.5 7M19 4v4h-4"/></svg>
+              </button>
+            </div>
+            <div class="service-big-icon taxi-big">
+              <svg viewBox="0 0 24 24"><path d="M5 16v-5l2-5h10l2 5v5M7 16v2m10-2v2M6 11h12M8 14h.01M16 14h.01"/></svg>
+            </div>
+            <p id="taxiStatusLabel">택시가 필요하신가요?</p>
+            <h3 id="taxiStatusTitle">현재 위치에서 바로 호출</h3>
+          </div>
+
+          <div class="service-content">
+            <div class="route-card">
+              <div class="route-line">
+                <i class="route-dot pickup"></i>
+                <span><small>출발</small><b id="taxiPickup">현재 위치 불러오는 중</b></span>
+              </div>
+              <div class="route-divider"></div>
+              <div class="route-line">
+                <i class="route-dot destination"></i>
+                <span><small>목적지</small><b id="taxiDestination">지도에 웨이포인트를 찍어주세요</b></span>
+              </div>
+            </div>
+
+            <button id="taxiWaypointRefresh" class="service-secondary" type="button">현재 위치 · 지도 목적지 다시 불러오기</button>
+
+            <div class="service-stats">
+              <div><span>예상 직선거리</span><b id="taxiDistance">-</b></div>
+              <div><span>예상 최소요금</span><b id="taxiEstimate">-</b></div>
+              <div><span>배차 가능</span><b id="taxiDrivers">확인 중</b></div>
+            </div>
+
+            <p class="service-note">예상 요금은 직선거리 기준입니다. 실제 요금은 탑승 후 택시 미터기의 실제 주행거리로 계산됩니다.</p>
+
+            <button id="taxiRequest" class="service-primary taxi-primary" type="button">택시 호출하기</button>
+            <button id="taxiCancel" class="service-danger hidden" type="button">호출 취소</button>
+          </div>
+        </section>
+
+        <section id="mechanicView" class="view service-view">
+          <div class="service-hero mechanic-service-hero">
+            <div class="app-header service-header">
+              <button id="mechanicBack" class="circle-btn dark" type="button">
+                <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+              </button>
+              <div><span class="eyebrow">COOKIE ROADSIDE</span><h2>긴급정비</h2></div>
+              <button id="mechanicRefresh" class="circle-btn dark" type="button">
+                <svg viewBox="0 0 24 24"><path d="M19 8a7 7 0 10.5 7M19 4v4h-4"/></svg>
+              </button>
+            </div>
+            <div class="service-big-icon mechanic-big">
+              <svg viewBox="0 0 24 24"><path d="M14.5 6.2a4 4 0 01-5.3 5.3L4 16.7 7.3 20l5.2-5.2a4 4 0 005.3-5.3l-2.3 2.3-3.3-3.3 2.3-2.3z"/></svg>
+            </div>
+            <p id="mechanicStatusLabel">차량에 문제가 생겼나요?</p>
+            <h3 id="mechanicStatusTitle">근처 차량을 찾아 정비공 호출</h3>
+          </div>
+
+          <div class="service-content">
+            <div id="vehicleScanCard" class="vehicle-scan-card empty">
+              <div class="vehicle-scan-head">
+                <span>정비 대상 차량</span>
+                <button id="mechanicScan" type="button">다시 찾기</button>
+              </div>
+              <div class="vehicle-main">
+                <div class="vehicle-glyph">
+                  <svg viewBox="0 0 24 24"><path d="M5 16v-5l2-5h10l2 5v5M7 16v2m10-2v2M6 11h12"/></svg>
+                </div>
+                <div><b id="mechanicVehicleName">7m 안의 차량을 찾습니다</b><small id="mechanicPlate">차량 안 또는 차량 근처에서 이용하세요.</small></div>
+              </div>
+              <div class="health-grid">
+                <div><span>엔진</span><b id="mechanicEngine">-</b><i><em id="mechanicEngineBar"></em></i></div>
+                <div><span>차체</span><b id="mechanicBody">-</b><i><em id="mechanicBodyBar"></em></i></div>
+              </div>
+            </div>
+
+            <div class="service-stats mechanic-pricing">
+              <div><span>기본 출동비</span><b id="mechanicBaseFare">-</b></div>
+              <div><span>정비 기본료</span><b id="mechanicRepairFee">-</b></div>
+              <div><span>최대 요금</span><b id="mechanicMaxFare">-</b></div>
+            </div>
+
+            <p class="service-note">정비공의 출발 위치와 거리에 따라 출장비가 추가됩니다. 정비공이 요청을 수락하면 실제 예상 요금이 확정됩니다.</p>
+
+            <button id="mechanicRequest" class="service-primary mechanic-primary" type="button">긴급정비 요청하기</button>
+            <button id="mechanicCancel" class="service-danger hidden" type="button">정비 요청 취소</button>
+          </div>
+        </section>
+
+        <section id="messagesView" class="view">
+          <div class="app-header messages-header">
+            <button id="messagesBack" class="circle-btn" type="button" aria-label="뒤로">
+              <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <div>
+              <span class="eyebrow">COOKIE CHAT</span>
+              <h2>메시지</h2>
+            </div>
+            <button id="messageNew" class="circle-btn accent" type="button" aria-label="새 메시지">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+
+          <div class="message-search-wrap">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="M15 15l4 4"/></svg>
+            <input id="messageSearch" type="text" maxlength="40" placeholder="이름 또는 번호 검색">
+          </div>
+
+          <div class="message-summary">
+            <span><b id="conversationCount">0</b>개의 대화</span>
+            <small id="messageUnreadSummary">읽지 않은 메시지 없음</small>
+          </div>
+
+          <div id="conversationList" class="conversation-list"></div>
+        </section>
+
+        <section id="conversationView" class="view conversation-view">
+          <div class="conversation-header">
+            <button id="conversationBack" class="circle-btn" type="button">
+              <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <div id="conversationAvatar" class="contact-avatar"></div>
+            <div class="conversation-person">
+              <b id="conversationName">대화 상대</b>
+              <small id="conversationPhone">전화번호</small>
+            </div>
+            <button id="conversationCall" class="circle-btn call-shortcut" type="button">
+              <svg viewBox="0 0 24 24"><path d="M6.4 3.5l3 4.4-2.1 2.1c1.5 3.1 3.6 5.2 6.7 6.7l2.1-2.1 4.4 3c.4.3.6.8.4 1.3-.6 1.5-1.8 2.4-3.5 2.4C10.1 21.3 2.7 13.9 2.7 6.6c0-1.7.9-2.9 2.4-3.5.5-.2 1 0 1.3.4z"/></svg>
+            </button>
+          </div>
+
+          <div id="messageThread" class="message-thread"></div>
+
+          <div class="message-composer">
+            <button id="messagePhotoAttach" class="message-photo-attach" type="button" aria-label="사진 첨부">
+              <svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><circle cx="9" cy="10" r="2"/><path d="M5 17l4.5-4 3.2 2.7 2.5-2.2L19 17"/></svg>
+            </button>
+            <textarea id="messageInput" maxlength="500" rows="1" placeholder="메시지"></textarea>
+            <button id="messageSend" type="button" aria-label="전송">
+              <svg viewBox="0 0 24 24"><path d="M4 12l16-8-5 16-3-6-8-2zm8 2l8-10"/></svg>
+            </button>
+          </div>
+        </section>
+
+        <section id="contactsView" class="view">
+          <div class="app-header contacts-header">
+            <button id="contactsBack" class="circle-btn" type="button" aria-label="뒤로">
+              <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg>
+            </button>
+            <div>
+              <span class="eyebrow">COOKIE PEOPLE</span>
+              <h2>연락처</h2>
+            </div>
+            <button id="contactAdd" class="circle-btn accent" type="button" aria-label="연락처 추가">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+
+          <div id="myContactCard" class="my-contact-card">
+            <div id="myAvatar" class="contact-avatar large">ME</div>
+            <div class="my-contact-copy">
+              <span>내 연락처 카드</span>
+              <b id="myProfileName">내 이름</b>
+              <small id="myProfilePhone">전화번호</small>
+            </div>
+            <button id="editProfile" class="mini-pill" type="button">편집</button>
+          </div>
+
+          <button id="shareMyContact" class="nearby-share" type="button">
+            <span class="share-pulse"></span>
+            <span><b>근처에 내 연락처 보내기</b><small>4m 안에서 휴대전화를 켠 사용자에게 공유</small></span>
+            <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+          </button>
+
+          <div class="contact-search-wrap">
+            <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="5.5"/><path d="M15 15l4 4"/></svg>
+            <input id="contactSearch" type="text" maxlength="40" placeholder="이름 또는 전화번호 검색">
+          </div>
+
+          <div id="favoritesSection" class="contact-section">
+            <div class="contact-section-title"><span>즐겨찾기</span><small id="favoriteCount">0</small></div>
+            <div id="favoriteList" class="favorite-list"></div>
+          </div>
+
+          <div class="contact-section all-contacts">
+            <div class="contact-section-title"><span>모든 연락처</span><small id="contactCount">0</small></div>
+            <div id="contactList" class="contact-list"></div>
+          </div>
+        </section>
+
+        <section id="dispatchView" class="view dispatch-view">
+          <div class="app-header dispatch-header">
+            <button id="dispatchBack" class="circle-btn" type="button" aria-label="뒤로"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <div><span class="eyebrow">COOKIE DISPATCH</span><h2>긴급연락</h2></div>
+            <button id="dispatchRefresh" class="circle-btn" type="button" aria-label="새로고침"><svg viewBox="0 0 24 24"><path d="M19 7v5h-5M5 17v-5h5M18 12a6 6 0 00-10.2-4.2L5 10m1 2a6 6 0 0010.2 4.2L19 14"/></svg></button>
+          </div>
+          <div class="dispatch-scroll">
+            <div class="dispatch-intro"><b>문자형 콜</b><small>호출한 순간의 위치가 전달됩니다. 같은 대상에는 20초 간격으로 호출할 수 있습니다.</small></div>
+            <div class="dispatch-section-title"><span>연락 가능한 곳</span><small id="dispatchTargetCount">0</small></div>
+            <div id="dispatchTargets" class="dispatch-target-list"><div class="dispatch-empty">대상을 불러오는 중...</div></div>
+            <div class="dispatch-section-title spaced"><span>내가 보낸 콜</span><small>취소 가능</small></div>
+            <div id="dispatchOwnCalls" class="dispatch-call-list"><div class="dispatch-empty compact">활성 콜이 없습니다.</div></div>
+            <div class="dispatch-section-title spaced"><span>내가 접수한 콜</span><small>담당자 전용</small></div>
+            <div id="dispatchAssignedCalls" class="dispatch-call-list"><div class="dispatch-empty compact">접수한 콜이 없습니다.</div></div>
+          </div>
+        </section>
+
+        <section id="galleryView" class="view gallery-view">
+          <div class="app-header gallery-header">
+            <button id="galleryBack" class="circle-btn" type="button" aria-label="뒤로"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg></button>
+            <div><span class="eyebrow">COOKIE CAMERA ROLL</span><h2>갤러리</h2></div>
+            <button id="galleryRefresh" class="circle-btn" type="button" aria-label="새로고침"><svg viewBox="0 0 24 24"><path d="M19 7v5h-5M5 17v-5h5M18 12a6 6 0 00-10.2-4.2L5 10m1 2a6 6 0 0010.2 4.2L19 14"/></svg></button>
+          </div>
+          <div class="gallery-summary"><b id="galleryCount">0장</b><small>인게임 카메라로 촬영한 사진만 저장됩니다.</small></div>
+          <div id="galleryGrid" class="gallery-grid"><div class="gallery-empty">사진을 불러오는 중...</div></div>
+        </section>
+
+        <section id="callView" class="call-view">
+          <div class="call-glow glow-a"></div>
+          <div class="call-glow glow-b"></div>
+
+          <div class="call-top">
+            <span id="callKicker" class="eyebrow">전화 거는 중</span>
+            <span id="callTimer" class="call-timer">00:00</span>
+          </div>
+
+          <div class="caller-block">
+            <div id="callerAvatar" class="caller-avatar">0000</div>
+            <p id="callStateText">연결 중...</p>
+            <h2 id="callNumber">000 000 0000</h2>
+          </div>
+
+          <div id="incomingActions" class="call-actions incoming hidden">
+            <button id="declineCall" class="round-action danger" type="button">
+              <svg viewBox="0 0 24 24"><path d="M5 9c4.7-3.2 9.3-3.2 14 0l-2.5 4-2.6-1.2v3.4h-3.8v-3.4L7.5 13 5 9z"/></svg>
+              <span>거절</span>
+            </button>
+            <button id="acceptCall" class="round-action accept" type="button">
+              <svg viewBox="0 0 24 24"><path d="M6.4 3.5l3 4.4-2.1 2.1c1.5 3.1 3.6 5.2 6.7 6.7l2.1-2.1 4.4 3c.4.3.6.8.4 1.3-.6 1.5-1.8 2.4-3.5 2.4C10.1 21.3 2.7 13.9 2.7 6.6c0-1.7.9-2.9 2.4-3.5.5-.2 1 0 1.3.4z"/></svg>
+              <span>수락</span>
+            </button>
+          </div>
+
+          <div id="singleCallAction" class="call-actions single hidden">
+            <button id="endCall" class="round-action danger large" type="button">
+              <svg viewBox="0 0 24 24"><path d="M5 9c4.7-3.2 9.3-3.2 14 0l-2.5 4-2.6-1.2v3.4h-3.8v-3.4L7.5 13 5 9z"/></svg>
+              <span>통화 종료</span>
+            </button>
+          </div>
+
+          <div class="call-bottom-note">P를 누르면 통화는 유지한 채 휴대전화를 넣습니다.</div>
+        </section>
+
+        <section id="bankPhoneModal" class="phone-modal hidden">
+          <div class="modal-sheet bank-sheet">
+            <div class="modal-head">
+              <div><span class="eyebrow">PHONE TRANSFER</span><h3>전화번호 송금</h3></div>
+              <button class="modal-close" data-close="bankPhoneModal" type="button">×</button>
+            </div>
+
+            <label class="field-label">받는 사람 전화번호
+              <input id="bankPhoneInput" class="phone-input" type="text" inputmode="numeric" maxlength="20" placeholder="010-0000-0000">
+            </label>
+
+            <div id="bankContactHints" class="bank-contact-hints"></div>
+
+            <label class="field-label">송금 금액
+              <div class="bank-amount-input">
+                <input id="bankPhoneAmount" type="text" inputmode="numeric" maxlength="12" placeholder="0">
+                <span>원</span>
+              </div>
+            </label>
+
+            <div class="bank-quick-amounts">
+              <button type="button" data-bank-add="10000">+1만</button>
+              <button type="button" data-bank-add="50000">+5만</button>
+              <button type="button" data-bank-add="100000">+10만</button>
+              <button type="button" data-bank-add="500000">+50만</button>
+            </div>
+
+            <label class="field-label">메모 <small>선택</small>
+              <input id="bankPhoneMemo" class="phone-input" type="text" maxlength="80" placeholder="예: 식사비, 차량 거래">
+            </label>
+
+            <button id="bankPhoneReview" class="sheet-primary bank-sheet-primary" type="button">송금 확인</button>
+          </div>
+        </section>
+
+        <section id="bankNearbyModal" class="phone-modal hidden">
+          <div class="modal-sheet bank-sheet compact">
+            <div class="modal-head">
+              <div><span class="eyebrow">NEARBY TRANSFER</span><h3>근처 송금</h3></div>
+              <button class="modal-close" data-close="bankNearbyModal" type="button">×</button>
+            </div>
+            <p class="modal-desc">4m 안에서 현재 휴대전화를 켜둔 사용자만 표시됩니다.</p>
+            <div id="bankNearbyList" class="bank-nearby-list">
+              <div class="sheet-loading">근처 휴대전화를 찾는 중...</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="bankNearbyAmountModal" class="phone-modal hidden">
+          <div class="modal-sheet bank-sheet">
+            <div class="modal-head">
+              <div><span class="eyebrow">NEARBY TRANSFER</span><h3>송금 금액</h3></div>
+              <button class="modal-close" data-close="bankNearbyAmountModal" type="button">×</button>
+            </div>
+
+            <div class="bank-target-card">
+              <div id="bankNearbyAvatar" class="contact-avatar large">?</div>
+              <div><b id="bankNearbyName">상대방</b><small id="bankNearbyPhone">-</small></div>
+            </div>
+
+            <label class="field-label">송금 금액
+              <div class="bank-amount-input">
+                <input id="bankNearbyAmount" type="text" inputmode="numeric" maxlength="12" placeholder="0">
+                <span>원</span>
+              </div>
+            </label>
+
+            <div class="bank-quick-amounts nearby-amounts">
+              <button type="button" data-bank-near-add="10000">+1만</button>
+              <button type="button" data-bank-near-add="50000">+5만</button>
+              <button type="button" data-bank-near-add="100000">+10만</button>
+              <button type="button" data-bank-near-add="500000">+50만</button>
+            </div>
+
+            <label class="field-label">메모 <small>선택</small>
+              <input id="bankNearbyMemo" class="phone-input" type="text" maxlength="80" placeholder="예: 식사비">
+            </label>
+
+            <button id="bankNearbyReview" class="sheet-primary bank-sheet-primary" type="button">송금 확인</button>
+          </div>
+        </section>
+
+        <section id="bankConfirmModal" class="phone-modal hidden priority">
+          <div class="modal-sheet bank-confirm-sheet">
+            <span class="eyebrow">TRANSFER CONFIRMATION</span>
+            <div class="bank-confirm-icon">
+              <svg viewBox="0 0 24 24"><path d="M4 12h15m-5-5 5 5-5 5"/></svg>
+            </div>
+            <p>아래 내용으로 송금합니다.</p>
+            <h3 id="bankConfirmName">수신자</h3>
+            <b id="bankConfirmPhone">-</b>
+            <strong id="bankConfirmAmount">0원</strong>
+            <small id="bankConfirmMemo"></small>
+            <div class="sheet-actions two">
+              <button id="bankConfirmCancel" class="sheet-secondary" type="button">취소</button>
+              <button id="bankConfirmSend" class="sheet-primary" type="button">송금하기</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="newMessageModal" class="phone-modal hidden">
+          <div class="modal-sheet compact">
+            <div class="modal-head">
+              <div><span class="eyebrow">NEW MESSAGE</span><h3>새 메시지</h3></div>
+              <button class="modal-close" data-close="newMessageModal" type="button">×</button>
+            </div>
+            <label class="field-label">받는 사람
+              <input id="newMessageRecipient" class="phone-input" type="text" maxlength="40" placeholder="연락처 이름 또는 전화번호">
+            </label>
+            <div id="messageRecipientSuggestions" class="recipient-suggestions"></div>
+            <button id="newMessageContinue" class="sheet-primary" type="button">대화 시작</button>
+          </div>
+        </section>
+
+        <section id="messagePhotoModal" class="phone-modal hidden priority">
+          <div class="modal-sheet gallery-picker-sheet message-photo-picker-sheet">
+            <div class="modal-head"><div><span class="eyebrow">CAMERA ROLL</span><h3>사진 보내기</h3></div><button class="modal-close" data-close="messagePhotoModal" type="button">×</button></div>
+            <p class="modal-desc">인게임 카메라로 촬영한 사진만 메시지로 보낼 수 있습니다.</p>
+            <div id="messagePhotoGrid" class="gallery-grid picker"><div class="gallery-empty">사진을 불러오는 중...</div></div>
+            <div id="messagePhotoSelected" class="message-photo-selected hidden">사진을 선택하세요.</div>
+            <button id="messagePhotoSend" class="sheet-primary" type="button" disabled>선택한 사진 보내기</button>
+          </div>
+        </section>
+
+        <section id="profileModal" class="phone-modal hidden">
+          <div class="modal-sheet">
+            <div class="modal-head">
+              <div><span class="eyebrow">MY CONTACT CARD</span><h3>내 연락처 편집</h3></div>
+              <button class="modal-close" data-close="profileModal" type="button">×</button>
+            </div>
+
+            <div class="profile-editor">
+              <button id="profilePhotoPick" class="profile-photo-button" type="button">
+                <div id="profilePhotoPreview" class="contact-avatar xlarge">ME</div>
+                <span>갤러리에서 사진 선택</span>
+              </button>
+              <button id="profilePhotoClear" class="profile-photo-clear" type="button">프로필 사진 제거</button>
+              <small class="profile-photo-rule">인게임 카메라로 직접 촬영한 사진만 프로필로 설정할 수 있습니다.</small>
+
+              <label class="field-label">표시 이름
+                <input id="profileNameInput" class="phone-input" type="text" maxlength="40" placeholder="예: 도베르만">
+              </label>
+              <div class="locked-field">
+                <span>전화번호</span><b id="profilePhoneLocked">-</b><small>서버에서 발급된 공식 번호는 변경할 수 없습니다.</small>
+              </div>
+            </div>
+
+            <button id="profileSave" class="sheet-primary" type="button">내 연락처 카드 저장</button>
+          </div>
+        </section>
+
+        <section id="profileGalleryModal" class="phone-modal hidden priority">
+          <div class="modal-sheet gallery-picker-sheet">
+            <div class="modal-head"><div><span class="eyebrow">CAMERA ROLL</span><h3>프로필 사진 선택</h3></div><button class="modal-close" data-close="profileGalleryModal" type="button">×</button></div>
+            <p class="modal-desc">휴대전화 카메라 앱으로 찍은 사진만 선택할 수 있습니다.</p>
+            <div id="profileGalleryGrid" class="gallery-grid picker"><div class="gallery-empty">사진을 불러오는 중...</div></div>
+          </div>
+        </section>
+
+        <section id="dispatchComposeModal" class="phone-modal hidden">
+          <div class="modal-sheet compact dispatch-sheet">
+            <div class="modal-head"><div><span class="eyebrow">NEW CALL</span><h3 id="dispatchComposeTarget">긴급연락</h3></div><button class="modal-close" data-close="dispatchComposeModal" type="button">×</button></div>
+            <p class="modal-desc">연락 사유를 문자로 입력하세요. 호출 당시 위치가 함께 전송됩니다.</p>
+            <label class="field-label">사유
+              <textarea id="dispatchReasonInput" class="dispatch-textarea" maxlength="180" placeholder="예: 차량 사고가 발생했습니다."></textarea>
+            </label>
+            <div class="dispatch-modal-actions"><button id="dispatchComposeCancel" class="sheet-secondary" type="button">취소</button><button id="dispatchSend" class="sheet-primary" type="button">콜 보내기</button></div>
+          </div>
+        </section>
+
+        <section id="dispatchCloseModal" class="phone-modal hidden">
+          <div class="modal-sheet dispatch-sheet">
+            <div class="modal-head"><div><span class="eyebrow">CLOSE CALL</span><h3 id="dispatchCloseTitle">콜 종료</h3></div><button class="modal-close" data-close="dispatchCloseModal" type="button">×</button></div>
+            <p class="modal-desc">처리 결과를 반드시 남겨야 콜을 종료할 수 있습니다.</p>
+            <div id="dispatchClosePresets" class="dispatch-presets">
+              <button type="button">물건 판매 완료</button><button type="button">문의 접수 완료</button><button type="button">사건 접수 완료</button>
+              <button type="button">현장 조치 완료</button><button type="button">수리 완료</button><button type="button">운송 완료</button>
+              <button type="button">허위/장난 신고</button>
+            </div>
+            <label class="field-label">종료 사유
+              <textarea id="dispatchCloseReason" class="dispatch-textarea" maxlength="180" placeholder="예: 사건 접수 완료"></textarea>
+            </label>
+            <div class="dispatch-modal-actions"><button id="dispatchCloseCancel" class="sheet-secondary" type="button">취소</button><button id="dispatchCloseSubmit" class="sheet-primary" type="button">콜 종료</button></div>
+          </div>
+        </section>
+
+        <section id="galleryPhotoModal" class="phone-modal hidden">
+          <div class="modal-sheet gallery-photo-sheet">
+            <div class="modal-head"><div><span class="eyebrow">PHOTO</span><h3>사진 보기</h3></div><button class="modal-close" data-close="galleryPhotoModal" type="button">×</button></div>
+            <div class="gallery-photo-frame"><img id="galleryPhotoImage" alt="촬영 사진"></div>
+            <div class="gallery-photo-meta"><b id="galleryPhotoDate">-</b><small id="galleryPhotoLens">COOKIE CAMERA</small></div>
+            <button id="galleryPhotoSave" class="sheet-primary gallery-save hidden" type="button">갤러리에 저장</button>
+            <button id="galleryPhotoDelete" class="sheet-danger gallery-delete" type="button">사진 삭제</button>
+          </div>
+        </section>
+
+        <section id="contactModal" class="phone-modal hidden">
+          <div class="modal-sheet">
+            <div class="modal-head">
+              <div><span class="eyebrow">CONTACT</span><h3 id="contactModalTitle">연락처 추가</h3></div>
+              <button class="modal-close" data-close="contactModal" type="button">×</button>
+            </div>
+
+            <input id="contactIdInput" type="hidden" value="0">
+
+            <div class="contact-edit-avatar-row">
+              <div id="contactEditAvatar" class="contact-avatar large">?</div>
+              <div><b id="contactEditPreviewName">새 연락처</b><small id="contactEditPreviewPhone">전화번호를 입력하세요</small></div>
+            </div>
+
+            <label class="field-label">이름
+              <input id="contactNameInput" class="phone-input" type="text" maxlength="40" placeholder="저장할 이름">
+            </label>
+            <label class="field-label">전화번호
+              <input id="contactPhoneInput" class="phone-input" type="text" inputmode="numeric" maxlength="20" placeholder="010-0000-0000">
+            </label>
+            <label class="field-label">메모
+              <textarea id="contactNoteInput" class="phone-input phone-textarea" maxlength="160" placeholder="소속, 역할, 기억할 내용 등을 적어둘 수 있습니다."></textarea>
+            </label>
+
+            <div class="contact-switch-row">
+              <button id="contactFavoriteToggle" class="setting-toggle" type="button" data-on="false">
+                <span class="setting-icon star">★</span><span><b>중요 연락처</b><small>즐겨찾기 최상단에 고정</small></span><i></i>
+              </button>
+              <button id="contactBlockToggle" class="setting-toggle danger" type="button" data-on="false">
+                <span class="setting-icon">⊘</span><span><b>전화 차단</b><small>이 번호의 전화 수신을 차단</small></span><i></i>
+              </button>
+            </div>
+
+            <div class="sheet-actions">
+              <button id="contactDelete" class="sheet-danger hidden" type="button">삭제</button>
+              <button id="contactCallNow" class="sheet-secondary hidden" type="button">전화</button>
+              <button id="contactSave" class="sheet-primary flex" type="button">저장</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="nearbyModal" class="phone-modal hidden">
+          <div class="modal-sheet compact">
+            <div class="modal-head">
+              <div><span class="eyebrow">NEARBY SHARE</span><h3>근처에 연락처 보내기</h3></div>
+              <button class="modal-close" data-close="nearbyModal" type="button">×</button>
+            </div>
+            <p class="modal-desc">4m 이내에서 현재 휴대전화를 열어둔 사용자만 표시됩니다.</p>
+            <div id="nearbyList" class="nearby-list">
+              <div class="sheet-loading">근처 사용자를 찾는 중...</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="shareOfferModal" class="phone-modal hidden priority">
+          <div class="modal-sheet share-offer">
+            <span class="eyebrow">CONTACT CARD RECEIVED</span>
+            <div id="offerAvatar" class="contact-avatar xlarge">?</div>
+            <p>근처에서 연락처 카드를 보냈습니다.</p>
+            <h3 id="offerName">이름</h3>
+            <b id="offerPhone">전화번호</b>
+            <div class="sheet-actions two">
+              <button id="offerDecline" class="sheet-secondary" type="button">거절</button>
+              <button id="offerAccept" class="sheet-primary" type="button">연락처에 저장</button>
+            </div>
+          </div>
+        </section>
+
+        <div id="toast" class="toast"></div>
+        <div class="homebar"></div>
+      </section>
+    </div>
+  </main>
+
+
+
+  <!-- Full-screen COOKIE Pro Camera overlay. The actual game view stays behind this HUD. -->
+  <div id="dispatchAlerts" class="dispatch-alerts" aria-live="polite"></div>
+  <div id="dispatchIncoming" class="dispatch-incoming hidden">
+    <div class="dispatch-incoming-head"><span>긴급연락</span><b id="dispatchIncomingId">CALL #0000</b></div>
+    <div class="dispatch-incoming-target" id="dispatchIncomingTarget">-</div>
+    <div class="dispatch-incoming-caller" id="dispatchIncomingCaller">신고자 -</div>
+    <p id="dispatchIncomingReason">-</p>
+    <div class="dispatch-incoming-foot"><span id="dispatchIncomingDistance">위치 전송됨</span><b>휠↑ / NUM + 접수</b></div>
+  </div>
+
+  <section id="cameraHud" class="camera-hud" aria-hidden="true">
+    <div id="cameraFrame" class="camera-frame">
+      <div id="cameraGrid" class="camera-grid">
+        <i class="v v1"></i><i class="v v2"></i><i class="h h1"></i><i class="h h2"></i>
+      </div>
+      <div class="camera-focus-box"><i></i><i></i><i></i><i></i></div>
+    </div>
+
+    <div class="camera-ui camera-topbar">
+      <div class="camera-brand"><b>COOKIE</b><span>CAMERA</span></div>
+      <div class="camera-status-row">
+        <span id="camFlash" class="cam-status">AUTO ⚡</span>
+        <span id="camTimer" class="cam-status">타이머 끔</span>
+        <span id="camOrientation" class="cam-status">세로</span>
+      </div>
+    </div>
+
+    <div id="cameraCountdown" class="camera-countdown"></div>
+
+    <div class="camera-ui camera-bottom">
+      <div class="camera-lens-row">
+        <span class="lens-min">0.5</span>
+        <b id="camZoom">1.0×</b>
+        <span class="lens-max">3.0</span>
+      </div>
+      <div class="camera-controls-row">
+        <div id="camLastPhoto" class="camera-last-photo"><span>최근 사진</span></div>
+        <div class="camera-shutter-wrap"><button class="camera-shutter" tabindex="-1"><i></i></button><small>SPACE 촬영</small></div>
+        <div id="camModeIcon" class="camera-flip-icon"><span>↻</span><small>후면</small></div>
+      </div>
+      <div class="camera-help">
+        <span><b>C</b> 전/후면</span><span><b>R</b> 가로/세로</span><span><b>F</b> 플래시</span>
+        <span><b>T</b> 타이머</span><span><b>G</b> 격자</span><span><b>휠</b> 줌</span><span><b>ESC</b> 종료</span>
+      </div>
+    </div>
+    <div id="cameraShutterFlash" class="camera-shutter-flash"></div>
+  </section>
+
+  <audio id="ringtone" src="ringtone.wav" preload="auto" loop></audio>
+  <audio id="ringback" src="ringback.wav" preload="auto" loop></audio>
+  <script src="wallpapers.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

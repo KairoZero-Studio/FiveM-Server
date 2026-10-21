@@ -1,0 +1,28 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="style.css"></head><body>
+<div id="interaction" class="overlay hidden"><div class="quick-card"><div class="eyebrow">COOKIE INTERACTION</div><h2 id="quickTarget">- / -</h2><p id="quickFaction">시민</p><div id="quickGrid" class="quick-grid"><button data-action="trade"><b>⇄</b><span>거래</span><small>아이템·차량·칭호·상품</small></button><button data-action="confess"><b>♥</b><span>고백</span><small>COOKIE 커플 시스템</small></button><button id="licenseRequestBtn" class="license-request hidden" data-action="license_request"><b>LIC</b><span>운전면허증 제시 요청</span><small>경찰청·보안국 근무자 전용</small></button></div><button id="quickClose" class="ghost">닫기</button></div></div>
+<div id="driverLicenseCard" class="overlay hidden">
+  <div class="driver-license-card">
+    <div class="dl-top">
+      <div><small>COOKIE CITY</small><h2>운전면허증</h2></div>
+      <span class="dl-mark">DRIVER LICENSE</span>
+    </div>
+    <div class="dl-body">
+      <div class="dl-photo">LIC</div>
+      <div class="dl-info">
+        <div><span>성명</span><b id="dlName">-</b></div>
+        <div><span>고번</span><b id="dlGobun">-</b></div>
+        <div class="wide"><span>운전면허번호</span><b id="dlNumber">-</b></div>
+        <div><span>면허 상태</span><b id="dlStatus">-</b></div>
+        <div><span>정지 종료</span><b id="dlUntil">-</b></div>
+        <div class="wide"><span>상태 사유</span><b id="dlReason">-</b></div>
+      </div>
+    </div>
+    <div class="dl-bottom">
+      <span>COOKIE SERVER · PUBLIC SAFETY</span>
+      <button id="driverLicenseCardClose" type="button">확인</button>
+    </div>
+  </div>
+</div>
+<div id="invite" class="overlay hidden"><div class="invite-card"><div class="eyebrow">TRADE REQUEST</div><h2>거래 요청</h2><p><strong id="inviteFrom">- / -</strong> 시민이 거래를 요청했습니다.</p><div class="invite-actions"><button id="inviteReject" class="ghost">거절</button><button id="inviteAccept" class="primary">수락</button></div></div></div>
+<div id="trade" class="trade-root hidden"><div class="trade-window"><header><div><span>COOKIE SECURE TRADE</span><h1>시민 거래</h1></div><div class="header-actions"><button id="refreshAssets">보유목록 새로고침</button><button id="tradeCancel">거래 취소</button></div></header><div class="people"><div class="person"><small>나</small><strong id="myName">- / -</strong><em id="myFaction">시민</em></div><div id="orgTradeBadge" class="org-badge hidden">조직 거래</div><div class="swap">⇄</div><div class="person other"><small>상대방</small><strong id="otherName">- / -</strong><em id="otherFaction">시민</em></div></div><main><section class="offer-panel"><div class="section-title"><b>내가 주는 것</b><span id="myOfferCount">0개</span></div><div id="myOffers" class="offer-list"></div></section><section class="asset-panel"><div class="tabs"><button data-tab="money" class="active">돈</button><button data-tab="items">아이템/총기</button><button data-tab="vehicles">포장차량</button><button data-tab="titles">칭호</button><button data-tab="assets">스킨·치장·킬피드</button></div><div id="assetBody" class="asset-body"></div></section><section class="offer-panel"><div class="section-title"><b>상대가 주는 것</b><span id="theirOfferCount">0개</span></div><div id="theirOffers" class="offer-list"></div></section></main><footer><div class="trade-warning">차량은 <b>포장 상태</b>에서만 거래됩니다. 양쪽이 <b>거래 준비</b> 후 각각 <b>최종 확인</b>해야 실제 소유권이 이동합니다.</div><div class="confirm-area"><button id="readyBtn" class="ready-btn">거래 준비</button><button id="confirmBtn" class="confirm-btn" disabled>최종 확인</button></div></footer></div></div>
+<script src="app.js"></script></body></html>

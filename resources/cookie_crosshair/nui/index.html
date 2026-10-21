@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="overlay" class="hidden">
+    <canvas id="ovCanvas" width="240" height="240"></canvas>
+  </div>
+
+  <div id="editor" class="hidden">
+
+    <div id="prevStage"><canvas id="prevCanvas" width="360" height="360"></canvas></div>
+
+    <div class="xh-prevtoggle" id="prevToggle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#3a3327" stroke-width="1.8"><circle cx="12" cy="12" r="7"/><line x1="12" y1="3" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="3" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="21" y2="12"/></svg>
+      크로스헤어 미리보기 <span class="st" id="prevState">켜짐</span>
+    </div>
+
+    <div class="xh-panel" id="xhPanel">
+      <div class="xh-titlebar">
+        <div>
+          <div class="xh-h1">크로스헤어 설정</div>
+          <div class="xh-sub">크로스헤어를 사용자에게 맞게 조정합니다</div>
+        </div>
+        <span class="xh-close" id="xhClose">닫기 (ESC)</span>
+      </div>
+
+      <div class="xh-scroll">
+
+        <div class="sect"><span class="dia">✦</span> 프리셋 <span class="line"></span></div>
+        <div class="xh-gallery" id="xhGallery"></div>
+
+        <div class="sect"><span class="dia">✦</span> 일반 <span class="line"></span></div>
+        <div class="row"><span class="name">기본 크로스헤어</span><div class="toggle" data-k="base"><span class="val off">꺼짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">사용자 정의 크로스헤어</span><div class="toggle" data-k="custom"><span class="val on">켜짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">총기를 들고 있을때만 표시</span><div class="toggle" data-k="adsOnly"><span class="val on">켜짐</span><span class="car"></span></div></div>
+
+        <div class="sect"><span class="dia">✦</span> 테두리 <span class="line"></span></div>
+        <div class="row"><span class="name">테두리 활성화</span><div class="toggle" data-k="outline"><span class="val on">켜짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">테두리 두께</span><div class="sw"><div class="numbox" id="n_outlineW">1</div><input class="slider" id="s_outlineW" type="range" min="0" max="5" value="1"></div></div>
+        <div class="row"><span class="name">테두리 투명도 (A)</span><div class="sw"><div class="numbox" id="n_outlineA">255</div><input class="slider" id="s_outlineA" type="range" min="0" max="255" value="255"></div></div>
+
+        <div class="sect"><span class="dia">✦</span> 크로스헤어 색깔 <span class="line"></span></div>
+        <div class="swatch-row"><div class="swatch" id="swatch"></div><span class="swatch-hex" id="hex">#FFFFFF</span><span class="swatch-lbl">현재 색상</span></div>
+        <div class="row"><span class="name">빨간색 (R)</span><div class="sw"><div class="numbox" id="n_r">255</div><input class="slider" id="s_r" type="range" min="0" max="255" value="255"></div></div>
+        <div class="row"><span class="name">초록색 (G)</span><div class="sw"><div class="numbox" id="n_g">255</div><input class="slider" id="s_g" type="range" min="0" max="255" value="255"></div></div>
+        <div class="row"><span class="name">파란색 (B)</span><div class="sw"><div class="numbox" id="n_b">255</div><input class="slider" id="s_b" type="range" min="0" max="255" value="255"></div></div>
+        <div class="row"><span class="name">투명도 (A)</span><div class="sw"><div class="numbox" id="n_a">255</div><input class="slider" id="s_a" type="range" min="0" max="255" value="255"></div></div>
+
+        <div class="sect"><span class="dia">✦</span> 중앙 도트 <span class="line"></span></div>
+        <div class="row"><span class="name">중앙 도트 활성화</span><div class="toggle" data-k="dot"><span class="val on">켜짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">중앙 도트 두께</span><div class="sw"><div class="numbox" id="n_dotW">4</div><input class="slider" id="s_dotW" type="range" min="1" max="10" value="4"></div></div>
+        <div class="row"><span class="name">중앙 도트 투명도 (A)</span><div class="sw"><div class="numbox" id="n_dotA">255</div><input class="slider" id="s_dotA" type="range" min="0" max="255" value="255"></div></div>
+
+        <div class="sect"><span class="dia">✦</span> 내부선 <span class="line"></span></div>
+        <div class="row"><span class="name">내부선 활성화</span><div class="toggle" data-k="inner"><span class="val on">켜짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">위쪽 선 표시 (T자는 끔)</span><div class="toggle" data-k="top"><span class="val on">켜짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">내부선 두께</span><div class="sw"><div class="numbox" id="n_inW">2</div><input class="slider" id="s_inW" type="range" min="1" max="10" value="2"></div></div>
+        <div class="row"><span class="name">내부선 길이</span><div class="sw"><div class="numbox" id="n_inL">8</div><input class="slider" id="s_inL" type="range" min="0" max="30" value="8"></div></div>
+        <div class="row"><span class="name">내부선 간격</span><div class="sw"><div class="numbox" id="n_inO">4</div><input class="slider" id="s_inO" type="range" min="0" max="30" value="4"></div></div>
+
+        <div class="sect"><span class="dia">✦</span> 외부선 <span class="line"></span></div>
+        <div class="row"><span class="name">외부선 활성화</span><div class="toggle" data-k="outer"><span class="val off">꺼짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">외부선 두께</span><div class="sw"><div class="numbox" id="n_outW">2</div><input class="slider" id="s_outW" type="range" min="1" max="10" value="2"></div></div>
+        <div class="row"><span class="name">외부선 길이</span><div class="sw"><div class="numbox" id="n_outL">4</div><input class="slider" id="s_outL" type="range" min="0" max="30" value="4"></div></div>
+        <div class="row"><span class="name">외부선 간격</span><div class="sw"><div class="numbox" id="n_outO">12</div><input class="slider" id="s_outO" type="range" min="0" max="50" value="12"></div></div>
+
+        <div class="sect"><span class="dia">✦</span> 링 (원) <span class="line"></span></div>
+        <div class="row"><span class="name">링 활성화</span><div class="toggle" data-k="ring"><span class="val off">꺼짐</span><span class="car"></span></div></div>
+        <div class="row"><span class="name">링 반지름</span><div class="sw"><div class="numbox" id="n_ringR">6</div><input class="slider" id="s_ringR" type="range" min="0" max="20" value="6"></div></div>
+        <div class="row"><span class="name">링 두께</span><div class="sw"><div class="numbox" id="n_ringW">2</div><input class="slider" id="s_ringW" type="range" min="1" max="10" value="2"></div></div>
+      </div>
+
+      <button class="xh-save" id="xhSave">저장</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

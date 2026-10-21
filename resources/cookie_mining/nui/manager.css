@@ -1,0 +1,135 @@
+*{box-sizing:border-box}body{margin:0;font-family:Inter,"Noto Sans KR",Arial,sans-serif;background:transparent;color:#171717}.hidden{display:none!important}#app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,8,12,.62);backdrop-filter:blur(4px)}.panel{width:min(1000px,92vw);height:min(720px,86vh);background:#f8f9fb;border-radius:24px;overflow:hidden;box-shadow:0 28px 90px rgba(0,0,0,.45);display:flex;flex-direction:column}header{padding:24px 28px 20px;display:flex;justify-content:space-between;background:linear-gradient(125deg,#fff,#fff8e8);border-bottom:1px solid #e9e9e9}header small{color:#b47600;font-weight:900;letter-spacing:1.4px}h1{margin:5px 0 4px;font-size:28px}header p{margin:0;color:#8a8a8a;font-size:13px}#close{width:44px;height:44px;border:1px solid #ddd;border-radius:14px;background:#fff;font-size:25px;cursor:pointer}nav{display:flex;gap:8px;padding:14px 28px;background:#fff;border-bottom:1px solid #eee}nav button{border:0;border-radius:11px;padding:10px 22px;background:#f1f3f5;font-weight:800;color:#777;cursor:pointer}nav button.active{background:#ffb400;color:#111}main{padding:22px 28px 30px;overflow:auto;flex:1}.summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}.stat,.card{background:#fff;border:1px solid #e7e7e7;border-radius:16px}.stat{padding:16px}.stat span{font-size:11px;color:#999}.stat b{display:block;margin-top:4px;font-size:22px}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.card{padding:16px}.card h3{margin:0 0 5px;font-size:16px}.card p{margin:0;color:#888;font-size:12px;line-height:1.5}.row{display:flex;align-items:center;gap:12px;padding:12px 14px;background:#fff;border:1px solid #e9e9e9;border-radius:13px;margin-bottom:9px}.row .grow{flex:1}.row b{display:block}.row small{color:#999}.price{font-weight:900;color:#a86d00}.btn{border:0;border-radius:10px;padding:9px 14px;background:#ffb400;font-weight:900;cursor:pointer}.btn.dark{background:#222;color:#fff}.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.toolbar h2{margin:0}.empty{padding:60px;text-align:center;color:#aaa}.badge{display:inline-block;margin-top:5px;padding:3px 7px;border-radius:20px;background:#f3f3f3;font-size:10px;color:#777}@media(max-width:720px){.grid,.summary{grid-template-columns:1fr}.panel{height:92vh}main{padding:18px}}
+.mine-prompt{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9999;padding:6px 10px;border-radius:7px;background:rgba(10,12,16,.72);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:14px;font-weight:900;letter-spacing:-.2px;pointer-events:none;text-shadow:0 1px 2px rgba(0,0,0,.8);white-space:nowrap}.mine-prompt.hidden{display:none!important}
+.buy-card{display:grid;grid-template-columns:92px 1fr;gap:14px;align-items:center}.buy-card .item-img{width:92px;height:92px;object-fit:contain;background:#f4f5f7;border:1px solid #e7e7e7;border-radius:14px;padding:7px}.buy-card .item-info{min-width:0}
+
+/* V13.6 - built-in mining circle timing minigame */
+.mining-skill{
+    position:fixed;
+    inset:0;
+    z-index:12000;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    pointer-events:none;
+}
+.mining-skill-card{
+    min-width:320px;
+    padding:20px 24px 18px;
+    border-radius:22px;
+    background:transparent;
+    border:0;
+    box-shadow:none;
+    color:#fff;
+    text-align:center;
+    backdrop-filter:none;
+    text-shadow:0 2px 8px rgba(0,0,0,.85);
+}
+.mining-skill-title{
+    font-size:18px;
+    font-weight:900;
+    margin-bottom:5px;
+}
+.mining-skill-sub{
+    font-size:12px;
+    color:rgba(255,255,255,.72);
+    margin-bottom:16px;
+}
+.mining-skill-sub b{
+    color:#fff;
+}
+.mining-skill-circle{
+    --radius:86px;
+    position:relative;
+    width:210px;
+    height:210px;
+    margin:0 auto;
+}
+.mining-skill-track{
+    position:absolute;
+    inset:18px;
+    border-radius:50%;
+    border:4px solid rgba(255,255,255,.18);
+    box-shadow:inset 0 0 28px rgba(0,0,0,.34);
+}
+.mining-skill-target,
+.mining-skill-mover{
+    position:absolute;
+    left:50%;
+    top:50%;
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+}
+.mining-skill-target{
+    width:48px;
+    height:48px;
+    background:rgba(69,226,121,.24);
+    border:3px solid rgba(94,255,145,.94);
+    box-shadow:0 0 22px rgba(65,255,128,.46);
+}
+.mining-skill-mover{
+    width:22px;
+    height:22px;
+    background:#fff;
+    border:3px solid rgba(255,255,255,.95);
+    box-shadow:0 0 20px rgba(255,255,255,.8);
+}
+.mining-skill-center{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:48px;
+    height:48px;
+    transform:translate(-50%,-50%);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.08);
+    font-size:22px;
+}
+.mining-skill-state{
+    margin-top:8px;
+    min-height:20px;
+    font-size:13px;
+    font-weight:900;
+    color:rgba(255,255,255,.86);
+}
+.mining-skill-card.success,
+.mining-skill-card.fail{
+    border:0;
+}
+.mining-skill-card.success .mining-skill-state{
+    color:#67f29a;
+}
+.mining-skill-card.fail .mining-skill-state{
+    color:#ff7777;
+}
+
+/* COOKIE MINING TRANSPARENT MINIGAME UI V13.8.2 */
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* COOKIE MINING MANAGER LARGE UI V14.2.5 */
+.panel{width:min(1220px,96vw)!important;height:min(860px,94vh)!important;}

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css?v=20260903-v383-needsplus">
+</head>
+<body>
+
+  <div id="nametags"></div>
+
+  <div id="noticeBox" class="ck-notice-box hidden">
+    <img class="ck-notice-logo" src="nui://cookie_select/nui/assets/logo.png" alt="">
+    <div class="ck-notice-main">
+      <div class="ck-notice-title">쿠키 서버 공지</div>
+      <div id="noticeBody" class="ck-notice-text"></div>
+    </div>
+    <div id="noticeCount" class="ck-notice-count hidden"></div>
+  </div>
+
+  <div id="hud" style="display:none;">
+    <div id="statusRight" class="ck-hud-stack">
+      <div class="ck-info-line">
+        <span class="ck-info-item"><b>직업</b> <span id="hudJob">-</span></span>
+        <span class="ck-info-item"><b>이름</b> <span id="hudName">-</span></span>
+        <span class="ck-info-item"><b>고정번호</b> <span id="hudCid">-</span></span>
+      </div>
+
+      <div id="vitalsPanel" class="ck-gauge-group">
+        <div class="ck-gauge-row">
+          <span class="ck-gauge-label-simple">체력</span>
+          <div class="ck-gauge-track">
+            <div id="healthBar" class="ck-gauge-fill health" style="width:100%;"></div>
+          </div>
+          <span id="healthPct" class="ck-gauge-pct-in">100%</span>
+        </div>
+
+        <div class="ck-gauge-row">
+          <span class="ck-gauge-label-simple">방탄</span>
+          <div class="ck-gauge-track">
+            <div id="armorBar" class="ck-gauge-fill armor" style="width:0%;"></div>
+          </div>
+          <span id="armorPct" class="ck-gauge-pct-in">0%</span>
+        </div>
+
+        <div class="ck-needs-row">
+          <div class="ck-need-item">
+            <span>수분</span>
+            <div class="ck-gauge-track ck-need-bar">
+              <div id="thirstBar" class="ck-gauge-fill needs thirst" style="width:100%;"></div>
+            </div>
+          </div>
+          <div class="ck-need-item">
+            <span>허기</span>
+            <div class="ck-gauge-track ck-need-bar">
+              <div id="hungerBar" class="ck-gauge-fill needs hunger" style="width:100%;"></div>
+            </div>
+          </div>
+          <div class="ck-need-item">
+            <span>기력</span>
+            <div class="ck-gauge-track ck-need-bar">
+              <div id="staminaBar" class="ck-gauge-fill needs stamina" style="width:100%;"></div>
+            </div>
+          </div>
+          <div id="oxygenStat" class="ck-need-item">
+            <span>산소</span>
+            <div class="ck-gauge-track ck-need-bar">
+              <div id="oxygenBar" class="ck-gauge-fill needs oxygen" style="width:100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div><div class="ck-money-row">
+        <b>💵 현금</b> <span id="hudCash" class="cash">0원</span>
+      </div>
+      <div class="ck-money-row">
+        <b>💳 계좌</b> <span id="hudBank" class="bank">0원</span>
+      </div>
+      <!-- Cookie killfeed: follow the right HUD stack, always below needs & money. -->
+      <div id="cookieKillFeed" class="ck-kf-list" aria-live="polite" aria-label="킬피드"></div>
+    </div>
+
+    <div id="infoBar" class="ck-infobar" style="display:none;">
+      <div class="ck-ib-cell ck-ib-datetime" id="ibDateTime">-</div>
+      <div class="ck-ib-cell ck-ib-fps"><span id="ibFps">--</span> FPS</div>
+      <div class="ck-ib-cell ck-ib-players"><span id="ibPlayers">0</span>명</div>
+    </div>
+
+    <div id="voiceWidget" class="ck-voice">
+      <div class="ck-voice-head">🎤 말하는 중..</div>
+      <div id="voiceList" class="ck-voice-list"></div>
+    </div>
+
+    <div id="voiceToast" class="ck-voice-toast"></div>
+
+    <div id="hotbar" class="ck-hotbar"></div>
+
+    <div id="vehHud" class="ck-veh" style="display:none;">
+
+      <svg class="ck-veh-dial" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg">
+
+        <g id="vehTicks"></g>
+        <g id="vehLabels"></g>
+
+        <path id="vehArc" class="ck-veh-arc" fill="none"
+              d="M 43.6 196.4 A 108 108 0 1 1 196.4 196.4" />
+
+        <text class="ck-veh-rpmlabel" x="120" y="104" text-anchor="middle">RPM</text>
+        <text class="ck-veh-rpmsub"   x="120" y="118" text-anchor="middle">x1000</text>
+
+        <text id="vehSpeed" class="ck-veh-speed" x="120" y="158" text-anchor="middle">0</text>
+        <text class="ck-veh-unit" x="120" y="176" text-anchor="middle">km/h</text>
+
+        <text id="vehGear" class="ck-veh-gear" x="120" y="208" text-anchor="middle">N</text>
+      </svg>
+
+      <div class="ck-veh-bars">
+        <div class="ck-veh-bar" id="vehFuelBar">
+          <span class="ck-veh-bar-label">연료</span>
+          <span class="ck-veh-bar-track">
+            <span id="vehFuelFill" class="ck-veh-bar-fill fuel" style="width:100%;"></span>
+          </span>
+        </div>
+        <div class="ck-veh-bar" id="vehEngBar">
+          <span class="ck-veh-bar-label">엔진</span>
+          <span class="ck-veh-bar-track">
+            <span id="vehEngFill" class="ck-veh-bar-fill engine" style="width:100%;"></span>
+          </span>
+        </div>
+        <span id="vehBelt" class="ck-veh-chip belt off">벨트 해제</span>
+      </div>
+    </div>
+
+    <div id="ammoCounter" class="ck-ammo" style="display:none;">
+      <img class="ck-ammo-img" id="ammoImg" alt="">
+      <span class="ck-ammo-clip" id="ammoClip">0</span><span class="ck-ammo-sep">/</span><span class="ck-ammo-reserve" id="ammoReserve">0</span>
+    </div>
+  </div>
+  <link rel="stylesheet" href="killfeed.css?v=20261013-weaponicons">
+  <script src="app.js?v=20260903-v383-needsplus"></script>
+  <script src="killfeed.js?v=20261013-weaponicons"></script>
+</body>
+</html>

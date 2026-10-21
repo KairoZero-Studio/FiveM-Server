@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Cookie Server</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="overlay">
+        <img src="assets/logo.png" class="logo">
+        <h1>쿠키 서버에 오신 것을 환영합니다</h1>
+        <p>여러분의 세상을 펼치세요!</p>
+
+        <div class="loading-bar">
+            <div class="progress"></div>
+        </div>
+
+        <div class="music-box">
+            <button id="musicToggle" type="button" aria-label="배경음악 재생 또는 일시정지">⏸ 음악 멈추기</button>
+            <label for="musicVolume">음량</label>
+            <input id="musicVolume" type="range" min="0" max="100" value="30" aria-label="배경음악 음량" />
+            <span id="volumeValue">30%</span>
+            <button id="cookieTrackPrev" type="button" aria-label="이전 트랙">◀</button>
+            <span id="cookieTrackTitle">쿠키서버 테마곡</span>
+            <button id="cookieTrackNext" type="button" aria-label="다음 트랙">▶</button>
+        </div>
+    </div>
+
+    <audio id="bgm" autoplay loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="playlist.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,7 @@
+fx_version 'cerulean'
+game 'gta5'
+lua54 'yes'
+name 'cookie_screen_diag'
+version '1.0.1'
+description 'COOKIE SERVER manual blackscreen diagnostic'
+client_script 'client/main.lua'

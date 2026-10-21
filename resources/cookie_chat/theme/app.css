@@ -1,0 +1,108 @@
+
+
+.ck-wrap, .msg .ck-wrap {
+    display: block !important;
+    white-space: nowrap !important;
+    margin: 2px 0;
+    padding: 3px 8px;
+    line-height: 1.6;
+    border-radius: 3px;
+    background: linear-gradient(to left, transparent, rgba(0, 0, 0, .45));
+    border-left: 2px solid #888;
+}
+.ck-wrap--prox  { border-left-color: #b0b3b8; }
+.ck-wrap--admin { border-left-color: #ff4d4f; }
+
+.msg .ck-wrap .ck-chip,
+.msg .ck-wrap .ck-nick,
+.msg .ck-wrap .ck-body {
+    display: inline-block !important;
+    vertical-align: middle !important;
+    margin-right: 7px !important;
+    float: none !important;
+    position: static !important;
+}
+.msg .ck-wrap .ck-body {
+    white-space: normal !important;
+    margin-right: 0 !important;
+}
+
+.msg .ck-wrap .ck-chip--hide { display: none !important; }
+
+.ck-chip {
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: .9em;
+    line-height: 1.4;
+}
+.ck-chip--gobun { background: #3a3d42; color: #ffffff; }
+.ck-chip--label { background: #000000; color: #FFFFFF; }
+.ck-chip--admin { background: #ff4d4f; color: #ffffff; }
+.ck-chip--faction { font-weight: 800; }
+
+.ck-nick { color: #9aa0a6; font-weight: 500; }
+.ck-body { color: #ffffff; font-weight: 600; word-break: break-word; }
+
+.ck-author  { color: #ffffff; font-weight: 600; }
+.ck-join    { color: #51cf66; }
+.ck-quit    { color: #868e96; }
+.ck-console { color: #ffd43b; }
+
+.chat-window {
+    background-color: transparent !important;
+}
+
+
+/* COOKIE CHAT ALWAYS V2.3 */
+.chat-window {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.chat-messages {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.chat-messages .msg,
+.chat-messages .message,
+.msg {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/*
+채팅 입력창은 건드리지 않는다.
+T 입력 시에만 FiveM chat의 ON_OPEN 로직으로 입력창이 열린다.
+*/
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* 귓속말: 보낸 사람·받는 사람만 표시 */
+.ck-wrap--whisper { border-left-color: #79c6ff !important; background: linear-gradient(to left, transparent, rgba(47, 106, 153, .24)) !important; }
+.ck-whisper-tag { color: #79c6ff; font-weight: 750; margin-right: 8px; }
+.ck-whisper-who { color: #cde9ff; margin-right: 8px; }

@@ -1,0 +1,280 @@
+
+#ckGMenu {
+  position: fixed; inset: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: center;
+
+  background: rgba(20, 20, 24, .28);
+  pointer-events: auto;
+}
+#ckGMenu.hidden { display: none; }
+
+.ck-gm {
+  width: min(1000px, 92vw); max-height: 86vh; display: flex; flex-direction: column;
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 18px; overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, .35);
+  font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+}
+
+.ck-gm-head {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  padding: 16px 18px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+.ck-gm-title {
+  font-size: 17px; font-weight: 800; color: #1a1a1a;
+  letter-spacing: -0.3px; text-align: center;
+}
+.ck-gm-close {
+  position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+  border: 0; background: rgba(0, 0, 0, 0.05); color: #888;
+  border-radius: 10px; width: 30px; height: 30px; font-size: 13px; cursor: pointer;
+  font-family: inherit;
+}
+.ck-gm-close:hover { background: rgba(0, 0, 0, 0.1); color: #1a1a1a; }
+
+.ck-gm-list { padding: 10px; overflow-y: auto; }
+
+.ck-gm-row {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; padding: 15px 44px; margin-bottom: 6px;
+  border: 0; background: rgba(255, 255, 255, 0.62); border-radius: 14px;
+  cursor: pointer; text-align: center; font-family: inherit;
+  transition: background .15s, transform .06s;
+}
+.ck-gm-row:hover { background: rgba(255, 246, 224, 0.9); }
+.ck-gm-row:active { transform: scale(0.995); }
+
+.ck-gm-info {
+  display: flex; flex-direction: column; align-items: center; gap: 4px; min-width: 0;
+}
+.ck-gm-name { font-size: 15px; font-weight: 800; color: #1a1a1a; letter-spacing: -0.3px; }
+.ck-gm-desc { font-size: 12px; color: #999; }
+
+.ck-gm-arrow {
+  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  font-size: 20px; color: #ccc;
+}
+.ck-gm-row:hover .ck-gm-arrow { color: #FFB800; }
+.ck-gm-empty { padding: 28px; text-align: center; font-size: 13px; color: #aaa; }
+
+.ck-gm-sec { margin-bottom: 18px; }
+.ck-gm-sechead {
+  padding: 0 2px 10px; color: #1a1a1a; font-size: 15px; font-weight: 800;
+}
+
+.ck-gm-secbody { display: flex; align-items: stretch; gap: 8px; }
+.ck-gm-track {
+  flex: 1; min-width: 0; display: flex; gap: 12px;
+  overflow-x: auto; scroll-behavior: smooth; padding: 2px;
+  scrollbar-width: none;
+}
+.ck-gm-track::-webkit-scrollbar { display: none; }
+.ck-gm-track.empty { min-height: 40px; }
+.ck-gm-more {
+  flex: 0 0 auto; align-self: center;
+  border: 1px solid #e0e0e0; background: #f7f7f7; color: #666;
+  border-radius: 10px; padding: 14px 10px;
+  font-family: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+  writing-mode: vertical-rl;
+}
+.ck-gm-more:hover { border-color: #FFB800; color: #1a1a1a; }
+.ck-gm-more.hidden { display: none; }
+
+.ck-gm-card {
+  position: relative; flex: 0 0 290px; width: 290px;
+  display: flex; flex-direction: column;
+  border: 1px solid #eee; border-radius: 14px; overflow: hidden;
+  background: #fff;
+}
+.ck-gm-card:hover { border-color: #FFB800; }
+.ck-gm-card.locked { opacity: .55; }
+.ck-gm-card.locked:hover { border-color: #eee; }
+
+.ck-gm-no {
+  position: absolute; top: 8px; left: 8px; z-index: 2;
+  min-width: 22px; height: 22px; padding: 0 6px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(26, 26, 26, .78); color: #fff;
+  border-radius: 7px; font-size: 11px; font-weight: 700;
+}
+
+.ck-gm-img {
+  width: 100%; height: 190px; flex: 0 0 190px; background: #fff;
+  display: flex; align-items: center; justify-content: center;
+}
+.ck-gm-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+  -webkit-mask-image: radial-gradient(ellipse 78% 82% at 50% 52%, #000 45%, rgba(0,0,0,.35) 75%, transparent 100%);
+  mask-image: radial-gradient(ellipse 78% 82% at 50% 52%, #000 45%, rgba(0,0,0,.35) 75%, transparent 100%);
+}
+.ck-gm-img.noimg { background: #f2f2f2; }
+.ck-gm-img.noimg::after { content: '이미지 없음'; font-size: 10px; font-weight: 600; color: #bbb; }
+.ck-gm-cbody {
+  flex: 1; min-width: 0; padding: 14px 16px;
+  display: flex; flex-direction: column; justify-content: center; gap: 10px;
+}
+.ck-gm-cname { font-size: 17px; font-weight: 700; color: #1a1a1a; }
+.ck-gm-take {
+  border: 0; background: #FFB800; color: #1a1a1a; border-radius: 10px;
+  padding: 12px; font-family: inherit; font-size: 14px; font-weight: 700; cursor: pointer;
+}
+.ck-gm-take:hover { background: #ffc426; }
+.ck-gm-take.locked { background: #f0f0f0; color: #aaa; cursor: default; }
+.ck-gm-take.locked:hover { background: #f0f0f0; }
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body {
+  width: 100%; height: 100%; overflow: hidden; background: transparent;
+  font-family: 'Pretendard', 'Segoe UI', 'Malgun Gothic', sans-serif;
+}
+
+.ck-sz {
+  position: fixed; top: 7vh; left: 50%;
+  transform: translateX(-50%) translateY(-14px);
+  display: flex; align-items: center; gap: 14px;
+  padding: 14px 22px; border-radius: 14px;
+  background: rgba(18, 18, 20, 0.86);
+  border: 1px solid rgba(255, 184, 0, 0.35);
+  box-shadow: 0 10px 36px rgba(0, 0, 0, 0.55);
+  pointer-events: none;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}
+.ck-sz.show {
+  opacity: 1; visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.ck-sz-logo {
+  width: 38px; height: 38px; flex: 0 0 auto;
+  border-radius: 9px; object-fit: contain;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 184, 0, 0.28);
+}
+
+.ck-sz-title {
+  font-size: 16px; font-weight: 700; color: #fff; white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+.ck-sz.exit { border-color: rgba(255, 255, 255, 0.16); }
+
+.ck-gbadge {
+  position: fixed; transform: translate(-50%, -50%);
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 12px 6px 6px; border-radius: 999px;
+  background: rgba(18, 20, 32, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  pointer-events: none; z-index: 40; white-space: nowrap;
+}
+.ck-gbadge.hidden { display: none; }
+.ck-gbadge-key {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 22px; height: 22px; background: #fff; color: #1a1a1a;
+  font-weight: 800; font-size: 12px; border-radius: 6px;
+}
+.ck-gbadge-text { color: #fff; font-size: 13px; font-weight: 600; }
+
+#ckStore {
+  position: fixed; inset: 0; z-index: 65;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(10, 16, 13, 0.42);
+  pointer-events: auto;
+}
+#ckStore.hidden { display: none; }
+.ck-store-shell {
+  width: min(1120px, 94vw); max-height: 88vh;
+  display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(249,255,250,.97), rgba(233,246,236,.97));
+  border: 1px solid rgba(75,165,105,.32);
+  box-shadow: 0 30px 80px rgba(0,0,0,.36);
+}
+.ck-store-head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 18px; padding: 20px 24px 18px;
+  background: linear-gradient(135deg, #2f8e50, #68bd7b); color: #fff;
+}
+.ck-store-kicker { font-size: 11px; font-weight: 900; letter-spacing: 1.7px; opacity: .88; }
+.ck-store-title { margin-top: 4px; font-size: 28px; font-weight: 900; letter-spacing: -.8px; }
+.ck-store-sub { margin-top: 5px; font-size: 13px; opacity: .92; }
+.ck-store-close {
+  width: 38px; height: 38px; border: 0; border-radius: 12px;
+  background: rgba(255,255,255,.18); color: #fff; cursor: pointer;
+  font-size: 16px; font-weight: 800;
+}
+.ck-store-close:hover { background: rgba(255,255,255,.28); }
+.ck-store-grid {
+  padding: 22px; overflow-y: auto;
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px;
+}
+.ck-store-card {
+  min-height: 316px; display: flex; flex-direction: column; overflow: hidden;
+  border-radius: 18px; background: rgba(255,255,255,.96);
+  border: 1px solid rgba(73,145,88,.14);
+  box-shadow: 0 10px 24px rgba(33,53,39,.08);
+  transition: transform .15s, box-shadow .15s;
+}
+.ck-store-card:hover { transform: translateY(-2px); box-shadow: 0 14px 30px rgba(33,53,39,.13); }
+.ck-store-img {
+  height: 152px; flex: 0 0 152px; display: flex; align-items: center; justify-content: center;
+  background: radial-gradient(circle at 50% 38%, rgba(199,255,210,.9), rgba(235,247,237,.9) 52%, rgba(242,247,243,.95));
+}
+.ck-store-img img { width: 112px; height: 112px; object-fit: contain; display: block; }
+.ck-store-img.noimg::after { content: '이미지 없음'; font-size: 11px; font-weight: 700; color: #9eb3a2; }
+.ck-store-body { flex: 1; padding: 14px 16px 10px; display: flex; flex-direction: column; gap: 6px; }
+.ck-store-name { font-size: 18px; font-weight: 850; color: #17321b; letter-spacing: -.4px; }
+.ck-store-code { font-size: 11px; color: #78907c; }
+.ck-store-price { margin-top: auto; font-size: 20px; font-weight: 900; color: #2f9e53; }
+.ck-store-foot { padding: 0 16px 16px; display: flex; flex-direction: column; gap: 10px; }
+.ck-store-qty { display: grid; grid-template-columns: 34px 1fr 34px; gap: 8px; }
+.ck-store-qty-btn, .ck-store-buy, .ck-store-qty-input { font-family: inherit; }
+.ck-store-qty-btn {
+  border: 0; border-radius: 10px; cursor: pointer;
+  background: rgba(63,121,74,.12); color: #2f5e38; font-size: 18px; font-weight: 900;
+}
+.ck-store-qty-btn:hover { background: rgba(63,121,74,.19); }
+.ck-store-qty-input {
+  width: 100%; height: 38px; text-align: center; border-radius: 10px;
+  border: 1px solid rgba(82,136,92,.22); background: #fff; color: #17321b;
+  font-size: 14px; font-weight: 750;
+}
+.ck-store-buy {
+  height: 40px; border: 0; border-radius: 11px; cursor: pointer;
+  background: linear-gradient(135deg, #359c51, #58bd73);
+  color: #fff; font-size: 14px; font-weight: 900;
+}
+.ck-store-buy:hover { filter: brightness(1.04); }
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* COOKIE SAFEZONE LARGE UI V14.2.5 */
+.ck-gm{width:min(1220px,96vw)!important;max-height:95vh!important;}
+.ck-gm-admin{width:min(1320px,97vw)!important;max-height:95vh!important;}

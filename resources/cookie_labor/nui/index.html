@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="dialog" class="hidden">
+  <div class="labor-profile" id="stats"></div>
+  <div class="labor-bottom">
+    <div class="labor-npc"><b id="npcName">건설 반장 권설현</b><span>건설 인부 관리인</span></div>
+    <div class="laborSpeech">일 찾으러 왔나? 안전하게만 하면 일은 얼마든지 있지.</div>
+    <div id="actions" class="actions"></div>
+    <button id="close" class="labor-close">나가기 (ESC)</button>
+  </div>
+</div>
+
+<div id="guide" class="guide hidden">
+  <div class="gIcon">📦</div>
+  <div class="gMain">
+    <div class="gTop"><b id="gLabel">건설 작업</b><span id="gCount">0/0</span></div>
+    <div class="bar"><i id="gBar"></i></div>
+    <div class="gBottom"><span id="gLine">작업 준비</span><b id="gReward">₩0</b></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<script src="app.js"></script>
+</body>
+</html>

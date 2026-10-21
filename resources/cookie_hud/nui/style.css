@@ -1,0 +1,1807 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { width: 100%; height: 100%; overflow: hidden; background: transparent; font-family: 'Pretendard', sans-serif; }
+#hud { width: 100%; height: 100%; }
+
+.ck-notice-box {
+  --ck-notice-top: 3.5vh;
+  position: fixed; left: 50%; top: var(--ck-notice-top);
+  transform: translateX(-50%);
+  z-index: 30;
+
+  width: auto;
+  max-width: min(920px, 76vw);
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 24px;
+
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+  white-space: nowrap;
+  font-family: 'Pretendard', 'Segoe UI', 'Malgun Gothic', sans-serif;
+  animation: ckNoticeIn .28s cubic-bezier(.2,.9,.3,1.2);
+}
+.ck-notice-box.hidden { display: none !important; }
+.ck-notice-box.out { animation: ckNoticeOut .25s ease forwards; }
+
+@keyframes ckNoticeIn {
+  from { opacity: 0; transform: translateX(-50%) translateY(-14px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+@keyframes ckNoticeOut {
+  from { opacity: 1; transform: translateX(-50%) translateY(0); }
+  to   { opacity: 0; transform: translateX(-50%) translateY(-14px); }
+}
+
+.ck-notice-logo { flex: 0 0 auto; width: 42px; height: 42px; object-fit: contain; }
+
+.ck-notice-main { flex: 0 1 auto; min-width: 0; text-align: center; }
+
+.ck-notice-title {
+  color: #1a1a1a; font-size: 12px; font-weight: 800;
+  letter-spacing: 1px; margin-bottom: 4px;
+}
+
+.ck-notice-text {
+  color: #b98600; font-size: 19px; font-weight: 800;
+  line-height: 1.4; letter-spacing: -0.4px;
+  word-break: keep-all;
+}
+
+.ck-notice-count {
+  flex: 0 0 auto;
+  margin-left: 8px; padding-left: 18px;
+  border-left: 1px solid #eee;
+  display: flex; align-items: baseline; gap: 3px;
+  color: #FFB800;
+  font-size: 42px; font-weight: 800; line-height: 1;
+  letter-spacing: -1px;
+  text-shadow: 0 0 12px rgba(255, 184, 0, 0.9),
+               0 0 30px rgba(255, 184, 0, 0.5);
+  animation: ckCountPulse .5s ease;
+}
+.ck-notice-count::after {
+  content: '초';
+  font-size: 15px; font-weight: 800; letter-spacing: 0;
+  color: #FFB800; text-shadow: none;
+}
+.ck-notice-count.hidden { display: none !important; }
+
+@keyframes ckCountPulse {
+  0%   { transform: scale(1.18); }
+  100% { transform: scale(1); }
+}
+
+.ck-veh {
+  --ck-veh-bottom: 96px;
+  --ck-veh-size: 210px;
+  --ck-veh-width: 360px;
+  position: absolute; left: 50%; bottom: var(--ck-veh-bottom); transform: translateX(-50%);
+  z-index: 8;
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  pointer-events: none;
+  font-family: 'Pretendard', 'Segoe UI', 'Malgun Gothic', sans-serif;
+}
+
+.ck-veh-dial {
+  width: var(--ck-veh-size);
+  height: var(--ck-veh-size);
+  overflow: visible;
+}
+
+.ck-veh-dial text {
+  paint-order: stroke;
+  stroke: rgba(0, 0, 0, 0.85);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+}
+
+.ck-veh-tick { fill: rgba(255, 255, 255, 0.55); }
+.ck-veh-tick.major { fill: #fff; }
+.ck-veh-tick.on { fill: #FFB800; }
+.ck-veh-tick.redline { fill: rgba(255, 90, 90, 0.55); }
+.ck-veh-tick.redline.on { fill: #ff5a5a; }
+
+.ck-veh-num {
+  fill: #fff; font-size: 15px; font-weight: 700;
+  paint-order: stroke; stroke: rgba(0,0,0,0.85); stroke-width: 3px;
+}
+
+.ck-veh-arc {
+  stroke: #FFB800;
+  stroke-width: 6;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.08s linear, stroke 0.2s;
+}
+.ck-veh.redline .ck-veh-arc { stroke: #ff5a5a; }
+
+.ck-veh-rpmlabel { fill: #fff; font-size: 13px; font-weight: 800; letter-spacing: 0.5px; }
+.ck-veh-rpmsub   { fill: #9aa0a6; font-size: 10px; font-weight: 700; stroke-width: 2px; }
+
+.ck-veh-speed {
+  fill: #6ffff0;
+  font-size: 52px; font-weight: 800; letter-spacing: -1px;
+  stroke: rgba(0, 0, 0, 0.9); stroke-width: 4px;
+  filter: drop-shadow(0 0 6px rgba(111, 255, 240, 0.9))
+          drop-shadow(0 0 16px rgba(111, 255, 240, 0.45));
+}
+
+.ck-veh.redline .ck-veh-speed {
+  fill: #ff7a7a;
+  filter: drop-shadow(0 0 6px rgba(255, 122, 122, 0.9))
+          drop-shadow(0 0 16px rgba(255, 122, 122, 0.45));
+}
+
+.ck-veh-unit { fill: #cfd3d8; font-size: 12px; font-weight: 700; }
+
+.ck-veh-gear { fill: #fff; font-size: 24px; font-weight: 800; }
+.ck-veh.rev .ck-veh-gear { fill: #ff5a5a; }
+
+.ck-veh-bars {
+  display: flex; align-items: center; gap: 10px;
+  width: var(--ck-veh-width);
+}
+
+.ck-veh-bar {
+  flex: 1;
+  display: flex; align-items: center; gap: 6px;
+  padding: 4px 8px;
+  border-radius: 7px;
+  background: rgba(13, 13, 15, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.ck-veh-bar-label {
+  flex: 0 0 auto;
+  color: #9aa0a6; font-size: 10.5px; font-weight: 700;
+}
+
+.ck-veh-bar-track {
+  flex: 1; min-width: 0;
+  display: block; height: 6px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+}
+
+.ck-veh-bar-fill {
+  display: block; height: 100%;
+  border-radius: 3px;
+  transition: width 0.2s linear, background 0.2s;
+}
+.ck-veh-bar-fill.fuel   { background: #FFB800; }
+.ck-veh-bar-fill.engine { background: #4a9eff; }
+
+.ck-veh-bar.low { border-color: rgba(255, 90, 90, 0.5); }
+.ck-veh-bar.low .ck-veh-bar-label { color: #ff5a5a; }
+.ck-veh-bar.low .ck-veh-bar-fill { background: #ff5a5a; animation: ckVehBlink 1s ease-in-out infinite; }
+
+.ck-veh-chip {
+  flex: 0 0 auto;
+  padding: 4px 10px; border-radius: 7px;
+  font-size: 11px; font-weight: 700;
+  background: rgba(13, 13, 15, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: #cfd3d8;
+}
+.ck-veh-chip.belt.on  { border-color: rgba(53,194,106,0.5); color: #35c26a; }
+.ck-veh-chip.belt.off { border-color: rgba(255,90,90,0.5);  color: #ff5a5a; animation: ckVehBlink 1.4s ease-in-out infinite; }
+
+@keyframes ckVehBlink {
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.4; }
+}
+
+#nametags { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+
+.ck-tag {
+  position: absolute; display: flex; flex-direction: column; align-items: center; gap: 2px;
+  white-space: nowrap; transform-origin: center;
+  will-change: left, top, transform;
+  text-shadow:
+    -1px -1px 0 rgba(0,0,0,.85),  1px -1px 0 rgba(0,0,0,.85),
+    -1px  1px 0 rgba(0,0,0,.85),  1px  1px 0 rgba(0,0,0,.85),
+     0    2px 4px rgba(0,0,0,.6);
+}
+.ck-tag-top, .ck-tag-bot { display: flex; align-items: center; gap: 5px; }
+
+.ck-tag-emoji {
+  font-size: 15px; line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, .6);
+}
+.ck-tag-org { color: #FFB800; font-size: 12px; font-weight: 800; }
+.ck-tag-duty { color: #888; font-size: 11px; font-weight: 700; }
+.ck-tag-duty.on { color: #6ee89b; }
+
+.ck-tag-name { font-size: 14px; font-weight: 800; color: #fff; }
+.ck-tag-gobun { font-size: 13px; font-weight: 700; color: #ffd766; }
+
+.ck-tag-badge {
+  padding: 3px 8px; border-radius: 7px;
+  background: #d92c2c; color: #fff;
+  font-size: 11px; font-weight: 800; line-height: 1.3;
+  text-shadow: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, .5);
+}
+
+.ck-hud-stack {
+  position: absolute; top: 22px; right: 22px;
+  display: flex; flex-direction: column; gap: 11px;
+  align-items: flex-end; width: 340px;
+}
+.ck-info-line {
+  display: flex; gap: 16px; justify-content: flex-end; width: 100%;
+  font-size: 13px; color: #fff; white-space: nowrap;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+.ck-info-item b { color: #FFB800; font-weight: 600; margin-right: 4px; }
+
+.ck-gauge-group { display: flex; flex-direction: column; gap: 4px; width: 100%; }
+.ck-gauge-row { display: flex; }
+.ck-gauge-track {
+  flex: 1; height: 18px; position: relative; overflow: hidden;
+  background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.18); border-radius: 2px;
+}
+.ck-gauge-fill { width: 0%; height: 100%; border-radius: 0; transition: width 0.2s ease; }
+.ck-gauge-fill.health { background: #e8453c; }
+.ck-gauge-fill.armor  { background: #378add; }
+
+.ck-gauge-pct-in {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  font-size: 11px; font-weight: 700; color: #fff; line-height: 1;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.95); pointer-events: none;
+}
+
+.ck-needs-row { display: flex; gap: 2px; width: 100%; }
+.ck-need-bar { flex: 1; height: 7px; }
+
+.ck-gauge-fill.needs.hunger { background: #f59e0b; }
+.ck-gauge-fill.needs.thirst { background: #3b82f6; }
+
+.ck-money-row {
+  display: flex; justify-content: flex-end; gap: 6px; align-items: baseline;
+  width: 100%; font-size: 14px; text-shadow: 0 1px 3px rgba(0,0,0,0.9);
+}
+.ck-money-row b { color: #FFB800; font-weight: 600; }
+.ck-money-row .cash { color: #4ade80; }
+.ck-money-row .bank { color: #60a5fa; }
+.ck-money-row .won-sub { color: #aaa; font-size: 11px; }
+
+.ck-infobar {
+
+  --ck-ib-bottom: 4.6vh;
+  position: absolute; left: 1.5vw; bottom: var(--ck-ib-bottom);
+  min-width: 16.4vw; width: max-content;
+  display: flex; gap: 2px; align-items: stretch;
+}
+.ck-ib-cell {
+
+  background: rgba(120, 120, 125, 0.55);
+  color: #fff; border-radius: 0; padding: 2px 6px;
+  font-family: "굴림", "Gulim", "Malgun Gothic", sans-serif;
+  font-size: 12.5px; font-weight: 700; white-space: nowrap;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.35); text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+.ck-ib-datetime { flex: 1 1 auto; letter-spacing: -0.4px; }
+.ck-ib-fps, .ck-ib-players { flex: 0 0 auto; }
+
+.ck-voice {
+  position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; align-items: flex-end; gap: 3px;
+  padding: 7px 11px; border-radius: 10px; z-index: 30;
+  background: rgba(255,184,0,0.14); border: 1px solid rgba(255,184,0,0.5);
+  opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.ck-voice.show { opacity: 1; visibility: visible; }
+.ck-voice-head { font-size: 12.5px; font-weight: 700; color: #FFB800; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+.ck-voice-list { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; }
+.ck-vc-row { display: flex; gap: 5px; font-size: 11.5px; text-shadow: 0 1px 2px rgba(0,0,0,0.8); }
+.ck-vc-gobun { color: #FFB800; font-weight: 700; }
+.ck-vc-sep { color: #666; }
+.ck-vc-nick { color: #fff; }
+
+.ck-voice-toast {
+  position: fixed; right: 14px; top: 38%;
+  padding: 6px 12px; border-radius: 8px; z-index: 31;
+  background: #3a3a3d; color: #fff; font-size: 12px; font-weight: 700; white-space: nowrap;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  opacity: 0; visibility: hidden; transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.ck-voice-toast.show { opacity: 1; visibility: visible; }
+
+.ck-hotbar {
+
+  --ck-hb-size: 70px;
+  position: absolute; left: 50%; bottom: 20px; transform: translateX(-50%);
+  display: flex; gap: 6px; z-index: 6;
+}
+.ck-hb-card {
+  position: relative; width: var(--ck-hb-size); height: var(--ck-hb-size); border-radius: 8px;
+  background: rgba(13, 13, 15, 0.72); border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.ck-hb-card.ck-hb-empty { background: rgba(13, 13, 15, 0.4); border-color: rgba(255, 255, 255, 0.08); }
+.ck-hb-num {
+  position: absolute; top: calc(var(--ck-hb-size) * 0.06); left: calc(var(--ck-hb-size) * 0.08); z-index: 2;
+  font-size: calc(var(--ck-hb-size) * 0.2); font-weight: 700; color: #FFB800; line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85);
+}
+.ck-hb-img {
+
+  position: absolute; inset: 0; z-index: 1;
+  width: 100%; height: 100%; max-width: 100%; max-height: 100%;
+  object-fit: contain; padding: 14%; box-sizing: border-box; pointer-events: none;
+}
+.ck-hb-count {
+  position: absolute; right: calc(var(--ck-hb-size) * 0.07); bottom: calc(var(--ck-hb-size) * 0.05); z-index: 2;
+  font-size: calc(var(--ck-hb-size) * 0.2); font-weight: 700; color: #fff; line-height: 1;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+}
+
+.ck-hb-equip {
+  display: none;
+  position: absolute; left: 50%; bottom: calc(var(--ck-hb-size) * 0.05); transform: translateX(-50%); z-index: 3;
+  padding: 2px 6px; border-radius: 6px;
+  font-size: calc(var(--ck-hb-size) * 0.15); font-weight: 700; line-height: 1;
+  background: rgba(62, 194, 106, 0.92); color: #fff; white-space: nowrap;
+}
+.ck-hb-card.equipped .ck-hb-equip { display: block; }
+.ck-hb-card.equipped { border-color: #3ec26a; box-shadow: 0 0 8px rgba(62, 194, 106, 0.45); }
+
+.ck-hb-cd {
+  display: none;
+  position: absolute; inset: 0; z-index: 4;
+  border-radius: 7px;
+  align-items: center; justify-content: center;
+  pointer-events: none;
+}
+.ck-hb-cd.on { display: flex; }
+.ck-hb-cd-num {
+  font-size: calc(var(--ck-hb-size) * 0.34); font-weight: 800; color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95);
+}
+
+.ck-ammo {
+  position: absolute; left: 53.5%; top: 52.5%;
+
+  display: flex; align-items: baseline;
+  font-family: "굴림", "Gulim", "Malgun Gothic", sans-serif;
+  pointer-events: none; z-index: 7;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.95), 0 0 2px rgba(0, 0, 0, 0.8);
+}
+.ck-ammo-img {
+
+  height: 18px; width: auto; max-width: 26px; max-height: 18px;
+  object-fit: contain; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.9));
+  align-self: center;
+  margin-right: 6px;
+}
+
+.ck-ammo-clip { font-size: 22px; font-weight: 800; color: #fff; }
+.ck-ammo-clip.empty { color: #ff4d4f; }
+
+.ck-ammo-sep { font-size: 14px; font-weight: 700; color: #9aa0a6; margin: 0 1px; }
+.ck-ammo-reserve { font-size: 14px; font-weight: 700; color: #9aa0a6; }
+
+/* COOKIE COUPLE V1 - partner line between job and player name */
+.ck-tag-lover{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:12px;
+  margin:1px 0;
+  padding:1px 7px 2px;
+  border-radius:999px;
+  background:rgba(36,10,22,.46);
+  color:#ff86b1;
+  font-size:10px;
+  line-height:1.15;
+  font-weight:900;
+  letter-spacing:-.2px;
+  border:1px solid rgba(255,134,177,.20);
+  text-shadow:
+    -1px -1px 0 rgba(0,0,0,.9),
+    1px -1px 0 rgba(0,0,0,.9),
+    -1px 1px 0 rgba(0,0,0,.9),
+    1px 1px 0 rgba(0,0,0,.9),
+    0 2px 4px rgba(0,0,0,.7);
+}
+
+/* COOKIE camera clean-screen mode */
+body.ck-camera-hidden > * { display: none !important; }
+
+/* COOKIE HUD V2 */
+:root{--ck-cookie:#e6a23c;--ck-cream:#f6dfac;--ck-cocoa:#20170f;--ck-line:rgba(246,223,172,.13);--ck-hp:#e96858;--ck-armor:#5f9be9}
+.ck-hud-stack{top:18px!important;right:18px!important;width:310px!important;gap:0!important}
+.ck-cookie-card{width:100%;padding:12px;border:1px solid var(--ck-line);border-radius:14px;background:linear-gradient(145deg,rgba(37,27,18,.93),rgba(13,14,16,.91));box-shadow:0 14px 34px rgba(0,0,0,.34),inset 0 1px 0 rgba(255,255,255,.035);backdrop-filter:blur(8px);transition:border-color .18s,box-shadow .18s}
+.ck-cookie-card.low-health{border-color:rgba(233,104,88,.45);animation:ckCookieLow 1.25s ease-in-out infinite}@keyframes ckCookieLow{50%{box-shadow:0 0 18px rgba(233,104,88,.16),0 14px 38px rgba(0,0,0,.38)}}
+.ck-cookie-head{display:flex;align-items:center;gap:9px}.ck-cookie-brand{display:flex;align-items:center;gap:6px;color:var(--ck-cream);font-size:9px;font-weight:950;letter-spacing:1.1px}.ck-cookie-brand i{width:15px;height:15px;border-radius:50%;background:radial-gradient(circle at 32% 30%,#5a3a20 0 10%,transparent 11%),radial-gradient(circle at 68% 32%,#5a3a20 0 8%,transparent 9%),radial-gradient(circle at 53% 67%,#5a3a20 0 9%,transparent 10%),#e0a249;box-shadow:0 0 0 2px rgba(255,223,168,.12)}
+.ck-cookie-identity{margin-left:auto;display:flex;align-items:baseline;gap:7px}.ck-cookie-identity b{font-size:12px;color:#f4f5f7}.ck-cookie-identity span{padding:2px 6px;border-radius:99px;color:#d5bd91;background:rgba(230,162,60,.08);border:1px solid rgba(230,162,60,.12);font-size:8px;font-weight:850}.ck-cookie-job{margin-top:5px;color:#948b80;font-size:9px;text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ck-vitals{display:flex;flex-direction:column;gap:6px;margin-top:10px}.ck-vital{display:grid;grid-template-columns:39px 1fr 35px;gap:7px;align-items:center}.ck-vital-label{font-size:8px;font-weight:950;color:#9c9287;letter-spacing:.4px}.ck-vital-track{height:7px;border-radius:99px;overflow:hidden;background:rgba(255,255,255,.065);box-shadow:inset 0 1px 2px rgba(0,0,0,.35)}.ck-vital-fill{height:100%;border-radius:99px;transition:width .18s linear}.ck-vital-fill.health{background:linear-gradient(90deg,#b94e43,var(--ck-hp))}.ck-vital-fill.armor{background:linear-gradient(90deg,#376eb6,var(--ck-armor))}.ck-vital b{font-size:8px;color:#b8afa4;text-align:right}
+.ck-mini-status{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:9px}.ck-mini{padding:5px 6px;border:1px solid rgba(255,255,255,.045);border-radius:7px;background:rgba(255,255,255,.025)}.ck-mini span{display:block;color:#776e65;font-size:7px;font-weight:800;margin-bottom:4px}.ck-mini>div{height:3px;background:rgba(255,255,255,.07);border-radius:99px;overflow:hidden}.ck-mini i{display:block;height:100%;background:#4d96df;border-radius:99px;transition:width .2s}.ck-mini:nth-child(2) i{background:#dca43d}.ck-mini i.stamina{background:#75bc7c}.ck-mini.oxygen i{background:#59b8d4}.ck-mini.hidden{display:none!important}
+.ck-cookie-location{margin-top:8px;padding-top:7px;border-top:1px solid rgba(255,255,255,.045);color:#81786f;font-size:8px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ck-cookie-location::before{content:'LOC  ';color:#c68f3e;font-weight:900}
+.ck-cookie-money{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:7px}.ck-cookie-money>span{min-width:0;padding:6px 7px;border-radius:8px;background:rgba(255,255,255,.026);border:1px solid rgba(255,255,255,.04)}.ck-cookie-money small{display:block;color:#756d65;font-size:7px}.ck-cookie-money b{display:block;margin-top:2px;font-size:9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ck-cookie-money .cash{color:#77c98b}.ck-cookie-money .bank{color:#76a9ef}.ck-cookie-money .won-sub{display:none}
+.ck-tag{gap:0!important;text-shadow:none!important}.ck-tag-card{min-width:108px;padding:5px 7px;border-radius:8px;border:1px solid rgba(246,223,172,.10);background:linear-gradient(145deg,rgba(26,21,17,.82),rgba(11,13,16,.76));box-shadow:0 5px 13px rgba(0,0,0,.28);backdrop-filter:blur(5px)}.ck-tag-card.talking{border-color:rgba(230,162,60,.42);box-shadow:0 0 12px rgba(230,162,60,.13),0 5px 13px rgba(0,0,0,.28)}.ck-tag-head{display:flex;align-items:center;justify-content:center;gap:4px;margin-bottom:3px;font-size:7px;font-weight:850}.ck-tag-talk{width:5px;height:5px;border-radius:50%;background:#514c46;box-shadow:0 0 0 2px rgba(255,255,255,.025)}.ck-tag-talk.on{background:#e5a23d;box-shadow:0 0 7px rgba(229,162,61,.6)}.ck-tag-org{font-size:8px!important;font-weight:900!important}.ck-tag-duty{padding:1px 4px;border-radius:99px;color:#78736d!important;font-size:6.5px!important;background:rgba(255,255,255,.035)}.ck-tag-duty.on{color:#7fce92!important;background:rgba(74,190,110,.08)}.ck-tag-emoji{font-size:9px!important}.ck-tag-main{display:flex;align-items:center;justify-content:center;gap:4px}.ck-tag-name{font-size:10px!important;font-weight:900!important;color:#f4f2ee!important}.ck-tag-divider{color:#5f5952;font-size:8px}.ck-tag-gobun{padding:1px 4px;border-radius:5px;color:#e6b765!important;background:rgba(230,162,60,.07);font-size:8px!important;font-weight:900!important}.ck-tag-badge{padding:2px 5px!important;border-radius:5px!important;background:#a83d37!important;color:#fff!important;font-size:7px!important;box-shadow:none!important}.ck-tag-lover{margin-top:3px!important;color:#e98ba6!important;font-size:7px!important;text-align:center}
+
+
+/* COOKIE NAMETAG V3.1 - CLASSIC SIMPLE */
+.ck-tag{
+  position:absolute!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:2px!important;
+  min-width:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  white-space:nowrap!important;
+  transform-origin:center!important;
+  text-shadow:
+    -1px -1px 0 rgba(0,0,0,.92),
+     1px -1px 0 rgba(0,0,0,.92),
+    -1px  1px 0 rgba(0,0,0,.92),
+     1px  1px 0 rgba(0,0,0,.92),
+     0 2px 4px rgba(0,0,0,.78)!important;
+}
+
+.ck-tag-card,.ck-tag-head,.ck-tag-main{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  padding:0!important;
+}
+
+.ck-tag-top,.ck-tag-bot{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:6px!important;
+  padding:0!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+}
+
+.ck-tag-emoji{
+  font-size:17px!important;
+  line-height:1!important;
+  background:transparent!important;
+}
+
+.ck-tag-org{
+  font-size:14px!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+  background:transparent!important;
+}
+
+.ck-tag-duty{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#b2b2b2!important;
+  font-size:12px!important;
+  font-weight:800!important;
+}
+.ck-tag-duty.on{
+  color:#72eba0!important;
+  background:transparent!important;
+}
+
+.ck-tag-lover{
+  min-height:0!important;
+  margin:1px 0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#ff8fb6!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1.1!important;
+}
+
+.ck-tag-badge{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#ff7770!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+}
+.ck-tag-badge::before{content:'['}
+.ck-tag-badge::after{content:']'}
+
+.ck-tag-name{
+  color:#fff!important;
+  font-size:16px!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+  background:transparent!important;
+}
+
+.ck-tag-gobun{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#ffd36e!important;
+  font-size:14px!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+}
+
+.ck-tag-talk,.ck-tag-divider{display:none!important}
+
+
+/* =========================================================
+   COOKIE HUD V3.2 SIMPLE
+   예전 레이아웃 복구 + 쿠키색 포인트만 최소 사용
+   ========================================================= */
+
+.ck-hud-stack{
+  top:18px!important;
+  right:18px!important;
+  width:286px!important;
+  gap:5px!important;
+}
+
+/* 상단 직업/이름/고번 */
+.ck-info-line{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  flex-wrap:wrap!important;
+  gap:7px!important;
+  min-height:30px!important;
+  padding:6px 9px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:8px!important;
+  background:rgba(12,13,15,.72)!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.18)!important;
+  backdrop-filter:blur(3px)!important;
+}
+
+.ck-info-item{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:4px!important;
+  color:#e7e7e7!important;
+  font-size:10px!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+
+.ck-info-item b{
+  color:#c99955!important;
+  font-size:9px!important;
+  font-weight:900!important;
+}
+
+/* 체력/방탄/허기/수분 */
+.ck-gauge-group{
+  padding:7px 9px!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  border-radius:8px!important;
+  background:rgba(12,13,15,.66)!important;
+  box-shadow:0 4px 12px rgba(0,0,0,.16)!important;
+  backdrop-filter:blur(3px)!important;
+}
+
+.ck-gauge-row{
+  margin:0 0 5px!important;
+}
+
+.ck-gauge-row:nth-child(1)::before{
+  content:'HP';
+}
+.ck-gauge-row:nth-child(2)::before{
+  content:'ARMOR';
+}
+
+.ck-gauge-row::before{
+  display:inline-block!important;
+  width:38px!important;
+  margin-right:5px!important;
+  color:#8f8f8f!important;
+  font-size:8px!important;
+  font-weight:900!important;
+  vertical-align:middle!important;
+}
+
+.ck-gauge-row .ck-gauge-track{
+  display:inline-block!important;
+  width:calc(100% - 46px)!important;
+  height:8px!important;
+  vertical-align:middle!important;
+  border-radius:999px!important;
+  overflow:hidden!important;
+  background:rgba(255,255,255,.075)!important;
+  box-shadow:none!important;
+}
+
+.ck-gauge-fill.health{
+  background:#d85d52!important;
+}
+.ck-gauge-fill.armor{
+  background:#4f8fd8!important;
+}
+
+.ck-gauge-pct-in{
+  color:#f1f1f1!important;
+  font-size:7px!important;
+  font-weight:900!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.8)!important;
+}
+
+.ck-needs-row{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:6px!important;
+  margin-top:3px!important;
+}
+
+.ck-need-bar{
+  width:100%!important;
+  height:4px!important;
+  border-radius:999px!important;
+  background:rgba(255,255,255,.07)!important;
+  overflow:hidden!important;
+}
+
+.ck-gauge-fill.needs.thirst{
+  background:#4f9bdc!important;
+}
+.ck-gauge-fill.needs.hunger{
+  background:#d6a13f!important;
+}
+
+/* 돈은 두 줄보다 한 줄씩 단순하게 */
+.ck-money-row{
+  min-height:27px!important;
+  display:flex!important;
+  align-items:center!important;
+  padding:5px 9px!important;
+  border:1px solid rgba(255,255,255,.05)!important;
+  border-radius:8px!important;
+  background:rgba(12,13,15,.62)!important;
+  box-shadow:none!important;
+  font-size:9px!important;
+}
+
+.ck-money-row b{
+  color:#9b9184!important;
+  font-size:9px!important;
+  font-weight:850!important;
+}
+
+.ck-money-row span{
+  margin-left:auto!important;
+  font-size:10px!important;
+  font-weight:900!important;
+}
+
+.ck-money-row .cash{color:#73c58a!important}
+.ck-money-row .bank{color:#77a9e9!important}
+
+/* V3의 큰 카드형 HUD 요소는 HTML에서 제거되지만 혹시 남아도 숨김 */
+.ck-cookie-card,
+.ck-cookie-head,
+.ck-cookie-brand,
+.ck-cookie-identity,
+.ck-cookie-job,
+.ck-vitals,
+.ck-mini-status,
+.ck-cookie-location,
+.ck-cookie-money{
+  display:none!important;
+}
+
+/* 저체력 시 카드 전체가 번쩍이지 않게 막고 HP 막대만 유지 */
+.ck-cookie-card.low-health{
+  animation:none!important;
+}
+
+/* 돈 숫자 안의 원화 보조 표현도 최대한 단순화 */
+.ck-money-row .won-sub{
+  font-size:7px!important;
+  opacity:.7!important;
+}
+
+
+/* =========================================================
+   COOKIE HUD V3.3 CLEAN
+   크기 확대 + 검은 카드/배경 완전 제거
+   ========================================================= */
+
+.ck-hud-stack{
+  top:22px!important;
+  right:24px!important;
+  width:340px!important;
+  gap:7px!important;
+}
+
+/* 정보 / 체력 / 돈 전부 배경 없는 텍스트 HUD */
+.ck-info-line,
+.ck-gauge-group,
+.ck-money-row{
+  background:transparent!important;
+  border:0!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+/* 이름/고번/직업 */
+.ck-info-line{
+  min-height:0!important;
+  padding:0!important;
+  gap:10px!important;
+  justify-content:flex-end!important;
+}
+
+.ck-info-item{
+  font-size:13px!important;
+  font-weight:800!important;
+  color:#f3f3f3!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.95)!important;
+}
+
+.ck-info-item b{
+  font-size:11px!important;
+  color:#d7a34f!important;
+  font-weight:900!important;
+}
+
+/* 체력 / 방탄 */
+.ck-gauge-group{
+  width:100%!important;
+  padding:2px 0 0!important;
+  gap:6px!important;
+}
+
+.ck-gauge-row{
+  margin:0!important;
+  min-height:15px!important;
+}
+
+.ck-gauge-row::before{
+  width:48px!important;
+  margin-right:7px!important;
+  color:#d2d2d2!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.95)!important;
+}
+
+.ck-gauge-row .ck-gauge-track{
+  width:calc(100% - 57px)!important;
+  height:10px!important;
+  background:rgba(0,0,0,.28)!important;
+  box-shadow:0 1px 3px rgba(0,0,0,.25)!important;
+}
+
+.ck-gauge-pct-in{
+  font-size:9px!important;
+  color:#fff!important;
+}
+
+/* 허기 / 수분은 작지만 잘 보이게 */
+.ck-needs-row{
+  gap:10px!important;
+  margin-top:3px!important;
+}
+
+.ck-need-wrap{
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
+
+.ck-need-label{
+  font-size:10px!important;
+  color:#d0d0d0!important;
+  font-weight:800!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.95)!important;
+}
+
+.ck-need-bar{
+  height:6px!important;
+  margin-top:4px!important;
+  background:rgba(0,0,0,.28)!important;
+}
+
+/* 현금 / 계좌 */
+.ck-money-row{
+  min-height:0!important;
+  padding:1px 0!important;
+  font-size:11px!important;
+}
+
+.ck-money-row b{
+  font-size:11px!important;
+  color:#d7a34f!important;
+  font-weight:900!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.95)!important;
+}
+
+.ck-money-row span{
+  font-size:13px!important;
+  font-weight:900!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.95)!important;
+}
+
+/* 혹시 예전 카드 요소가 남아도 절대 검은 배경이 보이지 않도록 */
+.ck-cookie-card,
+.ck-cookie-head,
+.ck-cookie-brand,
+.ck-cookie-identity,
+.ck-cookie-job,
+.ck-vitals,
+.ck-mini-status,
+.ck-cookie-location,
+.ck-cookie-money{
+  display:none!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+
+/* =========================================================
+   COOKIE HUD V3.4 · LARGE VITALS
+   체력/방탄을 크게, 단순하지만 빈약하지 않게
+   ========================================================= */
+
+.ck-hud-stack{
+  top:24px!important;
+  right:28px!important;
+  width:410px!important;
+  gap:9px!important;
+}
+
+/* 상단 신상 정보는 체력 패널보다 살짝 작게 */
+.ck-info-line{
+  min-height:34px!important;
+  padding:7px 10px!important;
+  gap:11px!important;
+  border:1px solid rgba(255,255,255,.075)!important;
+  border-radius:11px!important;
+  background:linear-gradient(180deg,rgba(17,19,23,.72),rgba(8,10,13,.62))!important;
+  box-shadow:0 8px 22px rgba(0,0,0,.22)!important;
+  backdrop-filter:blur(5px)!important;
+}
+
+.ck-info-item{
+  font-size:13px!important;
+}
+.ck-info-item b{
+  font-size:10px!important;
+}
+
+/* 생존 상태 메인 카드 */
+.ck-gauge-group{
+  position:relative!important;
+  width:100%!important;
+  padding:13px 14px 14px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:10px!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  border-radius:13px!important;
+  background:
+    linear-gradient(145deg,rgba(18,21,26,.88),rgba(8,10,13,.78))!important;
+  box-shadow:
+    0 10px 26px rgba(0,0,0,.28),
+    inset 0 1px 0 rgba(255,255,255,.025)!important;
+  backdrop-filter:blur(6px)!important;
+  overflow:hidden!important;
+}
+
+.ck-gauge-group::after{
+  content:''!important;
+  position:absolute!important;
+  left:0!important;
+  top:0!important;
+  bottom:0!important;
+  width:3px!important;
+  background:linear-gradient(180deg,#e96b5f 0 50%,#5f9be9 50% 100%)!important;
+  opacity:.88!important;
+}
+
+.ck-vitals-head{
+  height:21px!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  padding-left:2px!important;
+  border-bottom:1px solid rgba(255,255,255,.055)!important;
+  padding-bottom:8px!important;
+  margin-bottom:1px!important;
+}
+
+.ck-vitals-head span{
+  font-size:8px!important;
+  font-weight:950!important;
+  letter-spacing:1.4px!important;
+  color:#8f969f!important;
+}
+
+.ck-vitals-head b{
+  font-size:11px!important;
+  font-weight:900!important;
+  color:#e7e9ec!important;
+}
+
+.ck-gauge-row{
+  min-height:47px!important;
+  margin:0!important;
+  display:grid!important;
+  grid-template-columns:92px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:12px!important;
+}
+
+.ck-gauge-row::before{
+  display:none!important;
+  content:none!important;
+}
+
+.ck-gauge-label{
+  display:flex!important;
+  align-items:center!important;
+  gap:8px!important;
+}
+
+.ck-vital-icon{
+  width:31px!important;
+  height:31px!important;
+  flex:0 0 31px!important;
+  display:grid!important;
+  place-items:center!important;
+  border-radius:9px!important;
+  font-size:16px!important;
+  font-weight:1000!important;
+  line-height:1!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.04)!important;
+}
+
+.ck-vital-icon.hp{
+  color:#ff8176!important;
+  background:rgba(233,104,88,.10)!important;
+  border-color:rgba(233,104,88,.18)!important;
+}
+
+.ck-vital-icon.armor{
+  color:#76adf0!important;
+  background:rgba(95,155,233,.10)!important;
+  border-color:rgba(95,155,233,.18)!important;
+  font-size:12px!important;
+}
+
+.ck-gauge-label small{
+  display:block!important;
+  margin-bottom:2px!important;
+  font-size:7px!important;
+  line-height:1!important;
+  letter-spacing:.85px!important;
+  color:#777f89!important;
+  font-weight:900!important;
+}
+
+.ck-gauge-label b{
+  display:block!important;
+  font-size:12px!important;
+  line-height:1.05!important;
+  color:#eef0f2!important;
+  font-weight:950!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.45)!important;
+}
+
+.ck-gauge-main{
+  min-width:0!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) 45px!important;
+  gap:9px!important;
+  align-items:center!important;
+}
+
+.ck-gauge-row .ck-gauge-track{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:17px!important;
+  border-radius:6px!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+  background:rgba(255,255,255,.055)!important;
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.42),
+    0 1px 2px rgba(0,0,0,.2)!important;
+}
+
+.ck-gauge-row .ck-gauge-track::after{
+  content:''!important;
+  position:absolute!important;
+  inset:0!important;
+  pointer-events:none!important;
+  background:
+    linear-gradient(90deg,transparent 24%,rgba(255,255,255,.055) 25%,transparent 26%,
+    transparent 49%,rgba(255,255,255,.055) 50%,transparent 51%,
+    transparent 74%,rgba(255,255,255,.055) 75%,transparent 76%)!important;
+}
+
+.ck-gauge-fill{
+  position:relative!important;
+  height:100%!important;
+  transition:width .18s ease!important;
+}
+
+.ck-gauge-fill.health{
+  background:linear-gradient(90deg,#b84e46,#e96858,#f17a6d)!important;
+  box-shadow:0 0 12px rgba(233,104,88,.24)!important;
+}
+
+.ck-gauge-fill.armor{
+  background:linear-gradient(90deg,#376fb8,#5f9be9,#78adf0)!important;
+  box-shadow:0 0 12px rgba(95,155,233,.22)!important;
+}
+
+.ck-gauge-pct-in{
+  position:static!important;
+  display:block!important;
+  width:auto!important;
+  color:#f3f4f5!important;
+  font-size:13px!important;
+  font-weight:950!important;
+  text-align:right!important;
+  line-height:1!important;
+  text-shadow:0 1px 3px rgba(0,0,0,.8)!important;
+}
+
+/* 수분 / 허기: 아래에 보조 상태로 정돈 */
+.ck-needs-row{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:12px!important;
+  margin-top:1px!important;
+  padding-top:10px!important;
+  border-top:1px solid rgba(255,255,255,.05)!important;
+}
+
+.ck-need-item{
+  min-width:0!important;
+  display:grid!important;
+  grid-template-columns:30px minmax(0,1fr)!important;
+  gap:7px!important;
+  align-items:center!important;
+}
+
+.ck-need-item>span{
+  font-size:9px!important;
+  color:#a8adb4!important;
+  font-weight:850!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.6)!important;
+}
+
+.ck-need-bar{
+  width:100%!important;
+  height:7px!important;
+  margin:0!important;
+  border-radius:4px!important;
+  border:1px solid rgba(255,255,255,.055)!important;
+  background:rgba(255,255,255,.055)!important;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.34)!important;
+}
+
+.ck-gauge-fill.needs.thirst{
+  background:linear-gradient(90deg,#3f82be,#59a8e8)!important;
+}
+.ck-gauge-fill.needs.hunger{
+  background:linear-gradient(90deg,#b9832c,#e1ad4a)!important;
+}
+
+/* 저체력은 체력 줄만 은은하게 경고 */
+.ck-gauge-group.low-health .health-row .ck-gauge-track{
+  border-color:rgba(233,104,88,.34)!important;
+  box-shadow:
+    inset 0 2px 4px rgba(0,0,0,.42),
+    0 0 12px rgba(233,104,88,.16)!important;
+}
+
+.ck-gauge-group.low-health .ck-vital-icon.hp{
+  animation:ckVitalPulse 1.05s ease-in-out infinite!important;
+}
+
+@keyframes ckVitalPulse{
+  50%{
+    background:rgba(233,104,88,.22);
+    box-shadow:0 0 13px rgba(233,104,88,.20);
+  }
+}
+
+/* 돈 영역도 메인 카드와 균형 맞춤 */
+.ck-money-row{
+  min-height:31px!important;
+  padding:5px 10px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:9px!important;
+  background:rgba(10,12,15,.56)!important;
+  box-shadow:0 5px 14px rgba(0,0,0,.15)!important;
+}
+
+.ck-money-row b{
+  font-size:11px!important;
+}
+
+.ck-money-row span{
+  font-size:13px!important;
+}
+
+/* 화면 폭이 좁을 때만 약간 축소 */
+@media(max-width:1200px){
+  .ck-hud-stack{
+    width:370px!important;
+    right:20px!important;
+  }
+}
+
+
+/* =========================================================
+   COOKIE NAMETAG V3.1.1 · ADMIN BADGE RESTORE
+   관리자 태그를 빨간 글자 거적대기에서 이전 캡슐 배지로 복구
+   ========================================================= */
+
+.ck-tag-badge{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:24px!important;
+  padding:3px 9px!important;
+  border:1px solid rgba(255,125,118,.25)!important;
+  border-radius:7px!important;
+  background:linear-gradient(180deg,#c84b44,#a93631)!important;
+  color:#fff!important;
+  font-size:11px!important;
+  font-weight:950!important;
+  line-height:1!important;
+  letter-spacing:-.02em!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.45)!important;
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.38),
+    inset 0 1px 0 rgba(255,255,255,.10)!important;
+}
+
+.ck-tag-badge::before,
+.ck-tag-badge::after{
+  content:none!important;
+  display:none!important;
+}
+
+/* 관리자 태그는 이름과 자연스럽게 붙이고, 너무 붕 뜨지 않도록 간격 보정 */
+.ck-tag:has(.ck-tag-badge) .ck-tag-bot{
+  gap:6px!important;
+}
+
+.ck-tag:has(.ck-tag-badge) .ck-tag-name{
+  font-size:16px!important;
+  color:#fff!important;
+}
+
+.ck-tag:has(.ck-tag-badge) .ck-tag-gobun{
+  font-size:14px!important;
+  color:#ffd36e!important;
+}
+
+
+/* =========================================================
+   COOKIE NAMETAG CLASSIC RESTORE
+   초창기 네임태그 스타일 그대로 복구
+   ========================================================= */
+.ck-tag{
+  position:absolute!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  gap:2px!important;
+  min-width:0!important;
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+  white-space:nowrap!important;
+  transform-origin:center!important;
+  text-shadow:
+    -1px -1px 0 rgba(0,0,0,.85),
+     1px -1px 0 rgba(0,0,0,.85),
+    -1px  1px 0 rgba(0,0,0,.85),
+     1px  1px 0 rgba(0,0,0,.85),
+     0 2px 4px rgba(0,0,0,.6)!important;
+}
+
+.ck-tag-card,.ck-tag-head,.ck-tag-main{
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.ck-tag-top,.ck-tag-bot{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.ck-tag-emoji{
+  font-size:15px!important;
+  line-height:1!important;
+  text-shadow:0 2px 4px rgba(0,0,0,.6)!important;
+}
+
+.ck-tag-org{
+  color:#FFB800!important;
+  font-size:12px!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+}
+
+.ck-tag-duty{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#888!important;
+  font-size:11px!important;
+  font-weight:700!important;
+}
+.ck-tag-duty.on{
+  color:#6ee89b!important;
+  background:transparent!important;
+}
+
+.ck-tag-lover{
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#ff8fb6!important;
+  font-size:10px!important;
+  font-weight:700!important;
+}
+
+.ck-tag-name{
+  color:#fff!important;
+  font-size:14px!important;
+  font-weight:800!important;
+  line-height:1.2!important;
+  background:transparent!important;
+}
+
+.ck-tag-gobun{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#ffd766!important;
+  font-size:13px!important;
+  font-weight:700!important;
+  line-height:1.2!important;
+}
+
+.ck-tag-badge{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-height:0!important;
+  padding:3px 8px!important;
+  border:0!important;
+  border-radius:7px!important;
+  background:#d92c2c!important;
+  color:#fff!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1.3!important;
+  letter-spacing:0!important;
+  text-shadow:none!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.5)!important;
+}
+.ck-tag-badge::before,
+.ck-tag-badge::after{
+  content:none!important;
+  display:none!important;
+}
+
+.ck-tag-talk,.ck-tag-divider{
+  display:none!important;
+}
+
+/* =========================================================
+   COOKIE HUD V3.5 CLASSIC LARGE
+   평범하고 큰 규격형 HUD / 과한 검은 카드 제거
+   ========================================================= */
+.ck-hud-stack{
+  position:absolute!important;
+  top:22px!important;
+  right:22px!important;
+  width:390px!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  gap:7px!important;
+}
+
+/* 직업/이름/고정번호: 한 줄, 규격 맞춤 */
+.ck-info-line{
+  width:100%!important;
+  min-height:36px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:flex-end!important;
+  gap:13px!important;
+  padding:7px 11px!important;
+  border:1px solid rgba(255,255,255,.085)!important;
+  border-radius:8px!important;
+  background:rgba(11,12,14,.67)!important;
+  box-shadow:0 3px 9px rgba(0,0,0,.18)!important;
+  backdrop-filter:blur(3px)!important;
+}
+
+.ck-info-item{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:5px!important;
+  color:#f0f0f0!important;
+  font-size:12px!important;
+  font-weight:700!important;
+  line-height:1!important;
+  white-space:nowrap!important;
+}
+.ck-info-item b{
+  margin:0!important;
+  color:#d7a449!important;
+  font-size:9px!important;
+  font-weight:900!important;
+}
+
+/* 체력/방탄: 박스 하나가 아니라 두 줄 게이지 */
+.ck-gauge-group{
+  width:100%!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  flex-direction:column!important;
+  gap:7px!important;
+  padding:8px 10px 9px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:8px!important;
+  background:rgba(11,12,14,.50)!important;
+  box-shadow:0 3px 9px rgba(0,0,0,.14)!important;
+  backdrop-filter:blur(2px)!important;
+  overflow:visible!important;
+}
+.ck-gauge-group::after{
+  content:none!important;
+  display:none!important;
+}
+.ck-vitals-head,
+.ck-gauge-label,
+.ck-vital-icon{
+  display:none!important;
+}
+
+.ck-gauge-row{
+  width:100%!important;
+  min-height:23px!important;
+  display:grid!important;
+  grid-template-columns:42px minmax(0,1fr) 46px!important;
+  align-items:center!important;
+  gap:8px!important;
+  margin:0!important;
+}
+
+.ck-gauge-label-simple{
+  color:#d9d9d9!important;
+  font-size:11px!important;
+  font-weight:900!important;
+  text-align:left!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.7)!important;
+}
+
+.ck-gauge-main{
+  display:contents!important;
+}
+
+.ck-gauge-row .ck-gauge-track{
+  position:relative!important;
+  display:block!important;
+  width:100%!important;
+  height:13px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:4px!important;
+  background:rgba(255,255,255,.07)!important;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.42)!important;
+}
+.ck-gauge-row .ck-gauge-track::after{
+  content:none!important;
+  display:none!important;
+}
+
+.ck-gauge-fill{
+  height:100%!important;
+  transition:width .18s ease!important;
+}
+.ck-gauge-fill.health{
+  background:linear-gradient(90deg,#d5544b,#ec6b61)!important;
+  box-shadow:none!important;
+}
+.ck-gauge-fill.armor{
+  background:linear-gradient(90deg,#397cc0,#5fa5e5)!important;
+  box-shadow:none!important;
+}
+
+.ck-gauge-pct-in{
+  position:static!important;
+  transform:none!important;
+  width:auto!important;
+  display:block!important;
+  color:#fff!important;
+  font-size:12px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  text-align:right!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.8)!important;
+}
+
+/* 수분/허기: 아래 한 줄 */
+.ck-needs-row{
+  width:100%!important;
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:14px!important;
+  margin:2px 0 0!important;
+  padding:7px 0 0!important;
+  border-top:1px solid rgba(255,255,255,.055)!important;
+}
+
+.ck-need-item{
+  min-width:0!important;
+  display:grid!important;
+  grid-template-columns:27px minmax(0,1fr)!important;
+  align-items:center!important;
+  gap:7px!important;
+}
+.ck-need-item>span{
+  color:#aeb1b5!important;
+  font-size:9px!important;
+  font-weight:800!important;
+  line-height:1!important;
+}
+.ck-need-bar{
+  width:100%!important;
+  height:6px!important;
+  margin:0!important;
+  border:0!important;
+  border-radius:99px!important;
+  background:rgba(255,255,255,.08)!important;
+  box-shadow:none!important;
+}
+.ck-gauge-fill.needs.thirst{
+  background:#55a7df!important;
+}
+.ck-gauge-fill.needs.hunger{
+  background:#d9a441!important;
+}
+
+/* 저체력 경고도 과장 없이 */
+.ck-gauge-group.low-health .health-row .ck-gauge-track,
+.ck-gauge-group.low-health .ck-gauge-row:first-child .ck-gauge-track{
+  border-color:rgba(236,107,97,.35)!important;
+  box-shadow:inset 0 1px 3px rgba(0,0,0,.42)!important;
+}
+.ck-gauge-group.low-health .ck-vital-icon.hp{
+  animation:none!important;
+}
+
+/* 돈: 같은 폭/같은 높이, COOKIE 포인트만 */
+.ck-money-row{
+  width:100%!important;
+  min-height:34px!important;
+  box-sizing:border-box!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  padding:6px 11px!important;
+  border:1px solid rgba(255,255,255,.06)!important;
+  border-radius:8px!important;
+  background:rgba(11,12,14,.56)!important;
+  box-shadow:0 3px 9px rgba(0,0,0,.13)!important;
+}
+.ck-money-row b{
+  color:#d7a449!important;
+  font-size:11px!important;
+  font-weight:900!important;
+}
+.ck-money-row span{
+  color:#f1f1f1!important;
+  font-size:12px!important;
+  font-weight:900!important;
+}
+.ck-money-row .cash{
+  color:#7bdc9b!important;
+}
+.ck-money-row .bank{
+  color:#78b9e9!important;
+}
+
+@media(max-width:1280px){
+  .ck-hud-stack{
+    width:355px!important;
+    right:18px!important;
+  }
+}
+
+
+
+/* =========================================================
+   COOKIE NAMETAG KEEP FIX ONLY (added on top of V3.9.5 HUD)
+   머리위 정보 유지용 오버라이드
+   ========================================================= */
+.ck-tag-org{
+  font-size:14px!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+  background:transparent!important;
+}
+.ck-tag-duty{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#b7b7b7!important;
+  font-size:12px!important;
+  font-weight:800!important;
+}
+.ck-tag-duty.on{ color:#72eba0!important; }
+.ck-tag-lover{
+  min-height:0!important;
+  margin:1px 0!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  color:#ff91b8!important;
+  font-size:11px!important;
+  font-weight:800!important;
+  line-height:1.1!important;
+}
+.ck-tag-badge{
+  display:inline-flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  min-width:0!important;
+  min-height:20px!important;
+  padding:2px 7px!important;
+  border:1px solid rgba(255,255,255,.12)!important;
+  border-radius:6px!important;
+  background:linear-gradient(180deg,#c84a43,#a73531)!important;
+  color:#fff!important;
+  font-size:10px!important;
+  font-weight:900!important;
+  line-height:1!important;
+  text-shadow:0 1px 2px rgba(0,0,0,.4)!important;
+  box-shadow:0 2px 5px rgba(0,0,0,.35)!important;
+}
+.ck-tag-badge:empty{ display:none!important; }
+.ck-tag-badge::before,
+.ck-tag-badge::after{ content:none!important; display:none!important; }
+.ck-tag-name{
+  color:#fff!important;
+  font-size:16px!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+}
+.ck-tag-gobun{
+  padding:0!important;
+  border:0!important;
+  border-radius:0!important;
+  background:transparent!important;
+  color:#ffd36e!important;
+  font-size:14px!important;
+  font-weight:900!important;
+  line-height:1.15!important;
+}
+.ck-tag-talk,.ck-tag-divider{ display:none!important; }
+
+
+
+/* =========================================================
+   COOKIE HUD V3.8 NO BLACK BOX
+   검정색 네모(배경 카드) 제거 전용 패치
+   ========================================================= */
+#statusRight,
+.ck-hud-stack{
+  background:transparent!important;
+  box-shadow:none!important;
+}
+
+.ck-info-line,
+.ck-gauge-group,
+.ck-money-row{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.ck-gauge-group::before,
+.ck-gauge-group::after,
+.ck-info-line::before,
+.ck-info-line::after,
+.ck-money-row::before,
+.ck-money-row::after{
+  content:none!important;
+  display:none!important;
+}
+
+
+/* =========================================================
+   COOKIE HUD V3.8.1 SOFT BACKGROUND FIX
+   큰 검정 네모는 제거하고, 각 줄/패널에만 은은한 배경 복구
+   ========================================================= */
+#statusRight,
+.ck-hud-stack{
+  background:transparent!important;
+  box-shadow:none!important;
+  backdrop-filter:none!important;
+}
+
+.ck-info-line{
+  background:rgba(10,12,18,.42)!important;
+  border:1px solid rgba(255,255,255,.09)!important;
+  box-shadow:0 3px 8px rgba(0,0,0,.10)!important;
+  backdrop-filter:blur(2px)!important;
+}
+
+.ck-gauge-group{
+  background:rgba(10,12,18,.36)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:0 3px 8px rgba(0,0,0,.09)!important;
+  backdrop-filter:blur(2px)!important;
+}
+
+.ck-money-row{
+  background:rgba(10,12,18,.34)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:0 3px 8px rgba(0,0,0,.08)!important;
+  backdrop-filter:blur(2px)!important;
+}
+
+.ck-gauge-group::before,
+.ck-gauge-group::after,
+.ck-info-line::before,
+.ck-info-line::after,
+.ck-money-row::before,
+.ck-money-row::after{
+  display:none!important;
+  content:none!important;
+}
+
+.ck-gauge-row .ck-gauge-track,
+.ck-need-item .ck-gauge-track{
+  background:rgba(255,255,255,.10)!important;
+  border:1px solid rgba(255,255,255,.07)!important;
+}
+
+
+/* =========================================================
+   COOKIE HUD V3.8.2 NO BLUR FIX
+   FiveM NUI blur 합성으로 생기는 검정 박스 제거
+   ========================================================= */
+#statusRight,
+.ck-hud-stack,
+.ck-info-line,
+.ck-gauge-group,
+.ck-money-row,
+.ck-cookie-card,
+.ck-card,
+.ck-panel {
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+
+.ck-info-line{
+  background:rgba(10,12,18,.22)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.08)!important;
+}
+
+.ck-gauge-group{
+  background:rgba(10,12,18,.20)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.07)!important;
+}
+
+.ck-money-row{
+  background:rgba(10,12,18,.18)!important;
+  border:1px solid rgba(255,255,255,.08)!important;
+  box-shadow:0 2px 6px rgba(0,0,0,.06)!important;
+}
+
+
+/* =========================================================
+   COOKIE HUD V3.8.3 NEEDS PLUS
+   수분/허기 아래에 기력/산소 추가
+   ========================================================= */
+.ck-needs-row{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:10px 12px!important;
+  margin-top:1px!important;
+  padding-top:10px!important;
+  border-top:1px solid rgba(255,255,255,.05)!important;
+}
+
+.ck-need-item{
+  min-width:0!important;
+  display:grid!important;
+  grid-template-columns:30px minmax(0,1fr)!important;
+  gap:7px!important;
+  align-items:center!important;
+}
+
+.ck-gauge-fill.needs.stamina{
+  background:linear-gradient(90deg,#59d17b,#7cf0a2)!important;
+}
+.ck-gauge-fill.needs.oxygen{
+  background:linear-gradient(90deg,#7ad9eb,#9cecff)!important;
+}
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,20 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><link rel="stylesheet" href="manager.css?v=20260929-v177"></head><body><div id="app" class="hidden"><div class="panel"><header><div><small>COOKIE FISHING</small><h1>🎣 <span id="title">낚시 관리인</span></h1><p>낚시용품 구매 · 물고기 판매 · 낚시 기록</p></div><button id="close">×</button></header><nav><button data-tab="buy" class="active">구매</button><button data-tab="sell">판매</button><button data-tab="record">기록</button></nav><main id="content"></main></div></div>
+<div id="fishPrompt" class="fish-prompt hidden">[E] 낚시 시작</div>
+<div id="fishGame" class="fish-game hidden">
+  <div class="fish-game-card">
+    <div class="fish-game-top">
+      <div>
+        <small>COOKIE FISHING · CLASSIC</small>
+        <h2>입질! 키를 순서대로 입력하세요</h2>
+      </div>
+      <span id="fishGrade" class="fish-grade">낚시</span>
+    </div>
+    <div id="fishKeys" class="fish-keys"></div>
+    <div class="fish-game-bottom">
+      <span id="fishHint">표시된 키를 왼쪽부터 입력</span>
+      <span id="fishProgressText">0 / 0</span>
+    </div>
+    <div class="fish-time"><i id="fishTimeBar"></i></div>
+  </div>
+</div>
+<script src="manager.js?v=20260929-v177"></script></body></html>

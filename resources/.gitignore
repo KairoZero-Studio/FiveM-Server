@@ -1,0 +1,7 @@
+# [cookie] resources checkpoint repo (STEP 2-D) — OS/editor junk only.
+# 리소스 소스(assets 포함)는 전부 추적. 아래 잡파일만 제외.
+Thumbs.db
+desktop.ini
+*.tmp
+*.log
+*.bak

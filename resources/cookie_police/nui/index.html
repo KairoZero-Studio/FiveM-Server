@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="chaseHud" class="chase-hud hidden">
+    <div class="chase-top">
+      <span id="chaseKind" class="chase-kind">수배 추격전</span>
+      <strong id="chaseTime">00:00</strong>
+    </div>
+    <div id="chaseTarget" class="chase-target">1 / 도베르만</div>
+    <div id="chaseReason" class="chase-reason">추격 진행 중</div>
+  </div>
+
+  <div id="appearanceHud" class="appearance-hud hidden">
+    <div class="appearance-top">
+      <span id="appearanceKind">출석 요구</span>
+      <strong id="appearanceTime">10:00</strong>
+    </div>
+    <div id="appearanceTarget" class="appearance-target">-</div>
+  </div>
+
+  <div id="pmRadar" class="pm-radar hidden">
+    <div class="pm-head">
+      <span class="pm-icon">▣</span>
+      <span class="pm-title">교통단속 시스템</span>
+      <span class="pm-status">P.M ON</span>
+    </div>
+    <div class="pm-body">
+      <div class="pm-card">
+        <div class="pm-card-title">전방 차량</div>
+        <div class="pm-line">
+          <span class="pm-label">차량번호:</span>
+          <span id="frontPlate" class="pm-value">감지 차량 없음</span>
+        </div>
+        <div class="pm-line">
+          <span class="pm-label">속도:</span>
+          <span id="frontSpeed" class="pm-speed">-- KM/H</span>
+        </div>
+      </div>
+    </div>
+    <div class="pm-foot"><kbd>Y</kbd> 앞 차량 정차 요청</div>
+  </div>
+
+  <div id="detentionHud" class="detention hidden">
+    <div class="detention-mark">COOKIE CORRECTIONS</div>
+    <div class="detention-row">
+      <div>
+        <span>구금 사유</span>
+        <b id="detentionCharge">-</b>
+      </div>
+      <div class="detention-time">
+        <span>남은 시간</span>
+        <strong id="detentionTime">00:00</strong>
+      </div>
+    </div>
+  </div>
+
+  <div id="fineReceipt" class="fine-receipt hidden">
+    <div class="fine-receipt-head">
+      <div>
+        <span class="fine-receipt-brand">COOKIE OFFICIAL RECEIPT</span>
+        <strong id="receiptFaction">경찰청</strong>
+      </div>
+      <span id="receiptStatus" class="fine-receipt-status">납부 완료</span>
+    </div>
+    <div class="fine-receipt-number">영수증 <b id="receiptNo">-</b></div>
+    <div class="fine-receipt-rule"></div>
+    <div class="fine-receipt-line"><span>담당자</span><b id="receiptOfficer">-</b></div>
+    <div class="fine-receipt-line"><span>사유</span><b id="receiptReason">-</b></div>
+    <div class="fine-receipt-line"><span>결제</span><b id="receiptPayment">-</b></div>
+    <div class="fine-receipt-rule dotted"></div>
+    <div class="fine-receipt-total"><span>벌금</span><strong id="receiptAmount">0원</strong></div>
+    <div id="receiptIssuedAt" class="fine-receipt-time"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

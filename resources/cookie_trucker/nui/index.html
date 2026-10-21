@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="root" class="hidden">
+    <div class="dim"></div>
+
+    <section id="greetView" class="view">
+      <div class="greet-bottom">
+        <div class="greet-npc" id="greetNpc">트럭관리인 김두력</div><div class="greet-job">트럭기사 관리인</div>
+        <div class="greet-text" id="greetText"></div>
+        <div class="greet-acts">
+          <button class="greet-btn" id="goWorkBtn">
+            <span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 13V6a1 1 0 011-1h10v9M14 8h4l3 3v2h-7"/><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/></svg></span>
+            <span class="gl">트럭일을 하고 싶어요</span>
+          </button>
+          <button class="greet-btn" id="greetClose">
+            <span class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+            <span class="gl">나가기 (ESC)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="workView" class="view hidden">
+      <aside class="me">
+        <div class="cap">내 트럭커 정보</div>
+        <div id="meBody"></div>
+      </aside>
+      <section class="jobs">
+        <div class="h1">배송 작업</div>
+        <div class="h1sub">운송할 배송지를 골라 지도에서 경로를 확인하세요</div>
+        <div class="grid" id="jobGrid"></div>
+        <div class="empty hidden" id="jobsEmpty">출근 후 배송 작업을 받을 수 있습니다</div>
+      </section>
+      <div class="close" id="closeBtn">닫기 (ESC)</div>
+    </section>
+
+    <div class="mapModal" id="mapModal">
+      <div class="mapCard">
+        <div class="mapSide">
+          <span class="back" id="backBtn">‹ 작업 목록으로</span>
+          <div class="destpic" id="destPic"></div>
+          <h2 id="mDest">-</h2>
+          <div class="rt">출발 <b>부두 물류창고</b> → 도착 <b id="mTo">-</b></div>
+          <div class="il"><span class="k">배송 거리</span><span class="v" id="mDist">-</span></div>
+          <div class="il"><span class="k">예상 보수</span><span class="v pay" id="mPay">-</span></div>
+          <div class="il"><span class="k">숙련도</span><span class="v exp">+ EXP</span></div>
+          <div class="acts"><button class="cancel" id="cancelBtn">취소</button><button class="accept" id="acceptBtn">배송 수락</button></div>
+        </div>
+        <div class="mapStage">
+          <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+            <g stroke="rgba(255,255,255,0.10)" stroke-width="0.4" fill="none">
+              <path d="M10,80 C25,70 30,55 45,52 S70,48 85,30"/>
+              <path d="M15,25 C30,35 40,45 55,45 S80,55 90,70"/>
+              <path d="M50,10 L52,90"/><path d="M8,50 L92,48"/>
+              <path d="M20,88 C35,78 55,80 70,88"/>
+            </g>
+            <path d="M6,44 C4,30 18,16 34,14 C52,11 60,20 74,16 C88,12 96,28 94,44 C92,62 96,78 82,86 C64,96 44,90 30,92 C14,94 8,60 6,44 Z"
+                  fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="0.6"/>
+            <path id="routeLine" d="" fill="none" stroke="#7c5cff" stroke-width="0.9" stroke-linecap="round" stroke-dasharray="2.4 1.8"/>
+          </svg>
+          <div id="markers"></div>
+          <div class="maphint">※ 스타일라이즈드 지도 (실제 산안드레아스 맵은 이식 시 적용)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="drive">
+    <div id="cineWrap" class="cine">
+      <div id="cineNpc" class="cine-npc"></div>
+      <div id="cineText" class="cine-text"></div>
+    </div>
+    <div id="guideCard" class="guide">
+      <div class="g-lvl">당신의 운송 레벨은 <b id="gLv">LV 1</b> 입니다</div>
+      <div class="g-cap">
+        <div class="g-cap-top"><span>적재 가능 재고</span><span id="gCapNum">0 / 15</span></div>
+        <div class="g-cap-bar"><i id="gCapBar" style="width:0%"></i></div>
+      </div>
+      <div class="g-go" id="gGo">재고지로 이동하시오.</div>
+      <div class="g-gps"><span class="dot"></span>GPS 전송중<span class="ell"></span></div>
+    </div>
+  </div>
+
+  <div id="receipt" class="rc-wrap hidden">
+    <div class="rc-card">
+      <div class="rc-perf rc-perf-t"></div>
+      <div class="rc-head">트럭 운전 보수 영수증</div>
+      <div class="rc-rule"></div>
+      <div class="rc-row"><span>총 보수</span><b id="rcPay" class="rc-pay">₩ 0</b></div>
+      <div class="rc-row"><span>날짜</span><b id="rcDate">-</b></div>
+      <div class="rc-sec">내용</div>
+      <div class="rc-body" id="rcBody">-</div>
+      <div class="rc-rule dashed"></div>
+      <div class="rc-sign">트럭 관리인 : <b>쿠키</b></div>
+      <button class="rc-ok" id="rcOk">확인</button>
+      <div class="rc-perf rc-perf-b"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

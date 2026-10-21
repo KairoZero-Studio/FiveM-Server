@@ -1,0 +1,13 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="stylesheet" href="manager.css"></head><body><div id="miningSkill" class="mining-skill hidden">
+  <div class="mining-skill-card">
+    <div id="miningSkillTitle" class="mining-skill-title">광질 타이밍</div>
+    <div class="mining-skill-sub">흰 원이 초록 원 안에 들어왔을 때 <b>E</b> 또는 <b>SPACE</b></div>
+    <div id="miningSkillCircle" class="mining-skill-circle">
+      <div class="mining-skill-track"></div>
+      <div id="miningSkillTarget" class="mining-skill-target"></div>
+      <div id="miningSkillMover" class="mining-skill-mover"></div>
+      <div class="mining-skill-center">⛏️</div>
+    </div>
+    <div id="miningSkillState" class="mining-skill-state">타이밍을 맞추세요</div>
+  </div>
+</div><div id="minePrompt" class="mine-prompt hidden">[E] 광질</div><div id="app" class="hidden"><div class="panel"><header><div><small>COOKIE MINING</small><h1>⛏️ <span id="title">광물 관리인</span></h1><p>광질 장비 구매 · 광물 판매 · 개인 채굴 기록</p></div><button id="close">×</button></header><nav><button data-tab="buy" class="active">구매</button><button data-tab="sell">판매</button><button data-tab="record">기록</button></nav><main id="content"></main></div></div><script src="manager.js"></script></body></html>

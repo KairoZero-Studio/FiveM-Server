@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHandlingDataMgr>
+  <HandlingData>
+
+    <Item type="CHandlingData">
+      <handlingName>STAFFORD</handlingName>
+
+      <!-- 클래식 대형 고급 세단 -->
+      <fMass value="2160.000000" />
+      <fInitialDragCoeff value="7.800000" />
+      <fPercentSubmerged value="85.000000" />
+
+      <!-- 묵직하지만 지나치게 뒤뚱거리지 않게 -->
+      <vecCentreOfMassOffset x="0.000000" y="0.030000" z="-0.145000" />
+      <vecInertiaMultiplier x="1.000000" y="1.200000" z="1.500000" />
+
+      <!-- 클래식 후륜구동 -->
+      <fDriveBiasFront value="0.000000" />
+      <nInitialDriveGears value="6" />
+
+      <!-- 순정 0단계 -->
+      <fInitialDriveForce value="0.319200" />
+      <fDriveInertia value="0.980000" />
+      <fClutchChangeRateScaleUpShift value="2.100000" />
+      <fClutchChangeRateScaleDownShift value="1.950000" />
+
+      <!-- 실제 최고속도는 cookie_tuningshop 프로필에서 185~210 제어 -->
+      <fInitialDriveMaxFlatVel value="180.000000" />
+
+      <!-- 제동: 무거운 차지만 일반차로 쓰기 편하게 -->
+      <fBrakeForce value="1.127000" />
+      <fBrakeBiasFront value="0.570000" />
+      <fHandBrakeForce value="0.650000" />
+
+      <!-- 조향: 스포츠카처럼 날카롭지 않게 -->
+      <fSteeringLock value="37.400000" />
+
+      <!-- 접지: 안정형 클래식 세단 -->
+      <fTractionCurveMax value="2.892800" />
+      <fTractionCurveMin value="2.618000" />
+      <fTractionCurveLateral value="22.000000" />
+      <fTractionSpringDeltaMax value="0.140000" />
+      <fLowSpeedTractionLossMult value="0.850000" />
+      <fCamberStiffnesss value="0.000000" />
+      <fTractionBiasFront value="0.490000" />
+      <fTractionLossMult value="0.950000" />
+
+      <!-- 승차감은 부드럽게, 고속에서는 과도한 롤만 억제 -->
+      <fSuspensionForce value="2.340000" />
+      <fSuspensionCompDamp value="1.480000" />
+      <fSuspensionReboundDamp value="2.150000" />
+      <fSuspensionUpperLimit value="0.100000" />
+      <fSuspensionLowerLimit value="-0.125000" />
+      <fSuspensionRaise value="0.000000" />
+      <fSuspensionBiasFront value="0.520000" />
+
+      <fAntiRollBarForce value="1.020000" />
+      <fAntiRollBarBiasFront value="0.540000" />
+      <fRollCentreHeightFront value="0.120000" />
+      <fRollCentreHeightRear value="0.130000" />
+
+      <!-- 클래식 대형차 특성상 차체는 어느 정도 튼튼 -->
+      <fCollisionDamageMult value="0.850000" />
+      <fWeaponDamageMult value="1.000000" />
+      <fDeformationDamageMult value="0.780000" />
+      <fEngineDamageMult value="0.900000" />
+
+      <fPetrolTankVolume value="75.000000" />
+      <fOilVolume value="6.000000" />
+
+      <fSeatOffsetDistX value="0.000000" />
+      <fSeatOffsetDistY value="0.000000" />
+      <fSeatOffsetDistZ value="0.000000" />
+
+      <nMonetaryValue value="55000" />
+
+      <strModelFlags>440010</strModelFlags>
+      <strHandlingFlags>0</strHandlingFlags>
+      <strDamageFlags>0</strDamageFlags>
+      <AIHandling>AVERAGE</AIHandling>
+
+      <SubHandlingData>
+        <Item type="NULL" />
+        <Item type="NULL" />
+        <Item type="NULL" />
+      </SubHandlingData>
+    </Item>
+
+  </HandlingData>
+</CHandlingDataMgr>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>COOKIE Vehicle</title>
+</head>
+<body>
+  <section id="seatPanel" class="seat-panel hidden">
+    <div class="panel-head">
+      <div>
+        <div class="eyebrow">COOKIE VEHICLE</div>
+        <div id="seatVehicleName" class="title">차량 좌석</div>
+      </div>
+      <div id="seatCount" class="badge">0 SEATS</div>
+    </div>
+
+    <div class="seat-help">이동할 빈 좌석을 클릭하세요.</div>
+
+    <div class="quick-states">
+      <span id="engineState" class="quick">● 시동</span>
+      <span id="lockState" class="quick">● 잠금</span>
+      <span id="beltState" class="quick">● 벨트</span>
+    </div>
+
+    <div id="seatGrid" class="seat-grid"></div>
+  </section>
+
+  <section id="doorPanel" class="door-panel hidden">
+    <div class="panel-head">
+      <div>
+        <div class="eyebrow">VEHICLE CONTROL</div>
+        <div id="doorVehicleName" class="title">차량 문 제어</div>
+      </div>
+      <button id="closeDoorMenu" class="x">×</button>
+    </div>
+
+    <div class="door-description">열거나 닫을 부분을 선택하세요.</div>
+    <div id="doorGrid" class="door-grid"></div>
+
+    <button id="closeAllDoors" class="close-all">전체 닫기</button>
+  </section>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>COOKIE 뉴비 시청</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app" class="hidden">
+  <div class="shell">
+    <header>
+      <div>
+        <p class="eyebrow">COOKIE SERVER</p>
+        <h1 id="title">뉴비 시청</h1>
+        <p id="who" class="sub"></p>
+      </div>
+      <button id="close" class="close">×</button>
+    </header>
+
+    <div class="progress"><div id="progressBar"></div></div>
+    <div id="progressText" class="progressText">0 / 5 완료</div>
+
+    <main id="steps"></main>
+
+    <section id="completeBox" class="complete hidden">
+      <div class="completeIcon">✓</div>
+      <div class="completeInfo">
+        <b>뉴비 과정 완료</b>
+        <p id="completeDesc">쿠키서버 생활 준비가 끝났습니다.</p>
+      </div>
+      <button id="claimRewardBtn" class="primary hidden">보상 받기</button>
+    </section>
+  </div>
+
+  <div id="modal" class="modal hidden">
+    <div class="modalCard">
+      <div class="modalHead"><h2 id="modalTitle"></h2><button id="modalClose">×</button></div>
+      <div id="modalPages" class="pages"></div>
+      <div class="modalFoot"><button id="modalDone" class="primary">확인 완료</button></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

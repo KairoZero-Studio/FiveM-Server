@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css">
+  <title>COOKIE Motion</title>
+</head>
+<body>
+  <main id="root" class="root hidden">
+    <section class="motion-panel">
+      <header class="head">
+        <div class="brand-line"><i></i><span>COOKIE SERVER</span></div>
+        <div class="head-main">
+          <div class="cookie-icon">●</div>
+          <div>
+            <small>시민 전용</small>
+            <h1>모션 메뉴</h1>
+          </div>
+          <button id="closeBtn" class="close-btn" type="button">×</button>
+        </div>
+      </header>
+
+      <nav id="tabs" class="tabs">
+        <button data-tab="favorite" class="tab fav active">♥ 찜</button>
+        <button data-tab="dance" class="tab">춤</button>
+        <button data-tab="action" class="tab">행동</button>
+        <button data-tab="prop" class="tab">물건 행동</button>
+        <button data-tab="sync" class="tab">같이 행동</button>
+        <button data-tab="walk" class="tab">걸음걸이</button>
+        <button data-tab="face" class="tab">표정</button>
+      </nav>
+
+      <div class="search-wrap">
+        <span>⌕</span>
+        <input id="search" autocomplete="off" placeholder="모션 검색">
+      </div>
+
+      <div class="section-head">
+        <div>
+          <small id="sectionMini">FAVORITES</small>
+          <h2 id="sectionTitle">찜</h2>
+        </div>
+        <b id="count">0</b>
+      </div>
+
+      <div id="empty" class="empty hidden">
+        <b>표시할 모션이 없습니다.</b>
+        <small>다른 카테고리를 선택하거나 검색어를 변경해보세요.</small>
+      </div>
+
+      <div id="list" class="motion-list"></div>
+
+      <footer>
+        <span>● 쿠키서버 · RP 모션 시스템</span>
+        <kbd>F9 닫기</kbd>
+      </footer>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

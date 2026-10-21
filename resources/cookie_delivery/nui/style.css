@@ -1,0 +1,377 @@
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: transparent;
+  font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+  color: #1a1a1a;
+  user-select: none;
+}
+
+.hidden { display: none !important; }
+
+#dlg {
+  position: fixed; inset: 0;
+  background: rgba(0, 0, 0, .3);
+}
+
+.tx-left {
+  position: absolute; left: 3vw; top: 50%; transform: translateY(-50%);
+  width: min(300px, 24vw); min-width: 250px;
+  display: flex; flex-direction: column;
+}
+.tx-profile {
+  padding: 20px;
+  background: #fff;
+  border-radius: 0 0 18px 18px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+.tx-pf-h { font-size: 11px; font-weight: 800; color: #FFB800; letter-spacing: .6px; }
+.tx-pf-name { margin-top: 4px; font-size: 18px; font-weight: 800; color: #1a1a1a; }
+.tx-pf-name i { font-style: normal; font-size: 13px; font-weight: 700; color: #aaa; }
+.tx-pf-muted { margin-top: 12px; font-size: 13px; font-weight: 600; color: #999; }
+
+.tx-pf-lv {
+  margin: 18px 0 8px;
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.tx-pf-lvnum { font-size: 26px; font-weight: 800; color: #FFB800; }
+.tx-pf-duty {
+  padding: 3px 9px; border-radius: 999px;
+  background: #f0f0f0; color: #999;
+  font-size: 11px; font-weight: 800;
+}
+.tx-pf-duty.on { background: #e6f5ec; color: #1e7a45; }
+.tx-pf-exp { margin-top: 6px; font-size: 11.5px; font-weight: 700; color: #999; }
+
+.tx-pf-rows { margin-top: 16px; display: flex; flex-direction: column; }
+.tx-pf-rows > div {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 9px 0; border-bottom: 1px solid #f2f2f2;
+  font-size: 13px;
+}
+.tx-pf-rows > div:last-child { border-bottom: 0; }
+.tx-pf-rows span { color: #999; font-weight: 600; }
+.tx-pf-rows b { font-weight: 800; }
+
+.tx-pf-debt {
+  margin-top: 14px; padding: 10px 12px; border-radius: 10px;
+  background: #fdecea; color: #c0392b;
+  font-size: 12.5px; font-weight: 800;
+}
+
+.tx-npc {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 18px;
+  background: #FFB800;
+  border-radius: 18px 18px 0 0;
+}
+.tx-npc-role {
+  padding: 3px 8px; border-radius: 6px;
+  background: rgba(0, 0, 0, .14);
+  font-size: 11px; font-weight: 800; color: #1a1a1a;
+  white-space: nowrap;
+}
+.tx-npc-name { font-size: 15px; font-weight: 800; color: #1a1a1a; }
+
+.tx-right {
+  position: absolute; right: 3vw; top: 50%; transform: translateY(-50%);
+  width: min(440px, 34vw); min-width: 360px;
+  display: flex; flex-direction: column;
+}
+.tx-pane {
+  max-height: 72vh; overflow-y: auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+.tx-pane-h { font-size: 16px; font-weight: 800; margin-bottom: 14px; }
+
+.tx-cards { display: flex; flex-direction: column; gap: 12px; }
+.tx-card {
+  display: flex; flex-direction: column;
+  border: 1px solid #eee; border-radius: 14px; overflow: hidden;
+  background: #fff;
+}
+.tx-card.mine { border-color: #f0dca4; background: #FFFCF3; }
+.tx-card.locked { opacity: .5; }
+
+.tx-card-img {
+  width: 100%; height: 120px;
+  display: flex; align-items: center; justify-content: center;
+  background: #f7f7f7;
+}
+.tx-card-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.tx-card-noimg { font-size: 12px; font-weight: 700; color: #bbb; }
+
+.tx-card-body { padding: 13px 15px 15px; }
+.tx-card-top {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 5px;
+}
+.tx-card-n { font-size: 15px; font-weight: 800; }
+.tx-card-lv { font-size: 12px; font-weight: 800; color: #FFB800; }
+.tx-card-lv.lock { color: #bbb; }
+.tx-card-fee { font-size: 12px; color: #999; margin-bottom: 12px; }
+
+.tx-cta {
+  width: 100%; padding: 11px; border: 0; border-radius: 10px;
+  background: #FFB800; color: #1a1a1a;
+  font-family: inherit; font-size: 14px; font-weight: 800; cursor: pointer;
+}
+.tx-cta:hover { background: #ffc528; }
+.tx-cta:disabled { background: #f0f0f0; color: #bbb; cursor: not-allowed; }
+.tx-cta.ghost { background: #fff; border: 1px solid #e0e0e0; color: #666; }
+.tx-cta.ghost:hover { border-color: #c0392b; color: #c0392b; }
+
+.tx-note { margin-top: 14px; font-size: 13px; font-weight: 600; line-height: 1.6; }
+.tx-warn { margin-top: 10px; font-size: 13px; font-weight: 800; color: #c0392b; }
+
+.tx-bar { height: 8px; border-radius: 999px; background: #f0f0f0; overflow: hidden; }
+.tx-bar i { display: block; height: 100%; background: #FFB800; }
+
+.tx-sub {
+  position: absolute; left: 50%; bottom: 130px; transform: translateX(-50%);
+  max-width: min(720px, 60vw);
+  text-align: center;
+  font-size: 17px; font-weight: 700; color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, .9), 0 0 2px rgba(0, 0, 0, .9);
+  line-height: 1.5;
+}
+.tx-acts {
+  position: absolute; left: 50%; bottom: 40px; transform: translateX(-50%);
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+  max-width: 76vw;
+}
+.tx-act {
+  padding: 13px 22px; border-radius: 12px;
+  background: rgba(255, 255, 255, .95);
+  border: 2px solid transparent;
+  font-family: inherit; font-size: 14px; font-weight: 700; color: #1a1a1a;
+  cursor: pointer; white-space: nowrap;
+}
+.tx-act:hover { border-color: #FFB800; }
+.tx-act.on { background: #FFF4C2; border-color: #FFB800; color: #7a6500; }
+.tx-act.danger { color: #c0392b; }
+.tx-act.danger:hover { border-color: #c0392b; }
+
+.tx-act.admin { border-color: #FFB800; color: #7a6500; }
+.tx-act.admin.on { background: #FFF4C2; }
+
+
+.dl-status{position:fixed;left:28px;top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:12px;background:rgba(25,25,25,.94);color:#fff;padding:13px 16px;border:1px solid rgba(255,184,0,.35);border-radius:15px;box-shadow:0 16px 40px #0006}.dl-icon{width:42px;height:42px;display:grid;place-items:center;background:#FFB800;border-radius:12px;font-size:20px}.dl-status b{font-size:13px}.dl-status p{font-size:11px;color:#bbb;margin-top:3px}.dl-offer{position:fixed;right:26px;top:50%;transform:translateY(-50%);width:330px;background:#fff;border-radius:16px;overflow:hidden;padding:0 18px 18px;box-shadow:0 16px 44px #0006}.dl-bar{height:4px;background:#eee;margin:0 -18px 14px}.dl-bar i{display:block;width:100%;height:100%;background:#FFB800}.dl-cap{font-size:11px;font-weight:800;color:#FFB800}.dl-offer h2{font-size:17px;margin:8px 0}.dl-offer p{font-size:13px;color:#777;line-height:1.5}.dl-offer button{width:100%;margin-top:14px;padding:12px;border:0;border-radius:10px;background:#FFB800;font-weight:800;cursor:pointer}
+
+.dl-f2{margin:10px 0 0!important;text-align:center!important;font-size:11px!important;color:#999!important}
+.dl-f2 .tx-key{display:inline-block;min-width:25px;padding:3px 7px;margin-right:3px;border-radius:6px;background:#222;color:#fff;font-size:10px;font-weight:900;box-shadow:0 2px 5px #0002}
+
+.dl-timer{margin:7px 0 3px!important;font-size:11px!important;font-weight:800!important;color:#f2b000!important}
+
+/* ===== COOKIE JOB UI UNIFIED V1 ===== */
+#dlg{
+ position:fixed!important;inset:0!important;background:linear-gradient(180deg,rgba(5,7,9,.05),rgba(5,7,9,.13) 46%,rgba(5,7,9,.82))!important;
+}
+#dlg .tx-left{
+ position:fixed!important;left:50%!important;bottom:132px!important;top:auto!important;
+ transform:translateX(-50%)!important;width:auto!important;min-width:520px!important;text-align:center!important;
+}
+#dlg .tx-npc{display:flex!important;flex-direction:column!important;align-items:center!important;gap:8px!important}
+#dlg .tx-npc-role{background:#ffb800!important;color:#332300!important;border-radius:999px!important;padding:6px 13px!important;font-size:11px!important;font-weight:900!important}
+#dlg .tx-npc-name{font-size:0!important}
+#dlg .tx-profile{display:none!important}
+#dlg .tx-sub{
+ position:fixed!important;left:50%!important;bottom:91px!important;transform:translateX(-50%)!important;
+ width:min(1000px,82vw)!important;text-align:center!important;color:#fff!important;font-size:18px!important;font-weight:850!important;
+ background:none!important;border:0!important;text-shadow:0 2px 6px #000!important;
+}
+#dlg .tx-acts{
+ position:fixed!important;left:50%!important;bottom:25px!important;transform:translateX(-50%)!important;
+ display:flex!important;gap:12px!important;justify-content:center!important;width:auto!important;
+}
+#dlg .tx-act{
+ min-width:150px!important;padding:12px 18px!important;border:0!important;border-radius:10px!important;
+ background:rgba(17,19,21,.9)!important;color:#eee!important;font-size:12px!important;font-weight:800!important;
+}
+#dlg .tx-act:hover{background:#ffb800!important;color:#332300!important}
+#dlg .tx-act.danger{color:#ef9a8c!important}
+#dlg .tx-act.danger:hover{background:#e55745!important;color:#fff!important}
+.dl-status{
+ left:22px!important;right:auto!important;top:72px!important;min-width:265px!important;
+ background:rgba(247,241,228,.96)!important;color:#302d27!important;border:1px solid rgba(0,0,0,.07)!important;
+ border-radius:14px!important;box-shadow:0 10px 28px rgba(0,0,0,.13)!important;
+}
+.dl-icon{background:#ffb800!important;border-radius:11px!important}
+.dl-offer{
+ left:22px!important;right:auto!important;top:50%!important;transform:translateY(-50%)!important;
+ width:330px!important;background:rgba(17,19,21,.97)!important;color:#f4f1e8!important;
+ border:1px solid rgba(255,184,0,.34)!important;border-radius:17px!important;box-shadow:0 18px 42px rgba(0,0,0,.34)!important;
+}
+.dl-offer h2{font-size:18px!important}.dl-offer button{display:none!important}
+.dl-cap{color:#d99f00!important}.dl-f2{color:#999!important}.dl-f2 .tx-key{background:#2b2d2f!important}
+
+/* COOKIE UNIFIED V4 */
+#dlg{position:fixed!important;inset:0!important;background:rgba(8,9,12,.62)!important}
+#dlg .tx-left{position:static!important;width:auto!important}
+#dlg .tx-profile{position:fixed!important;left:24px!important;top:80px!important;width:280px!important;
+ background:rgba(239,233,220,.96)!important;color:#3a3327!important;border-radius:14px!important}
+#dlg .tx-npc{position:fixed!important;left:50%!important;bottom:151px!important;transform:translateX(-50%)!important}
+#dlg .tx-npc-role{background:#ffb800!important;color:#1a1a1a!important;padding:5px 16px!important;border-radius:20px!important;font-size:14px!important;font-weight:800!important}
+#dlg .tx-npc-name{display:none!important}
+#dlg .tx-sub{position:fixed!important;left:50%!important;bottom:100px!important;transform:translateX(-50%)!important;width:min(1100px,86vw)!important;
+ text-align:center!important;font-size:22px!important;font-weight:900!important;color:#fff!important;text-shadow:0 2px 10px #000!important}
+#dlg .tx-acts{position:fixed!important;left:50%!important;bottom:28px!important;transform:translateX(-50%)!important;display:flex!important;gap:28px!important}
+#dlg .tx-act{background:transparent!important;border:0!important;color:rgba(255,255,255,.84)!important;padding:8px 12px!important;font-size:13.5px!important;font-weight:800!important}
+#dlg .tx-act:hover{color:#ffb800!important}#dlg .tx-act.danger{color:#e99b90!important}
+.dl-status{left:24px!important;right:auto!important;top:78px!important;border-radius:14px!important}
+.dl-offer{left:24px!important;right:auto!important;top:50%!important;transform:translateY(-50%)!important;border-radius:14px!important}
+
+/* ===== COOKIE SERVER JOB DIALOG V5 ===== */
+.tx-npc-role,.mech-npc .role,.labor-npc b,.greet-npc{
+  font-weight:900!important;letter-spacing:.1px!important;
+}
+.tx-job-sub,.job-sub,.labor-npc span,.greet-job{
+  display:block!important;margin-top:6px!important;color:rgba(255,255,255,.72)!important;
+  font-size:13px!important;font-weight:750!important;text-align:center!important;
+  text-shadow:0 2px 7px rgba(0,0,0,.75)!important;
+}
+.tx-sub,.speech,.laborSpeech,.greet-text{
+  font-size:23px!important;line-height:1.42!important;font-weight:900!important;
+}
+.tx-act,.act,.labor-close,.greet-btn{
+  font-size:15px!important;font-weight:850!important;min-height:48px!important;
+  padding:11px 17px!important;transition:color .12s ease,transform .12s ease,background .12s ease!important;
+}
+.tx-act:hover,.act:hover,.labor-close:hover,.greet-btn:hover{
+  color:#ffbf18!important;text-shadow:0 0 10px rgba(255,184,0,.26)!important;
+  transform:translateY(-1px)!important;
+}
+.tx-act:hover .tx-mg-title,.tx-act:hover span,.act:hover span,.greet-btn:hover span{
+  color:inherit!important;opacity:1!important;visibility:visible!important;
+}
+
+.tx-npc{display:flex!important;flex-direction:column!important;align-items:center!important}
+.tx-npc-name{display:block!important;font-size:17px!important;color:#fff!important;margin-top:7px!important}
+#dlg .tx-acts{gap:34px!important}.tx-act{min-width:175px!important}
+
+#dlg .tx-act:hover,#dlg .tx-act:hover *{color:#ffbf18!important;opacity:1!important;visibility:visible!important}
+#dlg .tx-act{color:#f4f4f4!important}
+
+/* =========================================================
+   COOKIE SERVER CIVIL JOB UI FINAL V6
+   기준: 트럭 배차관리인 대화 UI
+   ========================================================= */
+.hidden{display:none!important}
+#dlg:not(.hidden),#dialog:not(.hidden){display:block!important}
+
+/* 화면 전체를 검게 덮지 않고, NPC와 하단 대화 영역 중심으로 자연스럽게 */
+#dlg,#dialog{
+  position:fixed!important;inset:0!important;
+  background:
+    linear-gradient(180deg,
+      rgba(7,8,10,.30) 0%,
+      rgba(7,8,10,.20) 48%,
+      rgba(7,8,10,.48) 68%,
+      rgba(7,8,10,.90) 100%)!important;
+}
+
+/* 하단 대화는 화면 맨 아래보다 살짝 위 */
+.tx-npc,.mech-npc,.labor-npc{
+  z-index:10!important;
+}
+.tx-sub,.speech,.laborSpeech{
+  z-index:10!important;
+  font-family:"Segoe UI","Malgun Gothic",sans-serif!important;
+  font-size:22px!important;
+  line-height:1.42!important;
+  font-weight:900!important;
+  color:#fff!important;
+  text-shadow:0 2px 9px rgba(0,0,0,.88)!important;
+}
+.tx-acts,.acts,.actions{
+  z-index:11!important;
+}
+.tx-act,.act{
+  font-family:"Segoe UI","Malgun Gothic",sans-serif!important;
+  font-size:15px!important;
+  line-height:1.2!important;
+  font-weight:850!important;
+  min-height:50px!important;
+  min-width:170px!important;
+  padding:11px 18px!important;
+  border:0!important;
+  border-radius:10px!important;
+  background:transparent!important;
+  color:#f3f3f3!important;
+  opacity:1!important;
+  visibility:visible!important;
+  cursor:pointer!important;
+}
+.tx-act:hover,.tx-act:hover *,
+.act:hover,.act:hover *{
+  color:#ffbd16!important;
+  opacity:1!important;
+  visibility:visible!important;
+  text-shadow:0 0 9px rgba(255,184,0,.22)!important;
+}
+.tx-act.danger,.act.danger{color:#eaa198!important}
+
+/* 관리인 표시 */
+.tx-npc-role,.mech-npc .role,.labor-npc b{
+  display:inline-flex!important;
+  align-items:center!important;justify-content:center!important;
+  background:#ffb800!important;
+  color:#1d1706!important;
+  border-radius:999px!important;
+  padding:6px 17px!important;
+  font-size:14px!important;
+  font-weight:900!important;
+  box-shadow:0 3px 12px rgba(0,0,0,.32)!important;
+}
+.tx-job-sub,.job-sub,.labor-npc span{
+  display:block!important;
+  margin-top:5px!important;
+  color:rgba(255,255,255,.68)!important;
+  font-size:12.5px!important;
+  font-weight:750!important;
+  text-align:center!important;
+}
+
+/* 좌측 상태 카드도 트럭처럼 작은 카드 */
+.tx-profile,.profile,.labor-profile{
+  border-radius:14px!important;
+}
+
+#dlg .tx-npc{position:fixed!important;left:50%!important;bottom:178px!important;transform:translateX(-50%)!important;display:flex!important;flex-direction:column!important;align-items:center!important}
+#dlg .tx-npc-name{display:block!important;margin-top:7px!important;color:#fff!important;font-size:16px!important;font-weight:850!important}
+#dlg .tx-sub{position:fixed!important;left:50%!important;bottom:119px!important;transform:translateX(-50%)!important;width:min(1120px,86vw)!important;text-align:center!important}
+#dlg .tx-acts{position:fixed!important;left:50%!important;bottom:48px!important;transform:translateX(-50%)!important;display:flex!important;gap:28px!important}
+#dlg .tx-profile{position:fixed!important;left:30px!important;top:66px!important;width:280px!important;background:rgba(242,236,223,.96)!important;color:#393227!important}
+.dl-status{left:30px!important;right:auto!important;top:66px!important;border-radius:14px!important}
+.dl-offer{left:30px!important;right:auto!important;top:50%!important;transform:translateY(-50%)!important;border-radius:14px!important}
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}

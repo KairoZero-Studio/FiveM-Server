@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="banner" class="ck-sz">
+    <img class="ck-sz-logo" src="logo.png" alt="">
+    <div class="ck-sz-title" id="szTitle">안전지대에 진입했습니다</div>
+  </div>
+
+  <div id="ckGarageBadge" class="ck-gbadge hidden">
+    <span class="ck-gbadge-key">E</span>
+    <span class="ck-gbadge-text" id="ckGarageBadgeText">차고 열기</span>
+  </div>
+
+  <div id="ckGMenu" class="hidden">
+    <div class="ck-gm">
+      <div class="ck-gm-head">
+        <span class="ck-gm-title" id="ckGMenuTitle">차고</span>
+        <button class="ck-gm-close" id="ckGMenuClose">✕</button>
+      </div>
+      <div class="ck-gm-list" id="ckGMenuList"></div>
+    </div>
+  </div>
+
+
+  <div id="ckStore" class="hidden">
+    <div class="ck-store-shell">
+      <div class="ck-store-head">
+        <div>
+          <div class="ck-store-kicker" id="ckStoreKicker">COOKIE MART</div>
+          <div class="ck-store-title" id="ckStoreTitle">편의점</div>
+          <div class="ck-store-sub" id="ckStoreSub">상품을 불러오는 중...</div>
+        </div>
+        <button id="ckStoreCloseBtn" class="ck-store-close" type="button">✕</button>
+      </div>
+      <div id="ckStoreGrid" class="ck-store-grid"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

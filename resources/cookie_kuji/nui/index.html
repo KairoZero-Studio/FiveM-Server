@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>COOKIE KUJI</title>
+</head>
+<body>
+  <main id="app" class="hidden">
+    <section class="shell">
+      <header>
+        <div><span class="eyebrow">COOKIE MONTHLY KUJI</span><h1 id="title">COOKIE 월간 쿠지</h1><p id="season">-</p></div>
+        <button id="close">×</button>
+      </header>
+      <div class="status">
+        <div><span>내 티켓</span><b id="tickets">0</b></div>
+        <div><span>남은 경품</span><b id="remaining">0 / 0</b></div>
+        <div class="drawButtons"><button class="drawBtn" data-count="1">1장 사용</button><button class="drawBtn" data-count="5">5장 사용</button><button class="drawBtn" data-count="10">10장 사용</button></div>
+      </div>
+      <div class="content">
+        <section class="prizes"><div class="sectionTitle"><b>이번 달 경품</b><small>뽑힌 경품은 실제 재고에서 사라집니다.</small></div><div id="prizeGrid"></div></section>
+        <aside><div class="sectionTitle"><b>최근 내 뽑기</b></div><div id="history"></div></aside>
+      </div>
+    </section>
+    <div id="result" class="result hidden"><div class="resultCard"><span id="resultGrade">A</span><h2 id="resultName">당첨!</h2><p id="resultText"></p><button id="resultOk">확인</button></div></div>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

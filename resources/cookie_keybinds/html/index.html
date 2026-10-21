@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>COOKIE KEY GUIDE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="root" class="hidden">
+    <section class="panel">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">COOKIE SERVER</div>
+          <h1 id="title">키 가이드</h1>
+          <p id="subtitle">현재 역할에서 사용할 수 있는 단축키입니다.</p>
+        </div>
+        <div class="top-actions">
+          <button id="adminBtn" class="btn ghost hidden">관리</button>
+          <button id="closeBtn" class="icon-btn">×</button>
+        </div>
+      </header>
+
+      <div id="guideView" class="content guide-layout">
+        <aside id="tabs" class="tabs"></aside>
+        <main id="guideItems" class="items"></main>
+      </div>
+
+      <div id="adminView" class="content admin hidden">
+        <div class="admin-head">
+          <button id="backBtn" class="btn ghost">← 키 가이드</button>
+          <button id="newCategoryBtn" class="btn primary">+ 버튼 종류 추가</button>
+          <button id="newItemBtn" class="btn">+ 단축키 추가</button>
+        </div>
+
+        <div id="categoryEditor" class="editor hidden">
+          <div class="editor-title">카테고리 편집</div>
+          <div class="form-grid">
+            <label>내부키<input id="catKey" placeholder="police_shortcuts"></label>
+            <label>표시 이름<input id="catLabel" placeholder="경찰 단축키"></label>
+            <label>아이콘<input id="catIcon" placeholder="🚓"></label>
+            <label>정렬 순서<input id="catSort" type="number" value="100"></label>
+            <label>공개 방식
+              <select id="catMode"><option value="all">모두</option><option value="jobs">직업/팩션만</option><option value="admin">관리자만</option></select>
+            </label>
+            <label>공개 대상<input id="catValue" placeholder="police,security / 관리자 레벨"></label>
+            <label>상태
+              <select id="catEnabled"><option value="1">표시</option><option value="0">숨김</option></select>
+            </label>
+          </div>
+          <div class="editor-actions"><button id="saveCategoryBtn" class="btn primary">저장</button><button id="cancelCategoryBtn" class="btn ghost">취소</button></div>
+        </div>
+
+        <div id="itemEditor" class="editor hidden">
+          <div class="editor-title">단축키 편집</div>
+          <div class="form-grid">
+            <label>카테고리<select id="itemCategory"></select></label>
+            <label>내부키<input id="itemKey" placeholder="cuff"></label>
+            <label>표시 키<input id="itemKeyLabel" placeholder="G"></label>
+            <label>기능명<input id="itemLabel" placeholder="수갑"></label>
+            <label class="span2">설명<input id="itemDescription" placeholder="가까운 대상 수갑 사용/해제"></label>
+            <label>정렬 순서<input id="itemSort" type="number" value="100"></label>
+            <label>상태<select id="itemEnabled"><option value="1">표시</option><option value="0">숨김</option></select></label>
+          </div>
+          <div class="editor-actions"><button id="saveItemBtn" class="btn primary">저장</button><button id="cancelItemBtn" class="btn ghost">취소</button></div>
+        </div>
+
+        <div id="adminList" class="admin-list"></div>
+      </div>
+    </section>
+    <div id="toast" class="toast hidden"></div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

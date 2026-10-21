@@ -1,0 +1,242 @@
+
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:"Segoe UI","Malgun Gothic",sans-serif;background:transparent;color:#1c1b18}.hidden{display:none!important}button{font:inherit}
+#dialog{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(11,12,14,.28);backdrop-filter:blur(3px)}
+.card{width:430px;background:rgba(255,253,247,.98);border:1px solid rgba(255,255,255,.8);border-radius:24px;padding:22px;box-shadow:0 26px 70px rgba(0,0,0,.35)}
+.cap{font-size:9px;font-weight:900;letter-spacing:2px;color:#b48600;margin-bottom:9px}.titleRow{display:flex;align-items:center;gap:12px}.helmet{width:51px;height:51px;border-radius:16px;display:grid;place-items:center;font-size:27px;background:linear-gradient(145deg,#fff0ae,#ffc82e)}h1{font-size:22px;margin:0}#npcName{font-size:11px;color:#999;margin:3px 0 0}.titleRow #close{margin-left:auto;width:36px;height:36px;border:0;border-radius:11px;background:#f1eee5;color:#777;cursor:pointer}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:18px}.stat{padding:12px;background:#f7f3e8;border:1px solid #eee5cd;border-radius:13px}.stat span{display:block;font-size:9px;color:#a69a7d;margin-bottom:3px}.stat b{font-size:13px}
+.actions{display:grid;gap:8px;margin-top:14px}.act{border:0;border-radius:12px;padding:12px 14px;font-weight:900;cursor:pointer;background:linear-gradient(135deg,#ffb800,#ffc934)}.act.sub{background:#eeeef0}.act.danger{background:#fff0ed;color:#c84435}.act:disabled{background:#eee;color:#aaa;cursor:not-allowed}.foot{font-size:10px;color:#aaa;line-height:1.55;margin-top:14px;padding-top:12px;border-top:1px solid #eee7d8}
+.guide{position:fixed;left:28px;top:50%;transform:translateY(-50%);width:340px;display:flex;gap:12px;align-items:center;padding:14px 15px;background:rgba(27,27,27,.94);border:1px solid rgba(255,184,0,.35);border-radius:17px;box-shadow:0 16px 35px rgba(0,0,0,.3);color:#fff}.gIcon{width:45px;height:45px;flex:0 0 45px;border-radius:13px;display:grid;place-items:center;font-size:22px;background:#ffb800}.gMain{flex:1;min-width:0}.gTop,.gBottom{display:flex;justify-content:space-between;align-items:center;gap:8px}.gTop b{font-size:13px}.gTop span{font-size:11px;color:#ffcc45;font-weight:900}.bar{height:6px;background:#444;border-radius:99px;overflow:hidden;margin:7px 0}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ffb800,#ffe084);border-radius:99px}.gBottom span{font-size:10px;color:#bbb;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.gBottom b{font-size:11px;color:#ffd15b}
+.toast{position:fixed;left:50%;bottom:12%;transform:translateX(-50%);max-width:520px;padding:12px 18px;border-radius:12px;background:rgba(25,25,25,.94);color:#fff;font-size:12px;font-weight:800;box-shadow:0 14px 35px rgba(0,0,0,.3)}
+
+/* ===== COOKIE JOB UI UNIFIED V1 ===== */
+#dialog{
+ position:fixed!important;inset:0!important;background:linear-gradient(180deg,rgba(5,7,9,.05),rgba(5,7,9,.13) 45%,rgba(5,7,9,.83))!important;
+ display:block!important;
+}
+#dialog.hidden{display:none!important}
+#dialog .card{
+ position:fixed!important;left:50%!important;bottom:22px!important;top:auto!important;
+ transform:translateX(-50%)!important;width:min(1080px,88vw)!important;max-width:none!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;padding:0!important;color:#fff!important;
+}
+#dialog .cap{display:none!important}
+#dialog .titleRow{
+ display:flex!important;justify-content:center!important;align-items:center!important;margin:0 0 46px!important;
+}
+#dialog .helmet{display:none!important}
+#dialog .titleRow>div{display:flex!important;flex-direction:column!important;align-items:center!important}
+#dialog .titleRow h1{
+ display:inline-flex!important;order:2!important;margin:0!important;background:#ffb800!important;color:#332300!important;
+ font-size:11px!important;font-weight:900!important;border-radius:999px!important;padding:6px 13px!important;
+}
+#dialog .titleRow p{display:none!important}
+#dialog #close{display:none!important}
+.laborSpeech{
+ position:absolute!important;left:50%!important;bottom:62px!important;transform:translateX(-50%)!important;
+ width:min(1000px,90vw)!important;text-align:center!important;font-size:18px!important;font-weight:850!important;
+ color:#fff!important;text-shadow:0 2px 6px #000!important;
+}
+#dialog .stats{
+ position:absolute!important;left:0!important;bottom:2px!important;display:flex!important;gap:8px!important;
+ width:auto!important;background:none!important;
+}
+#dialog .stat{
+ min-width:125px!important;background:rgba(17,19,21,.90)!important;border:1px solid rgba(255,255,255,.08)!important;
+ border-radius:10px!important;padding:9px 12px!important;color:#ddd!important;
+}
+#dialog .stat span{color:#999!important;font-size:9px!important}#dialog .stat b{font-size:11px!important}
+#dialog .actions{
+ position:absolute!important;right:0!important;bottom:0!important;display:flex!important;gap:10px!important;flex-direction:row!important;
+}
+#dialog .act{
+ min-width:145px!important;padding:12px 16px!important;border:0!important;border-radius:10px!important;
+ background:rgba(17,19,21,.90)!important;color:#eee!important;font-size:12px!important;font-weight:800!important;
+}
+#dialog .act:hover{background:#ffb800!important;color:#332300!important}
+#dialog .act.sub{background:rgba(55,58,60,.9)!important}#dialog .act.danger{color:#ef9a8c!important}
+#dialog .act.danger:hover{background:#e55745!important;color:#fff!important}
+#dialog .foot{display:none!important}
+.guide{
+ left:22px!important;right:auto!important;top:72px!important;bottom:auto!important;
+ background:rgba(17,19,21,.95)!important;border:1px solid rgba(255,184,0,.3)!important;border-radius:14px!important;
+ box-shadow:0 12px 30px rgba(0,0,0,.25)!important;
+}
+.gIcon{background:#ffb800!important}
+
+/* COOKIE UNIFIED V4 */
+#dialog{position:fixed!important;inset:0!important;background:rgba(8,9,12,.62)!important}
+#dialog .card,#dialog .cap,#dialog .titleRow,#dialog .foot{display:none!important}
+.labor-profile{position:fixed!important;left:24px!important;top:80px!important;display:flex!important;gap:10px!important}
+.labor-profile .stat{background:rgba(239,233,220,.96)!important;color:#3a3327!important;border-radius:12px!important;padding:12px 16px!important;min-width:130px!important}
+.labor-bottom{position:fixed!important;left:0!important;right:0!important;bottom:0!important;padding:46px 0 28px!important;
+ background:linear-gradient(180deg,transparent,rgba(8,9,12,.7) 42%,rgba(8,9,12,.92))!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:16px!important}
+.labor-npc{background:#ffb800!important;color:#1a1a1a!important;padding:5px 16px!important;border-radius:20px!important;font-size:14px!important;font-weight:800!important}
+.laborSpeech{font-size:22px!important;font-weight:900!important;color:#fff!important;text-align:center!important;text-shadow:0 2px 10px #000!important}
+#dialog .actions{display:flex!important;gap:28px!important}
+#dialog .act,.labor-close{background:transparent!important;border:0!important;color:rgba(255,255,255,.84)!important;padding:8px 12px!important;font-size:13.5px!important;font-weight:800!important}
+#dialog .act:hover,.labor-close:hover{color:#ffb800!important}#dialog .act.danger{color:#e99b90!important}
+.guide{left:24px!important;right:auto!important;top:78px!important;bottom:auto!important;border-radius:14px!important}
+
+/* ===== COOKIE SERVER JOB DIALOG V5 ===== */
+.tx-npc-role,.mech-npc .role,.labor-npc b,.greet-npc{
+  font-weight:900!important;letter-spacing:.1px!important;
+}
+.tx-job-sub,.job-sub,.labor-npc span,.greet-job{
+  display:block!important;margin-top:6px!important;color:rgba(255,255,255,.72)!important;
+  font-size:13px!important;font-weight:750!important;text-align:center!important;
+  text-shadow:0 2px 7px rgba(0,0,0,.75)!important;
+}
+.tx-sub,.speech,.laborSpeech,.greet-text{
+  font-size:23px!important;line-height:1.42!important;font-weight:900!important;
+}
+.tx-act,.act,.labor-close,.greet-btn{
+  font-size:15px!important;font-weight:850!important;min-height:48px!important;
+  padding:11px 17px!important;transition:color .12s ease,transform .12s ease,background .12s ease!important;
+}
+.tx-act:hover,.act:hover,.labor-close:hover,.greet-btn:hover{
+  color:#ffbf18!important;text-shadow:0 0 10px rgba(255,184,0,.26)!important;
+  transform:translateY(-1px)!important;
+}
+.tx-act:hover .tx-mg-title,.tx-act:hover span,.act:hover span,.greet-btn:hover span{
+  color:inherit!important;opacity:1!important;visibility:visible!important;
+}
+
+.labor-npc{display:flex!important;flex-direction:column!important;align-items:center!important}
+.labor-npc b{background:#ffb800!important;color:#1b1606!important;border-radius:999px!important;padding:6px 17px!important;font-size:15px!important}
+#dialog .actions{gap:36px!important}
+#dialog .act{min-width:180px!important}
+
+/* =========================================================
+   COOKIE SERVER CIVIL JOB UI FINAL V6
+   기준: 트럭 배차관리인 대화 UI
+   ========================================================= */
+.hidden{display:none!important}
+#dlg:not(.hidden),#dialog:not(.hidden){display:block!important}
+
+/* 화면 전체를 검게 덮지 않고, NPC와 하단 대화 영역 중심으로 자연스럽게 */
+#dlg,#dialog{
+  position:fixed!important;inset:0!important;
+  background:
+    linear-gradient(180deg,
+      rgba(7,8,10,.30) 0%,
+      rgba(7,8,10,.20) 48%,
+      rgba(7,8,10,.48) 68%,
+      rgba(7,8,10,.90) 100%)!important;
+}
+
+/* 하단 대화는 화면 맨 아래보다 살짝 위 */
+.tx-npc,.mech-npc,.labor-npc{
+  z-index:10!important;
+}
+.tx-sub,.speech,.laborSpeech{
+  z-index:10!important;
+  font-family:"Segoe UI","Malgun Gothic",sans-serif!important;
+  font-size:22px!important;
+  line-height:1.42!important;
+  font-weight:900!important;
+  color:#fff!important;
+  text-shadow:0 2px 9px rgba(0,0,0,.88)!important;
+}
+.tx-acts,.acts,.actions{
+  z-index:11!important;
+}
+.tx-act,.act{
+  font-family:"Segoe UI","Malgun Gothic",sans-serif!important;
+  font-size:15px!important;
+  line-height:1.2!important;
+  font-weight:850!important;
+  min-height:50px!important;
+  min-width:170px!important;
+  padding:11px 18px!important;
+  border:0!important;
+  border-radius:10px!important;
+  background:transparent!important;
+  color:#f3f3f3!important;
+  opacity:1!important;
+  visibility:visible!important;
+  cursor:pointer!important;
+}
+.tx-act:hover,.tx-act:hover *,
+.act:hover,.act:hover *{
+  color:#ffbd16!important;
+  opacity:1!important;
+  visibility:visible!important;
+  text-shadow:0 0 9px rgba(255,184,0,.22)!important;
+}
+.tx-act.danger,.act.danger{color:#eaa198!important}
+
+/* 관리인 표시 */
+.tx-npc-role,.mech-npc .role,.labor-npc b{
+  display:inline-flex!important;
+  align-items:center!important;justify-content:center!important;
+  background:#ffb800!important;
+  color:#1d1706!important;
+  border-radius:999px!important;
+  padding:6px 17px!important;
+  font-size:14px!important;
+  font-weight:900!important;
+  box-shadow:0 3px 12px rgba(0,0,0,.32)!important;
+}
+.tx-job-sub,.job-sub,.labor-npc span{
+  display:block!important;
+  margin-top:5px!important;
+  color:rgba(255,255,255,.68)!important;
+  font-size:12.5px!important;
+  font-weight:750!important;
+  text-align:center!important;
+}
+
+/* 좌측 상태 카드도 트럭처럼 작은 카드 */
+.tx-profile,.profile,.labor-profile{
+  border-radius:14px!important;
+}
+
+#dialog .labor-bottom{
+ position:fixed!important;left:0!important;right:0!important;bottom:0!important;top:auto!important;
+ padding:0 0 43px!important;display:flex!important;flex-direction:column!important;align-items:center!important;gap:13px!important;
+}
+#dialog .labor-npc{
+ position:static!important;transform:none!important;background:transparent!important;
+ display:flex!important;flex-direction:column!important;align-items:center!important;
+}
+#dialog .laborSpeech{
+ position:static!important;transform:none!important;width:min(1120px,86vw)!important;text-align:center!important;margin:0!important;
+}
+#dialog .actions{
+ position:static!important;transform:none!important;display:flex!important;flex-direction:row!important;
+ align-items:center!important;justify-content:center!important;gap:28px!important;margin:0!important;
+}
+#dialog .labor-close{
+ position:static!important;background:transparent!important;border:0!important;color:rgba(255,255,255,.62)!important;
+ font-size:12px!important;font-weight:750!important;padding:3px 10px!important;margin-top:-5px!important;
+}
+#dialog .labor-profile{
+ position:fixed!important;left:30px!important;top:66px!important;display:flex!important;gap:9px!important;
+}
+#dialog .labor-profile .stat{
+ min-width:120px!important;background:rgba(242,236,223,.96)!important;color:#393227!important;border-radius:12px!important;padding:10px 13px!important;
+}
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}

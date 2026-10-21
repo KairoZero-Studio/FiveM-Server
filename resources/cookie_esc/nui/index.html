@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="utf-8">
+    <title>cookie_esc</title>
+    <link rel="stylesheet" href="style.css?v=20260827-full3">
+</head>
+<body>
+<div id="esc" class="hidden">
+
+    <div id="stage-vignette" aria-hidden="true"></div>
+    <div id="stage-blur" aria-hidden="true"></div>
+
+    <header id="topbar">
+        <nav id="tabs"></nav>
+        <div id="sysbar">
+            <button class="sys-btn" data-sys="keys" title="키 가이드">키 가이드</button>
+            <button class="sys-btn" data-sys="settings" title="게임설정">게임설정</button>
+            <button class="sys-btn sys-btn--danger" data-sys="quit" title="게임종료">게임종료</button>
+        </div>
+    </header>
+
+    <main id="body">
+
+        <section id="col-left">
+            <div class="panel">
+                <div class="panel-head">소식</div>
+                <div class="panel-body">
+
+                    <img id="notice-img" class="notice-img hidden" alt="">
+                    <div id="notice-banner" class="notice-banner">
+                        <div class="notice-kicker" id="notice-kicker">쿠키서버</div>
+                        <div class="notice-title" id="notice-title">뉴비 인증 도입</div>
+                        <div class="notice-sub" id="notice-sub">디스코드 인증 후 입장할 수 있습니다</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">바로가기</div>
+                <div class="panel-body" id="shortcuts"></div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-body">
+                    <button id="suggest-btn" class="row-btn">
+                        <span class="row-main">
+                            <span class="row-title" id="suggest-title">건의함</span>
+                            <span class="row-desc" id="suggest-desc"></span>
+                        </span>
+                        <span class="row-arrow">›</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">쿠키서버 공지</div>
+                <div class="panel-body" id="notice-list"></div>
+            </div>
+        </section>
+
+        <section id="col-center">
+            <div id="tab-play" class="tabview"></div>
+
+            <div id="tab-userlist" class="tabview hidden">
+                <div class="feature-shell userlist-shell">
+                    <div class="feature-top">
+                        <div>
+                            <div class="feature-kicker">LIVE CITY</div>
+                            <div class="feature-title">유저리스트</div>
+                            <div class="feature-desc">현재 접속 중인 시민과 직업 · 팩션 현황입니다.</div>
+                        </div>
+                        <div class="feature-total"><span id="userlist-count">-</span><small>ONLINE</small></div>
+                    </div>
+
+                    <div class="population-grid population-grid--single">
+                        <div class="population-card population-card--wide">
+                            <div class="population-head"><span>시민 · 직업 · 팩션 접속 현황</span><small>정부 팩션은 출근 중 인원만 집계</small></div>
+                            <div id="user-population-summary" class="population-list population-list--compact"></div>
+                        </div>
+                    </div>
+
+                    <div class="feature-section-head"><span>접속 시민</span><span class="muted">고번 · 상태 · 직업 · 팩션</span></div>
+                    <div id="userlist-rows" class="userlist-rows"></div>
+                </div>
+            </div>
+
+            <div id="tab-event" class="tabview hidden">
+                <div class="feature-shell event-shell">
+                    <div class="feature-top">
+                        <div>
+                            <div class="feature-kicker">COOKIE OPEN EVENT</div>
+                            <div class="feature-title">이벤트</div>
+                            <div class="feature-desc">쿠키서버 오픈 이벤트의 현재 순위와 보상을 확인하세요.</div>
+                        </div>
+                        <div id="event-state" class="state-pill">불러오는 중</div>
+                    </div>
+                    <div id="event-meta" class="feature-note">이벤트 정보를 불러오는 중입니다.</div>
+                    <div id="event-rows" class="event-grid"></div>
+                </div>
+            </div>
+
+            <div id="tab-rank" class="tabview hidden">
+                <div class="feature-shell rank-shell">
+                    <div class="feature-top">
+                        <div>
+                            <div class="feature-kicker">COOKIE RECORDS</div>
+                            <div class="feature-title">순위표</div>
+                            <div class="feature-desc">도시에서 쌓인 기록을 분야별로 확인할 수 있습니다.</div>
+                        </div>
+                    </div>
+                    <div id="rank-tabs" class="rank-tabs"></div>
+                    <div id="rank-desc" class="feature-note"></div>
+                    <div id="rank-rows" class="rank-rows"></div>
+                    <div id="rank-note" class="rank-note"></div>
+                </div>
+            </div>
+
+            <div id="tab-soon" class="tabview hidden">
+                <div class="center-card">
+                    <div class="center-title" id="soon-title">준비 중</div>
+                    <div class="center-desc">곧 만나보실 수 있습니다.</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="col-right">
+            <div class="panel" id="me-panel">
+                <div class="panel-head">
+                    <span id="me-nick">-</span>
+                    <span id="me-gobun" class="head-sub">[-]</span>
+                    <span class="head-chip">
+                        <span id="me-emoji" class="head-emoji"></span>
+                        <span id="me-job">-</span>
+                    </span>
+                </div>
+
+                <div class="panel-body">
+                    <div class="kv"><span class="k">지갑</span><span class="v" id="me-cash">-</span></div>
+                    <div class="kv"><span class="k">은행</span><span class="v" id="me-bank">-</span></div>
+                    <div class="kv"><span class="k">전화번호</span><span class="v" id="me-phone">-</span></div>
+                    <div class="kv"><span class="k">나이</span><span class="v" id="me-age">-</span></div>
+                    <div class="kv"><span class="k">주민등록번호</span><span class="v" id="me-jumin">-</span></div>
+                    <div class="kv"><span class="k">운전면허번호</span><span class="v" id="me-driver-license">-</span></div>
+                    <div class="kv"><span class="k">소속</span><span class="v" id="me-org">-</span></div>
+                    <div class="kv"><span class="k">계급</span><span class="v" id="me-grade">-</span></div>
+                    <div class="kv"><span class="k">플레이타임</span><span class="v" id="me-play">-</span></div>
+                    <div class="kv"><span class="k">근무시간</span><span class="v" id="me-job-time">-</span></div>
+
+                    <div id="status-box" class="status-box">
+                        <div class="status-head">
+                            <span class="k">상태</span>
+                            <span class="status-count"><span id="status-len">0</span>/<span id="status-max">20</span></span>
+                        </div>
+                        <div class="status-row">
+                            <input id="status-input" class="status-input" type="text" maxlength="20"
+                                placeholder="상태 메시지를 입력하세요" autocomplete="off" spellcheck="false">
+                            <button id="status-apply" class="mini-btn mini-btn--point">적용</button>
+                            <button id="status-clear" class="mini-btn">해제</button>
+                        </div>
+                        <div id="status-hint" class="status-hint"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <span>업데이트 내역</span>
+                    <button id="news-more" class="head-more">더 보기</button>
+                </div>
+                <div class="panel-body" id="news"></div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer id="bottombar">
+        <div class="brand" id="brand-en">COOKIE KR</div>
+        <div class="bottom-links">
+            <button class="link-btn" data-sys="discord">디스코드</button>
+            <button class="link-btn" data-sys="home">홈페이지</button>
+            <button class="link-btn" data-sys="disconnect">서버 나가기</button>
+        </div>
+    </footer>
+
+    <div id="confirm" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-title" id="confirm-title">정말 종료하시겠습니까?</div>
+            <div class="modal-sub" id="confirm-sub">진행 중인 내용이 저장되지 않을 수 있습니다.</div>
+            <div class="modal-actions">
+                <button id="confirm-no" class="btn btn-secondary">취소</button>
+                <button id="confirm-yes" class="btn btn-danger">종료</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-title">게임설정</div>
+            <div class="modal-sub">어떤 설정을 여시겠습니까?</div>
+            <div class="settings-list">
+                <button class="row-btn" data-set="cookie">
+                    <span class="row-main">
+                        <span class="row-title">쿠키서버 키 설정</span>
+                        <span class="row-desc">설정 화면의 키 설정에서 FiveM 항목을 선택하세요</span>
+                    </span>
+                    <span class="row-arrow">›</span>
+                </button>
+                <button class="row-btn" data-set="gta">
+                    <span class="row-main">
+                        <span class="row-title">GTA5 설정</span>
+                        <span class="row-desc">그래픽, 음향 등 게임 기본 설정</span>
+                    </span>
+                    <span class="row-arrow">›</span>
+                </button>
+            </div>
+            <div class="modal-actions">
+                <button id="settings-close" class="btn btn-secondary">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="notice-detail" class="modal-overlay hidden">
+        <div class="notice-card">
+            <img class="notice-card-logo" src="nui://cookie_select/nui/assets/logo.png" alt="">
+            <div class="notice-card-kicker">쿠키 서버 공지</div>
+            <div id="nd-text" class="notice-card-text"></div>
+            <div class="notice-card-meta">
+                <span id="nd-admin">-</span>
+                <span id="nd-at">-</span>
+            </div>
+            <button id="nd-close" class="btn btn-close">닫기</button>
+        </div>
+    </div>
+
+    <div id="upd-detail" class="modal-overlay hidden">
+        <div class="notice-card">
+            <div id="ud-badge" class="upd-badge">패치노트</div>
+            <div id="ud-title" class="upd-title"></div>
+            <div id="ud-body" class="upd-body"></div>
+            <button id="ud-close" class="btn btn-close">닫기</button>
+        </div>
+    </div>
+
+    <div id="upd-all" class="modal-overlay hidden">
+        <div class="upd-page">
+            <div class="upd-page-head">
+                <span class="upd-page-title">쿠키서버 업데이트 내역</span>
+                <button id="ua-close" class="upd-page-x">✕</button>
+            </div>
+            <div class="upd-table-head">
+                <span class="uc-date">날짜</span>
+                <span class="uc-title">제목</span>
+                <span class="uc-admin">작성자</span>
+                <span class="uc-more"></span>
+            </div>
+            <div id="ua-list" class="upd-table"></div>
+            <div id="ua-pager" class="upd-pager"></div>
+        </div>
+    </div>
+
+    <div id="keys" class="modal-overlay hidden">
+        <div class="modal-card modal-card--wide">
+            <div class="modal-title">키 가이드</div>
+            <div class="keys-grid">
+                <div class="key-row"><span class="key">ESC</span><span class="key-desc">이 메뉴 열기/닫기</span></div>
+                <div class="key-row"><span class="key">F3</span><span class="key-desc">관리자 / 내 정보 패널</span></div>
+                <div class="key-row"><span class="key">T</span><span class="key-desc">채팅</span></div>
+                <div class="key-row"><span class="key">TAB</span><span class="key-desc">내 이름표 토글</span></div>
+                <div class="key-row"><span class="key">E</span><span class="key-desc">상호작용(차고, 근무존, 무장고)</span></div>
+                <div class="key-row"><span class="key">M</span><span class="key-desc">개인 메뉴</span></div>
+            </div>
+            <div class="modal-actions">
+                <button id="keys-close" class="btn btn-secondary">닫기</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="suggest-modal" class="esc-modal hidden">
+  <div class="esc-modal-card">
+    <div class="esc-modal-head"><div><span>COOKIE FEEDBACK</span><b>건의함</b><small>운영진에게 직접 전달됩니다.</small></div><button id="suggest-close" type="button">×</button></div>
+    <label class="esc-field"><span>분류</span><select id="suggest-category"><option value="general">일반 건의</option><option value="bug">버그 제보</option><option value="other">기타</option></select></label>
+    <label class="esc-field"><span>제목</span><input id="suggest-input-title" maxlength="80" placeholder="건의 제목"></label>
+    <label class="esc-field"><span>내용</span><textarea id="suggest-input-body" maxlength="2000" placeholder="내용을 자세히 적어주세요"></textarea></label>
+    <div class="esc-modal-foot"><small>제출된 내용은 F3 운영 로그에서 확인할 수 있습니다.</small><button id="suggest-submit" type="button">제출하기</button></div>
+  </div>
+</div>
+
+<script src="app.js?v=20260928-v168"></script>
+</body>
+</html>

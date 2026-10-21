@@ -1,0 +1,57 @@
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Pretendard,"Noto Sans KR",Arial,sans-serif;color:#f6f7fb;background:transparent}button{font:inherit}.hidden{display:none!important}#app{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(6,8,12,.55);backdrop-filter:blur(4px)}.shell{width:min(940px,92vw);max-height:88vh;overflow:auto;background:linear-gradient(180deg,#151922,#0f1219);border:1px solid rgba(255,255,255,.08);border-radius:22px;box-shadow:0 28px 90px rgba(0,0,0,.52);padding:26px}header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px}.eyebrow{margin:0 0 5px;color:#ffbf3f;font-size:12px;font-weight:900;letter-spacing:.18em}h1{margin:0;font-size:30px}.sub{margin:7px 0 0;color:#9ba4b6}.close,#modalClose{border:0;background:rgba(255,255,255,.07);color:#fff;width:38px;height:38px;border-radius:12px;font-size:24px;cursor:pointer}.progress{height:8px;background:#252b37;border-radius:99px;margin-top:24px;overflow:hidden}.progress>div{height:100%;width:0;background:linear-gradient(90deg,#ffad24,#ffd463);transition:.25s}.progressText{text-align:right;color:#939cac;font-size:12px;margin-top:7px}main{display:grid;gap:12px;margin-top:16px}.step{display:grid;grid-template-columns:54px 1fr auto;gap:16px;align-items:center;padding:18px;border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.028);border-radius:16px}.step.done{border-color:rgba(84,211,138,.25);background:rgba(84,211,138,.055)}.step.locked{opacity:.52}.no{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;background:#242a35;font-weight:900}.done .no{background:#20452f;color:#6ee59c}.step h3{margin:0 0 5px;font-size:17px}.step p{margin:0;color:#929cac;font-size:13px;line-height:1.5}.values{margin-top:7px;color:#f7c969!important}.link{color:#ffd36c}.action{min-width:138px;border:0;border-radius:12px;padding:12px 15px;background:#ffbd3f;color:#18130a;font-weight:900;cursor:pointer}.action:disabled{cursor:not-allowed;background:#333947;color:#747e91}.action.doneBtn{background:#253f31;color:#70df9c}.complete{margin-top:16px;padding:18px;border-radius:16px;background:linear-gradient(135deg,rgba(75,207,132,.14),rgba(255,190,65,.08));border:1px solid rgba(75,207,132,.25);display:flex;gap:14px;align-items:center}.completeInfo{flex:1}.completeIcon{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:#43c77d;color:#07120b;font-size:22px;font-weight:900}.complete b{font-size:18px}.complete p{margin:3px 0 0;color:#a6afbd}.modal{position:fixed;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.58)}.modalCard{width:min(680px,88vw);max-height:80vh;overflow:auto;background:#151a23;border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:22px}.modalHead{display:flex;justify-content:space-between;align-items:center}.modalHead h2{margin:0}.pages{display:grid;gap:10px;margin:18px 0}.page{padding:15px;border-radius:13px;background:#0e1219;border:1px solid rgba(255,255,255,.06)}.page b{display:block;margin-bottom:7px}.page p{margin:0;color:#a2abba;line-height:1.65}.modalFoot{display:flex;justify-content:flex-end}.primary{border:0;border-radius:12px;padding:12px 18px;background:#ffbd3f;font-weight:900;cursor:pointer}.primary:disabled{cursor:not-allowed;opacity:.6}.toast{position:fixed;bottom:6vh;left:50%;transform:translateX(-50%);padding:12px 18px;border-radius:12px;background:#202632;border:1px solid rgba(255,255,255,.1);box-shadow:0 12px 36px rgba(0,0,0,.35)}.toast.bad{background:#3a1d22;color:#ffabb6}@media(max-width:700px){.step{grid-template-columns:45px 1fr}.action{grid-column:1/-1;width:100%}.shell{padding:18px}.complete{align-items:flex-start;flex-direction:column}.complete .primary{width:100%}}
+.verifyStep{grid-template-columns:54px 1fr}.verifyContent{min-width:0}.verifyGuide{display:grid;gap:7px;margin-top:11px;padding:12px 14px;border-radius:12px;background:rgba(255,189,63,.065);border:1px solid rgba(255,189,63,.14)}.verifyGuide span{color:#c3cad6;font-size:12px;line-height:1.45}.verifyGuide b{display:inline-grid;place-items:center;width:19px;height:19px;margin-right:7px;border-radius:50%;background:#ffbd3f;color:#19130a;font-size:11px}.discordLine{margin-top:10px;color:#8f9bad;font-size:12px}.discordLine span{color:#ffcf70}.verifyInputRow{display:flex;gap:9px;margin-top:12px}.verifyInputRow input{flex:1;min-width:0;height:43px;border:1px solid rgba(255,255,255,.1);border-radius:11px;background:#0b0f15;color:#fff;padding:0 14px;outline:none;font-size:17px;font-weight:800;letter-spacing:.18em}.verifyInputRow input:focus{border-color:rgba(255,189,63,.55);box-shadow:0 0 0 3px rgba(255,189,63,.08)}.verifyInputRow .action{min-width:110px}.verifiedText{margin-top:10px!important;color:#70df9c!important;font-weight:800}@media(max-width:700px){.verifyStep{grid-template-columns:45px 1fr}.verifyInputRow{flex-direction:column}.verifyInputRow .action{width:100%}}
+
+
+/* COOKIE NEWBIE SCROLLBAR HIDE V13.9.8 */
+/* 스크롤 기능은 유지하고, 회색 브라우저 스크롤바만 숨깁니다. */
+html,
+body,
+.newbie-shell,
+.newbie-panel,
+.newbie-content,
+.newbie-wrap,
+main {
+  scrollbar-width: none !important;      /* Firefox */
+  -ms-overflow-style: none !important;   /* legacy */
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar,
+.newbie-shell::-webkit-scrollbar,
+.newbie-panel::-webkit-scrollbar,
+.newbie-content::-webkit-scrollbar,
+.newbie-wrap::-webkit-scrollbar,
+main::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+/* COOKIE NEWBIE LARGE UI V14.2.5 */
+.shell{width:min(1120px,96vw)!important;max-height:95vh!important;padding:28px!important;}
+.modalCard{width:min(820px,94vw)!important;max-height:92vh!important;}

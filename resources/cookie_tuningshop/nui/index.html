@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>COOKIE TUNING</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main id="app" class="hidden">
+  <section class="panel">
+    <header>
+      <div>
+        <div class="eyebrow">COOKIE CUSTOMS</div>
+        <h1>튜닝샵</h1>
+        <p id="vehicleMeta">-</p>
+      </div>
+      <button id="closeBtn" class="icon-btn" type="button">×</button>
+    </header>
+
+    <nav id="tabs">
+      <button class="tab active" data-tab="repair">정비</button>
+      <button class="tab" data-tab="paint">색상</button>
+      <button class="tab" data-tab="performance">성능</button>
+      <button class="tab" data-tab="lights">조명·타이어</button>
+      <button class="tab" data-tab="exterior">외형</button>
+      <button class="tab" data-tab="etc">기타</button>
+    </nav>
+
+    <div id="repairLock" class="repair-lock hidden">
+      차량 손상이 확인되었습니다. <b>전체 수리</b> 후 튜닝할 수 있습니다.
+    </div>
+
+    <div class="content">
+      <section class="page active" data-page="repair">
+        <div class="status-grid">
+          <div><span>엔진</span><b id="engineHealth">100%</b></div>
+          <div><span>차체</span><b id="bodyHealth">100%</b></div>
+          <div><span>연료탱크</span><b id="tankHealth">100%</b></div>
+        </div>
+
+        <div id="damageDetail" class="info-box">차량 상태 확인 중...</div>
+
+        <button id="repairBtn" class="wide primary" type="button">
+          전체 수리
+        </button>
+        <small id="repairPriceText" class="under-note">수리비 -</small>
+      </section>
+
+      <section class="page" data-page="paint">
+        <div class="field">
+          <div><b>1차 색상</b><small>차량 메인 색상</small></div>
+          <input id="primaryColor" type="color" value="#ffffff">
+        </div>
+
+        <div class="field">
+          <div><b>2차 색상</b><small>차량 보조 색상</small></div>
+          <input id="secondaryColor" type="color" value="#ffffff">
+        </div>
+
+        <label class="stack">
+          <span>특수 페인트</span>
+          <select id="specialPaint"></select>
+        </label>
+
+        <label class="stack">
+          <span>휠 색상</span>
+          <select id="wheelColor"></select>
+        </label>
+
+        <label class="stack">
+          <span>유리 썬팅 농도</span>
+          <select id="windowTint"></select>
+        </label>
+
+        <label class="stack">
+          <span>내부 색상</span>
+          <select id="interiorColor"></select>
+        </label>
+      </section>
+
+      <section class="page" data-page="performance">
+        <div class="level-row">
+          <div><b>엔진</b><small>가속 성능</small></div>
+          <div class="level-control">
+            <button data-minus="engineLevel">−</button>
+            <strong id="engineLevelText">순정</strong>
+            <button data-plus="engineLevel">+</button>
+          </div>
+        </div>
+
+        <div class="level-row">
+          <div><b>속도</b><small>최고속 세팅</small></div>
+          <div class="level-control">
+            <button data-minus="speedLevel">−</button>
+            <strong id="speedLevelText">순정</strong>
+            <button data-plus="speedLevel">+</button>
+          </div>
+        </div>
+
+        <div class="level-row">
+          <div><b>내구도</b><small>충돌/엔진 손상 감소</small></div>
+          <div class="level-control">
+            <button data-minus="durabilityLevel">−</button>
+            <strong id="durabilityLevelText">순정</strong>
+            <button data-plus="durabilityLevel">+</button>
+          </div>
+        </div>
+
+        <div class="level-row">
+          <div><b>브레이크</b><small>제동 성능</small></div>
+          <div class="level-control">
+            <button data-minus="brakeLevel">−</button>
+            <strong id="brakeLevelText">순정</strong>
+            <button data-plus="brakeLevel">+</button>
+          </div>
+        </div>
+
+        <div class="level-row">
+          <div><b>서스펜션</b><small>차고/서스펜션 튜닝</small></div>
+          <div class="level-control">
+            <button data-minus="suspensionLevel">−</button>
+            <strong id="suspensionLevelText">순정</strong>
+            <button data-plus="suspensionLevel">+</button>
+          </div>
+        </div>
+
+        <div class="level-row">
+          <div><b>미션</b><small>변속 성능</small></div>
+          <div class="level-control">
+            <button data-minus="transmissionLevel">−</button>
+            <strong id="transmissionLevelText">순정</strong>
+            <button data-plus="transmissionLevel">+</button>
+          </div>
+        </div>
+
+        <label class="toggle-row">
+          <div><b>터보</b><small>터보차저 장착</small></div>
+          <input id="turbo" type="checkbox">
+          <span class="switch"></span>
+        </label>
+      </section>
+
+      <section class="page" data-page="lights">
+        <label class="toggle-row">
+          <div><b>타이어</b><small>일반 / 방탄타이어</small></div>
+          <input id="bulletproofTyres" type="checkbox">
+          <span class="switch"></span>
+        </label>
+
+        <div class="field">
+          <div><b>타이어 연기</b><small>번아웃 연기 색상</small></div>
+          <input id="tyreSmokeColor" type="color" value="#ffffff">
+        </div>
+
+        <label class="toggle-row">
+          <div><b>헤드라이트</b><small>제논 헤드라이트</small></div>
+          <input id="xenonEnabled" type="checkbox">
+          <span class="switch"></span>
+        </label>
+
+        <label class="stack">
+          <span>헤드라이트 색상</span>
+          <select id="xenonColor"></select>
+        </label>
+
+        <label class="toggle-row">
+          <div><b>네온</b><small>차량 하부 네온</small></div>
+          <input id="neonEnabled" type="checkbox">
+          <span class="switch"></span>
+        </label>
+
+        <div class="field">
+          <div><b>네온 색상</b><small>RGB</small></div>
+          <input id="neonColor" type="color" value="#ffffff">
+        </div>
+
+        <div class="neon-sides">
+          <label><input type="checkbox" id="neonLeft">좌측</label>
+          <label><input type="checkbox" id="neonRight">우측</label>
+          <label><input type="checkbox" id="neonFront">전면</label>
+          <label><input type="checkbox" id="neonBack">후면</label>
+        </div>
+      </section>
+
+      <section class="page" data-page="exterior">
+        <label class="stack">
+          <span>휠 종류</span>
+          <select id="wheelType"></select>
+        </label>
+
+        <label class="stack">
+          <span>휠 모델</span>
+          <select id="wheelIndex"></select>
+        </label>
+
+        <label class="stack">
+          <span>앞범퍼</span>
+          <select id="frontBumper"></select>
+        </label>
+
+        <label class="stack">
+          <span>뒷범퍼</span>
+          <select id="rearBumper"></select>
+        </label>
+
+        <label class="stack">
+          <span>루프</span>
+          <select id="roofIndex"></select>
+        </label>
+
+        <label class="stack">
+          <span>배기구 외형</span>
+          <select id="exhaustIndex"></select>
+        </label>
+
+        <label class="stack">
+          <span>번호판 색상</span>
+          <select id="plateStyle"></select>
+        </label>
+      </section>
+
+      <section class="page" data-page="etc">
+        <label class="stack">
+          <span>경적</span>
+          <select id="hornIndex"></select>
+        </label>
+
+        <label class="stack">
+          <span>배기음 / 엔진음</span>
+          <select id="engineAudio"></select>
+        </label>
+
+        <div class="extras-title">차량 엑스트라</div>
+        <div id="extrasList" class="extras-list"></div>
+
+        <div class="info-box">
+          차량마다 지원하는 EXTRA만 표시됩니다. 스포일러·라이트바·루프 장식 등
+          애드온 차량에서 EXTRA로 제작된 파츠는 여기에서 켜고 끌 수 있습니다.
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <div class="money">
+        <span>예상 결제금액</span>
+        <strong id="priceText">0원</strong>
+        <small id="balanceText">계좌 0원 · 현금 0원</small>
+      </div>
+
+      <div class="actions">
+        <button id="resetBtn" class="ghost" type="button">되돌리기</button>
+        <button id="buyBtn" class="primary" type="button">튜닝 적용</button>
+      </div>
+    </footer>
+  </section>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

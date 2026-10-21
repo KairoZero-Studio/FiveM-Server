@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><link rel="stylesheet" href="style.css"><title>COOKIE Drug Craft</title></head>
+<body>
+<div id="craft" class="screen hidden"><section class="window">
+<header><div><p class="eyebrow">COOKIE ORGANIZATION</p><h1 id="craftTitle">조직 제조</h1><p id="craftSub">원재료를 선택해 제조를 시작하세요.</p></div><button id="closeCraft" class="iconBtn">×</button></header>
+<div id="recipes" class="recipeGrid"></div>
+<div class="controlCard">
+<div class="controlInfo"><span class="muted">선택</span><strong id="selectedName">품목을 선택하세요</strong><span id="formula" class="formula">-</span></div>
+<div class="quantityBox"><label>사용할 원재료 수량</label><div class="quantityLine"><input id="rawAmount" type="number" min="1" value="1"><button id="maxBtn">MAX</button></div><small id="quantityHint">보유량에 맞춰 입력하세요.</small></div>
+<div class="buttons"><button id="autoBtn" class="secondary">자동 제조 <span id="baseTime">15초</span></button><button id="miniBtn" class="primary">미니게임 도전 <span id="boostTime">성공 시 5초</span></button></div>
+</div></section></div>
+
+<div id="progressHud" class="progressHud hidden"><div class="hudTop"><strong id="progressName">제조 중</strong><span id="progressCount">0 / 0</span></div><div class="bar"><i id="progressBar"></i></div><div class="hudBottom"><span id="progressMode">자동 제조</span><b>BACKSPACE · 취소</b></div></div>
+
+<div id="mini" class="screen hidden"><section class="miniWindow">
+<div class="miniHead"><span id="miniName">미니게임</span><b id="miniTimer"></b></div>
+<div id="cocaineGame" class="game hidden"><h2>SPACE · 목표 구역 맞추기</h2><p>왕복 2회가 끝나기 전에 초록 구역에서 SPACE</p><div class="timingTrack"><div id="cocaineTarget" class="targetZone"></div><div id="cocaineNeedle" class="needle"></div></div></div>
+<div id="cannabisGame" class="game hidden"><h2>키 입력 · 8개</h2><p>W A S D Q E 중 표시되는 키를 정확히 입력</p><div id="keySeq" class="keySeq"></div></div>
+<div id="methGame" class="game hidden"><h2>A / D · 균형 유지</h2><p>5초 동안 표시점을 초록 범위 안에 유지</p><div class="balanceTrack"><div class="balanceSafe"></div><div id="balanceDot" class="balanceDot"></div></div><div class="adHelp"><kbd>A</kbd><span>← 균형 →</span><kbd>D</kbd></div></div>
+<div id="heroinGame" class="game hidden"><h2>마우스 · 함정 피하기</h2><p>5초 동안 전용 커서를 함정에 닿지 않게 움직이세요.</p><div id="trapArena" class="trapArena"><div id="trapCursor" class="trapCursor"></div></div></div>
+</section></div>
+
+<div id="admin" class="screen hidden"><section class="window adminWindow">
+<header><div><p class="eyebrow">COOKIE ADMIN</p><h1>조직 제조 관리</h1><p>제조 위치와 게임 내부 변환 비율을 관리합니다.</p></div><button id="closeAdmin" class="iconBtn">×</button></header>
+<div class="adminAdd"><input id="newLocLabel" placeholder="제조소 이름" value="조직 제조소"><input id="newLocRadius" type="number" min="1" max="20" value="3"><button id="addLocBtn" class="primary">현재 위치 추가</button></div>
+<h3>제조 위치</h3><div id="adminLocations" class="adminList"></div>
+<h3>제조 설정</h3><div id="adminRecipes" class="adminList"></div>
+</section></div>
+<script src="app.js"></script></body></html>

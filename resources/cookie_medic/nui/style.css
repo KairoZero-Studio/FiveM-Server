@@ -1,0 +1,138 @@
+
+* { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
+html, body {
+  width: 100vw; height: 100vh; overflow: hidden; background: transparent;
+  font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+}
+
+#deathScreen {
+  position: fixed; inset: 0;
+  background: rgba(19, 19, 19, 0.74);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 18px;
+  animation: fadein 1s;
+}
+#deathScreen.hidden { display: none; }
+@keyframes fadein { from { opacity: 0 } to { opacity: 1 } }
+
+.ecg-wrap {
+  width: min(680px, 80vw); text-align: center;
+}
+.ecg { width: 100%; height: 120px; display: block; }
+
+#pulsar {
+  stroke-dasharray: 281;
+  animation: dash 2.5s infinite linear forwards;
+}
+@keyframes dash { from { stroke-dashoffset: 814; } to { stroke-dashoffset: -814; } }
+
+.ds-status {
+  margin-top: 6px;
+  font-size: 14px; color: #f60d54; font-weight: 700;
+  min-height: 20px; letter-spacing: .5px;
+}
+
+.ds-revive {
+  position: fixed; left: 50%; top: 62%; transform: translateX(-50%);
+  text-align: center;
+}
+.ds-revive.hidden { display: none; }
+.ds-revive-t { font-size: 16px; font-weight: 700; color: #fff;
+  text-shadow: 0 2px 8px rgba(0,0,0,.8); margin-bottom: 10px; }
+.ds-revive-t b { color: #fff; font-weight: 900; }
+
+.ds-flip {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 96px; padding: 10px 22px;
+  background: rgba(20,20,24,.72); border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.5);
+}
+.ds-flip span {
+  font-size: 64px; font-weight: 900; color: #fff; line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 2px 10px rgba(0,0,0,.6);
+  transform-origin: center top;
+  display: inline-block;
+}
+
+.ds-regen {
+  margin-top: 10px;
+  padding: 7px 12px;
+  border: 1px solid rgba(93, 233, 170, .42);
+  border-radius: 999px;
+  background: rgba(20, 82, 59, .55);
+  color: #bdf7dc;
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .2px;
+}
+.ds-regen.hidden { display: none; }
+
+.ds-flip span.flip { animation: ds-flip .38s ease; }
+@keyframes ds-flip {
+  0%   { transform: rotateX(-90deg); opacity: 0; }
+  60%  { transform: rotateX(10deg);  opacity: 1; }
+  100% { transform: rotateX(0deg); }
+}
+
+.ds-acts {
+  display: flex; gap: 12px;
+}
+
+.ds-btn {
+  min-width: 132px;
+  padding: 15px 26px;
+  border: 1px solid rgba(255, 255, 255, .16);
+  border-radius: 12px;
+
+  font-family: inherit; font-size: 15px; font-weight: 800; color: #fff;
+  cursor: pointer;
+  backdrop-filter: none;
+  transition: background .12s, transform .12s, opacity .12s;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, .38);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .45);
+}
+.ds-btn:hover { transform: translateY(-1px); }
+
+.ds-btn.used {
+  opacity: .28;
+  pointer-events: none;
+  transform: none;
+}
+
+.ds-btn.wipe  { background: rgba(124, 77, 200, .55); }
+.ds-btn.wipe:hover  { background: rgba(124, 77, 200, .88); }
+
+.ds-btn.stop  { background: rgba(224, 160, 0, .55); }
+.ds-btn.stop:hover  { background: rgba(224, 160, 0, .88); }
+
+.ds-btn.death { background: rgba(214, 48, 49, .55); }
+.ds-btn.death:hover { background: rgba(214, 48, 49, .88); }
+
+.ds-btn.revive { background: rgba(46, 160, 90, .60); }
+.ds-btn.revive:hover { background: rgba(46, 160, 90, .92); }
+
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}

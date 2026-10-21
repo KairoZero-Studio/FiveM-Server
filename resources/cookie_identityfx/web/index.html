@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="stylesheet" href="style.css?_ship=7457u5t">
+  <title>COOKIE Identity FX</title>
+</head>
+<body>
+  <div id="feed"></div>
+
+  <div id="panel" class="hidden">
+    <div class="window">
+      <header>
+        <div>
+          <strong>COOKIE IDENTITY</strong>
+          <small>칭호 · 머리칭호 · 킬피드</small>
+        </div>
+        <button id="close">×</button>
+      </header>
+
+      <nav>
+        <button data-tab="mine" class="active">내 보유 목록</button>
+        <button data-tab="admin" id="adminTab" class="hidden">관리자</button>
+      </nav>
+
+      <main>
+        <section id="mine" class="tab active">
+          <div id="profile"></div>
+          <div class="columns">
+            <div>
+              <h3>채팅 칭호</h3>
+              <div id="chatList" class="cards"></div>
+              <button class="unequip" data-type="chat_title">채팅 칭호 해제</button>
+            </div>
+            <div>
+              <h3>머리 위 칭호</h3>
+              <div id="headList" class="cards"></div>
+              <button class="unequip" data-type="overhead_title">머리 칭호 해제</button>
+            </div>
+            <div>
+              <h3>킬피드 스킨</h3>
+              <div id="feedList" class="cards"></div>
+              <button class="unequip" data-type="killfeed_skin">킬피드 해제</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="admin" class="tab">
+          <div class="admin-grid">
+            <div class="box">
+              <h3>대상 유저</h3>
+              <select id="targetPlayer"></select>
+              <button id="refreshAdmin">새로고침</button>
+            </div>
+
+            <div class="box">
+              <h3>새 항목 추가</h3>
+              <select id="newType">
+                <option value="chat_title">채팅 칭호</option>
+                <option value="overhead_title">머리 위 칭호</option>
+                <option value="killfeed_skin">킬피드 스킨</option>
+              </select>
+              <input id="newCode" placeholder="코드 예: event_2026">
+              <input id="newLabel" placeholder="표시 이름">
+              <input id="newColor" type="color" value="#ffffff">
+              <select id="newTheme">
+                <option value="default">default</option>
+                <option value="gold">gold</option>
+                <option value="pink">pink</option>
+                <option value="ice">ice</option>
+              </select>
+              <button id="createItem">추가 / 수정</button>
+            </div>
+          </div>
+
+          <div class="box">
+            <h3>카탈로그</h3>
+            <div id="catalog" class="catalog"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script src="app.js?_ship=7457u5t"></script>
+</body>
+</html>

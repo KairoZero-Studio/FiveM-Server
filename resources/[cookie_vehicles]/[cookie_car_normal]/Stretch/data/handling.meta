@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CHandlingDataMgr>
+  <HandlingData>
+    <Item type="CHandlingData">
+      <handlingName>STRETCH</handlingName>
+
+      <!-- 대형 리무진: 길고 무거운 차체 -->
+      <fMass value="2650.000000" />
+      <fInitialDragCoeff value="8.200000" />
+      <fPercentSubmerged value="85.000000" />
+
+      <!-- 무게중심을 낮춰 긴 차체의 전복/출렁임 억제 -->
+      <vecCentreOfMassOffset x="0.000000" y="0.080000" z="-0.175000" />
+      <vecInertiaMultiplier x="1.050000" y="1.350000" z="1.650000" />
+
+      <!-- 클래식 리무진 후륜구동 -->
+      <fDriveBiasFront value="0.000000" />
+      <nInitialDriveGears value="6" />
+
+      <!-- 순정 0단계 -->
+      <fInitialDriveForce value="0.296800" />
+      <fDriveInertia value="0.940000" />
+      <fClutchChangeRateScaleUpShift value="1.950000" />
+      <fClutchChangeRateScaleDownShift value="1.800000" />
+
+      <!-- 실제 최고속도는 cookie_tuningshop에서 175~200 km/h 제어 -->
+      <fInitialDriveMaxFlatVel value="175.000000" />
+
+      <!-- 무거운 차체를 감안해 제동은 충분히 확보 -->
+      <fBrakeForce value="1.104000" />
+      <fBrakeBiasFront value="0.585000" />
+      <fHandBrakeForce value="0.600000" />
+
+      <!-- 긴 휠베이스: 좁은 길에서 너무 민감하지 않게 -->
+      <fSteeringLock value="33.550000" />
+
+      <!-- 안정적인 접지, 대신 스포츠카 수준은 아님 -->
+      <fTractionCurveMax value="2.802400" />
+      <fTractionCurveMin value="2.530000" />
+      <fTractionCurveLateral value="21.500000" />
+      <fTractionSpringDeltaMax value="0.145000" />
+      <fLowSpeedTractionLossMult value="0.900000" />
+      <fCamberStiffnesss value="0.000000" />
+      <fTractionBiasFront value="0.490000" />
+      <fTractionLossMult value="0.980000" />
+
+      <!-- 승차감 위주의 부드러운 서스펜션 -->
+      <fSuspensionForce value="2.280000" />
+      <fSuspensionCompDamp value="1.420000" />
+      <fSuspensionReboundDamp value="2.100000" />
+      <fSuspensionUpperLimit value="0.105000" />
+      <fSuspensionLowerLimit value="-0.130000" />
+      <fSuspensionRaise value="0.000000" />
+      <fSuspensionBiasFront value="0.530000" />
+
+      <!-- 리무진 느낌은 남기되 지나친 롤은 억제 -->
+      <fAntiRollBarForce value="1.050000" />
+      <fAntiRollBarBiasFront value="0.550000" />
+      <fRollCentreHeightFront value="0.115000" />
+      <fRollCentreHeightRear value="0.125000" />
+
+      <!-- 대형차 특성상 차체 내구도 조금 높게 -->
+      <fCollisionDamageMult value="0.820000" />
+      <fWeaponDamageMult value="1.000000" />
+      <fDeformationDamageMult value="0.760000" />
+      <fEngineDamageMult value="0.900000" />
+
+      <fPetrolTankVolume value="85.000000" />
+      <fOilVolume value="6.000000" />
+
+      <fSeatOffsetDistX value="0.000000" />
+      <fSeatOffsetDistY value="0.000000" />
+      <fSeatOffsetDistZ value="0.000000" />
+
+      <nMonetaryValue value="60000" />
+
+      <strModelFlags>440010</strModelFlags>
+      <strHandlingFlags>0</strHandlingFlags>
+      <strDamageFlags>0</strDamageFlags>
+      <AIHandling>AVERAGE</AIHandling>
+
+      <SubHandlingData>
+        <Item type="NULL" />
+        <Item type="NULL" />
+        <Item type="NULL" />
+      </SubHandlingData>
+    </Item>
+  </HandlingData>
+</CHandlingDataMgr>

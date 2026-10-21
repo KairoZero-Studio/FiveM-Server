@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="deathScreen" class="hidden">
+    <div class="ecg-wrap">
+      <svg class="ecg" viewBox="0 100 560 60" preserveAspectRatio="xMidYMid meet">
+        <path id="pulsar" stroke="#f60d54" fill="none" stroke-width="1.5" stroke-linejoin="round"
+          d="M0,90L250,90Q257,60 262,87T267,95 270,88 273,92t6,35 7,-60T290,127 297,107s2,-11 10,-10 1,1 8,-10T319,95c6,4 8,-6 10,-17s2,10 9,11h210" />
+      </svg>
+      <div id="dsStatus" class="ds-status"></div>
+    </div>
+
+    <nav id="dsActs" class="ds-acts">
+      <button class="ds-btn wipe" data-a="wipe">알피 전멸</button>
+      <button class="ds-btn stop" data-a="stop">알피 중단</button>
+      <button class="ds-btn death" data-a="death">알피 사망</button>
+      <button class="ds-btn revive" data-a="revive">소생</button>
+    </nav>
+
+    <div id="reviveBox" class="ds-revive hidden">
+      <p class="ds-revive-t">당신은 <b id="reviveSec">10</b>초 후 소생합니다</p>
+      <div class="ds-flip"><span id="reviveNum">10</span></div>
+      <div id="regenBadge" class="ds-regen hidden">자가재생동기 활성화 · 1개 소모</div>
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

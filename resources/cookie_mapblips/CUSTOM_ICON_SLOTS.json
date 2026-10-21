@@ -1,0 +1,71 @@
+{
+  "sheet": "blips_texturesheet_ng_2",
+  "slot_size": 64,
+  "sheet_size": 1024,
+  "sprites": {
+    "main_square": {
+      "label": "메인광장",
+      "sprite": 602
+    },
+    "main_garage": {
+      "label": "메인차고",
+      "sprite": 603
+    },
+    "security": {
+      "label": "보안국",
+      "sprite": 604
+    },
+    "police": {
+      "label": "경찰서",
+      "sprite": 605
+    },
+    "garage_area": {
+      "label": "차고지",
+      "sprite": 606
+    },
+    "city_hall": {
+      "label": "시청",
+      "sprite": 607
+    },
+    "delivery": {
+      "label": "배달기사",
+      "sprite": 618
+    },
+    "repair_worker": {
+      "label": "수리공",
+      "sprite": 619
+    },
+    "convenience": {
+      "label": "편의점",
+      "sprite": 620
+    },
+    "bank": {
+      "label": "은행",
+      "sprite": 621
+    },
+    "repair_shop": {
+      "label": "정비소",
+      "sprite": 622
+    },
+    "taxi": {
+      "label": "택시기사",
+      "sprite": 623
+    },
+    "atm": {
+      "label": "ATM",
+      "sprite": 636
+    },
+    "clothing": {
+      "label": "옷장/옷가게",
+      "sprite": 637
+    },
+    "trucker": {
+      "label": "트럭기사",
+      "sprite": 638
+    },
+    "construction": {
+      "label": "건설인부",
+      "sprite": 639
+    }
+  }
+}

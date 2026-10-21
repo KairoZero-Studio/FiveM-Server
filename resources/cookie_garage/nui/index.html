@@ -1,0 +1,12 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><link rel="stylesheet" href="style.css"></head>
+<body><div id="app" class="hidden"><div class="veil"></div><main class="garage">
+<header class="top"><div class="brand"><div class="cookie-mark">🍪</div><div><div class="overline">COOKIE SERVER</div><h1>쿠키 차고</h1></div></div>
+<div class="top-actions"><button id="refresh" class="icon-btn">↻</button><button id="close" class="icon-btn close">✕</button></div></header>
+<section id="loading" class="loading hidden"><div class="spinner"></div><b id="loadingTitle">쿠키 차고</b><span id="loadingText">불러오는 중입니다...</span></section>
+<section id="content" class="content hidden"><nav id="tabs" class="tabs"></nav><div id="body" class="body"></div></section></main>
+<section id="sellModal" class="sell-modal hidden"><div class="sell-dialog"><div class="sell-warning-icon">!</div><div class="sell-kicker">VEHICLE SALE WARNING</div><h2>일반 차량 판매</h2><p class="sell-lead">차량을 판매하면 <b>구매가의 40%</b>만 돌려받습니다.</p>
+<div class="sell-summary"><div><span>차량</span><b id="sellName">-</b></div><div><span>번호판</span><b id="sellPlate">-</b></div><div><span>기준 가격</span><b id="sellBase">0원</b></div><div class="refund"><span>실제 지급액 (40%)</span><b id="sellRefund">0원</b></div></div>
+<div class="sell-danger-text"><strong>⚠ 꼭 확인하세요.</strong><span>판매 즉시 차량 소유권이 삭제되며 되돌릴 수 없습니다.</span><span>나머지 60%는 환급되지 않습니다.</span><span>판매대금은 은행 계좌로 지급됩니다.</span></div>
+<label class="sell-check"><input id="sellAgree" type="checkbox"><span>구매가의 40%만 지급되는 것을 확인했습니다.</span></label>
+<div class="sell-actions"><button id="sellCancel" class="sell-cancel" type="button">취소</button><button id="sellConfirm" class="sell-confirm" type="button" disabled>40%에 차량 판매</button></div></div></section>
+</div><script src="app.js"></script></body></html>

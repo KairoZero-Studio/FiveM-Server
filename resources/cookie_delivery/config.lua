@@ -1,0 +1,2 @@
+Config=Config or {}
+Config.Delivery={Job='delivery',Skill='delivery',JobDef={label='배달기사',defaultDuty=false,offDutyPay=false,grades={[0]={name='배달기사',payment=0}}},CallMinDelay=8,CallMaxDelay=20,CallExpire=45,PickupRadius=2.2,DropoffRadius=2.5,DefaultBasePay=15000,DefaultPerKm=10000,ExpPerDelivery=3,PayMult={1.00,1.05,1.10,1.15,1.20},BagProp='prop_food_bs_bag_01',FallbackBagProp='prop_cs_paper_bag'}

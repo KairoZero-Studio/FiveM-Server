@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="dlg" class="hidden">
+
+    <div class="tx-left">
+      <div class="tx-npc">
+        <span class="tx-npc-role">택시 관리인</span><span class="tx-job-sub">택시기사 관리인</span>
+        <span class="tx-npc-name" id="npcName">-</span>
+      </div>
+      <aside id="profile" class="tx-profile"></aside>
+    </div>
+
+    <div class="tx-right">
+      <aside id="pane" class="tx-pane hidden">
+        <p class="tx-pane-h" id="paneTitle">차량 배정</p>
+        <div id="paneBody"></div>
+      </aside>
+    </div>
+
+    <div class="tx-sub" id="dlgSub"></div>
+    <nav class="tx-acts" id="acts"></nav>
+  </div>
+
+  <div id="status" class="tx-status hidden">
+    <span class="tx-spin">
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </span>
+    <span class="tx-status-t" id="statusText">접수 대기중</span>
+  </div>
+
+  <div id="offer" class="tx-offer hidden">
+    <div class="tx-offer-bar"><i id="offerBar"></i></div>
+    <p class="tx-offer-h">콜 접수가 진행됩니다</p>
+    <p class="tx-offer-body">
+      <b id="offerGuest">-</b>님이<br>
+      <b id="offerDest">-</b> 가기 위해 호출했습니다.
+    </p>
+    <div class="tx-offer-keys">
+      <div class="tx-offer-key ok"><span class="tx-offer-k">+</span><span class="tx-offer-l">수락</span></div>
+      <div class="tx-offer-key no"><span class="tx-offer-k">−</span><span class="tx-offer-l">거절</span></div>
+    </div>
+    <p class="tx-offer-warn">거절 시 패널티가 발생할 수 있습니다</p>
+  </div>
+
+  <div id="meter" class="tx-meter hidden">
+    <div class="tx-meter-head">
+      <span class="tx-meter-brand">택시 미터기</span>
+      <span class="tx-meter-t">T</span>
+    </div>
+
+    <div class="tx-meter-status" id="meterStatus">
+      <span class="tx-ms-bar"><i></i></span>
+      <span class="tx-ms-t" id="meterStatusT">대기</span>
+    </div>
+
+    <div class="tx-meter-screen">
+      <div class="tx-meter-cell">
+        <p class="tx-meter-k">주행거리</p>
+
+        <div class="tx-gauge">
+          <svg viewBox="0 0 120 120">
+            <circle class="tx-gauge-track" cx="60" cy="60" r="52"></circle>
+            <circle class="tx-gauge-fill" id="meterRing" cx="60" cy="60" r="52"></circle>
+          </svg>
+          <div class="tx-gauge-c"><b id="meterDist">0.00</b><span>km</span></div>
+        </div>
+      </div>
+      <div class="tx-meter-div"></div>
+      <div class="tx-meter-cell right">
+        <p class="tx-meter-k">요금</p>
+        <p class="tx-meter-v"><b id="meterFare">0</b><span>원</span></p>
+      </div>
+    </div>
+
+    <p class="tx-meter-state" id="meterState">빈차</p>
+
+    <div class="tx-meter-grid">
+      <button class="tx-mb" data-m="empty">빈차</button>
+      <button class="tx-mb" data-m="drive">주행</button>
+      <button class="tx-mb" data-m="inter">할증</button>
+      <button class="tx-mb" data-m="pay">결제</button>
+    </div>
+
+    <div class="tx-meter-npc">
+      <span>NPC 호출</span>
+      <button class="tx-npc-toggle" id="meterNpc" data-m="npc">OFF</button>
+    </div>
+
+    <p class="tx-meter-hint">
+      <span class="tx-key">F2</span> 커서 ON/OFF
+    </p>
+    <p class="tx-meter-hint2" id="meterHint"></p>
+  </div>
+
+  <div id="receipt" class="tx-rc hidden">
+    <div class="tx-rc-card">
+      <div class="tx-rc-logo">쿠키 택시 영수증</div>
+      <p class="tx-rc-hi"><b id="rcGuest">-</b> 손님,</p>
+      <p class="tx-rc-sub">쿠키택시를 이용해주셔서 감사합니다</p>
+
+      <div class="tx-rc-sep"></div>
+
+      <div class="tx-rc-row"><span>탑승일자</span><b id="rcDate">-</b></div>
+      <div class="tx-rc-row"><span>하차시각</span><b id="rcTime">-</b></div>
+
+      <div class="tx-rc-dot"></div>
+
+      <div class="tx-rc-row"><span>총 주행 시간</span><b id="rcElapsed">-</b></div>
+      <div class="tx-rc-row"><span>총 주행 거리</span><b id="rcDist">-</b></div>
+      <div class="tx-rc-row"><span>운행요금</span><b id="rcFare">-</b></div>
+
+      <div class="tx-rc-dot"></div>
+
+      <div class="tx-rc-row"><span>시외요금</span><b id="rcInter">0원</b></div>
+      <div class="tx-rc-row"><span>추가요금</span><b id="rcExtra">0원</b></div>
+
+      <div class="tx-rc-sep"></div>
+
+      <div class="tx-rc-row total"><span>합계</span><b id="rcTotal">-</b></div>
+      <p class="tx-rc-exp" id="rcExp">경력 +1</p>
+    </div>
+  </div>
+
+  <div id="pickBadge" class="tx-badge hidden">
+    <span class="tx-badge-k">E</span>
+    <span class="tx-badge-t">손님 태우기</span>
+  </div>
+
+  <div id="sub" class="tx-wsub hidden"><span id="subText"></span></div>
+
+  <div id="speech" class="tx-speech hidden">
+    <div class="tx-speech-body" id="speechText"></div>
+    <div class="tx-speech-tail"></div>
+  </div>
+
+  <div id="bill" class="tx-bill hidden">
+    <div class="tx-bill-card">
+      <div class="tx-bill-logo">쿠키 택시 요금 청구</div>
+      <p class="tx-bill-hi"><b id="billGuest">-</b> 손님</p>
+      <p class="tx-bill-sub">목적지 <b id="billDest">-</b> 도착</p>
+
+      <div class="tx-bill-sep"></div>
+
+      <div class="tx-bill-row"><span>주행 거리</span><b id="billDist">-</b></div>
+      <div class="tx-bill-row"><span>운행요금</span><b id="billFare">-</b></div>
+      <div class="tx-bill-row"><span>시외요금</span><b id="billInter">0원</b></div>
+
+      <div class="tx-bill-sep"></div>
+
+      <div class="tx-bill-row total"><span>청구 금액</span><b id="billTotal">-</b></div>
+
+      <p class="tx-bill-f2"><span class="tx-key">F2</span> 를 눌러 마우스를 켜고 결제하세요</p>
+
+      <div class="tx-bill-acts">
+        <button class="tx-bill-btn pay" id="billPay">결제하기</button>
+        <button class="tx-bill-btn cancel" id="billCancel">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+ 

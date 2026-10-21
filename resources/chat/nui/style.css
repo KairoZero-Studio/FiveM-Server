@@ -1,0 +1,364 @@
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html, body {
+    width: 100%; height: 100%;
+    background: transparent; overflow: hidden;
+    font-family: "Malgun Gothic", "\B9D1\C740 \ACE0\B515", "Segoe UI", sans-serif;
+    user-select: none;
+}
+.ck-hidden { display: none !important; }
+
+.ck-hard-off { display: none !important; }
+
+#chat {
+
+    position: absolute; left: 12px; top: 12px; z-index: 50;
+    width: 34%; max-width: 560px;
+    opacity: 1; transition: opacity 2s ease;
+}
+#chat.ck-faded { opacity: 0; }
+
+#chat.ck-esc {
+    left: 50%;
+    top: auto;
+    bottom: 74px;
+    transform: translateX(-50%);
+    width: min(760px, 46vw);
+    max-width: none;
+    z-index: 60;
+    opacity: 1 !important;
+}
+
+#chat.ck-esc::before {
+    content: '';
+    position: absolute;
+    left: -10%;
+    right: -10%;
+    bottom: -74px;
+    height: 300px;
+    z-index: -1;
+    pointer-events: none;
+    background: linear-gradient(
+        to top,
+        rgba(10, 11, 13, 0.92) 0%,
+        rgba(10, 11, 13, 0.80) 30%,
+        rgba(10, 11, 13, 0.45) 60%,
+        rgba(10, 11, 13, 0.00) 100%
+    );
+}
+
+#chat.ck-esc #ck-messages {
+    max-height: 19vh;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+}
+
+#chat.ck-esc #ck-header { display: none !important; }
+
+#ck-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 4px 8px;
+    background: rgba(18, 20, 24, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.08); border-bottom: none;
+    border-radius: 4px 4px 0 0;
+}
+.ck-hdr-left { display: flex; align-items: center; gap: 6px; }
+.ck-hdr-logo { width: 17px; height: 17px; object-fit: contain; display: block; }
+.ck-hdr-title { color: #fff; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
+.ck-hdr-right { display: flex; align-items: center; gap: 3px; }
+.ck-tab {
+    position: relative; padding: 2px 7px; cursor: pointer;
+    color: #9aa0a6; font-size: 12px; font-weight: 600;
+    border-bottom: 2px solid transparent;
+}
+.ck-tab:hover { color: #cfd3d8; }
+.ck-tab.active { color: #FFB800; border-bottom-color: #FFB800; }
+.ck-tab--dot::after {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 5px; height: 5px; border-radius: 50%; background: #FFB800;
+}
+.ck-gear { color: #6a6f75; font-size: 13px; cursor: default; padding-left: 3px; }
+
+#ck-messages {
+    max-height: 30vh; overflow-y: auto; overflow-x: hidden;
+    display: flex; flex-direction: column; gap: 0; padding: 6px 4px;
+    background: rgba(18, 20, 24, 0.82);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+    scrollbar-width: thin; scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+#ck-messages::-webkit-scrollbar { width: 5px; }
+#ck-messages::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.2); border-radius: 3px; }
+
+.ck-wrap {
+    color: #fff; font-size: var(--ck-fs, 13px); line-height: 1.5;
+    flex-shrink: 0;
+    padding: 2px 7px;
+    background: transparent;
+    border-radius: 0; border-left: 2px solid transparent;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.9);
+    overflow: hidden;
+    word-break: keep-all; overflow-wrap: anywhere;
+}
+.ck-wrap:hover   { background: rgba(255, 255, 255, 0.04); }
+.ck-wrap--all     { border-left-color: transparent; }
+.ck-wrap--prox    { border-left-color: #4a5a66; }
+.ck-wrap--faction { border-left-color: #6ee7a8; }
+.ck-wrap--ad      { border-left-color: #ffd166; }
+.ck-wrap--admin   { border-left-color: #ff4d4f; }
+.ck-wrap--rp      { border-left-color: #c9a7ff; }
+.ck-wrap--join    { border-left-color: #3fb26f; }
+.ck-wrap--leave   { border-left-color: #e05b63; }
+.ck-wrap--system  { border-left-color: #7c83c4; }
+.ck-wrap--notice  { border-left-color: #FFB800; }
+.ck-wrap--warn    { border-left-color: #ff4d4f; }
+
+.ck-ch, .ck-chip, .ck-nick, .ck-time {
+    float: none; display: inline; margin-right: 5px;
+    white-space: nowrap;
+}
+.ck-time { color: #7f858c; font-weight: 500; font-size: 0.86em; line-height: 1.5; }
+.ck-ch, .ck-chip {
+
+    padding: 1px 10px; border-radius: 3px;
+    font-weight: 700; font-size: 0.86em; line-height: 1.5;
+    min-width: 34px; text-align: center;
+}
+.ck-ch--all     { background: #5a5d62; color: #fff; }
+.ck-ch--prox    { background: #4a5a66; color: #cfe3f0; }
+.ck-ch--faction { background: #1f7a52; color: #b7f5d5; }
+.ck-ch--ad      { background: #8a6a1f; color: #ffe6a8; }
+.ck-ch--admin   { background: #ff4d4f; color: #fff; }
+.ck-ch--rp      { background: #5c4a8a; color: #ddd0ff; }
+.ck-ch--join    { background: #3fb26f; color: #fff; }
+.ck-ch--leave   { background: #c84750; color: #fff; }
+.ck-ch--system  { background: #7c83c4; color: #fff; }
+
+.ck-notice {
+    display: block; padding: 6px 10px; margin: 2px 0;
+    background: rgba(255, 184, 0, 0.14);
+    border-left: 3px solid #FFB800; border-radius: 3px;
+    color: #ffe6a8; font-size: calc(var(--ck-fs, 13px) + 1px); font-weight: 800;
+    letter-spacing: -0.2px;
+}
+.ck-notice::before { content: '공지  '; color: #FFB800; }
+
+.ck-warn {
+    display: block; padding: 6px 10px; margin: 2px 0;
+    background: rgba(255, 77, 79, 0.16);
+    border-left: 3px solid #ff4d4f; border-radius: 3px;
+    color: #ffc9ca; font-size: calc(var(--ck-fs, 13px) + 1px); font-weight: 800;
+}
+.ck-warn::before { content: '경고  '; color: #ff4d4f; }
+
+.ck-ch--rp { background: #6b4fa8; color: #fff; }
+.ck-rp-hl { font-weight: 800; }
+
+.ck-rp-hl--wipe  { color: #c9a7ff; }
+.ck-rp-hl--stop  { color: #FFB800; }
+.ck-rp-hl--death { color: #ff4d4f; }
+
+.ck-chip--gobun { background: #3a3d42; color: #fff; }
+.ck-chip--label { background: #FFB800; color: #1a1a1a; }
+.ck-chip--admin { background: #ff4d4f; color: #fff; }
+.ck-chip--faction { font-weight: 800; }
+.ck-title-chip {
+    display: inline-flex; align-items: center; min-height: 20px;
+    padding: 2px 8px; border: 1px solid rgba(255,224,138,.35); border-radius: 999px;
+    font-size: .88em; line-height: 1.35; font-weight: 800; letter-spacing: -.1px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.025);
+}
+
+.ck-nick { color: #9aa0a6; font-weight: 500; }
+.ck-body {
+    display: inline; overflow: visible;
+    color: #fff; font-weight: 600;
+    word-break: keep-all; overflow-wrap: anywhere;
+}
+
+.ck-wrap[data-src] { cursor: pointer; }
+
+.ck-body--system { color: #fff; font-weight: 600; }
+
+#ck-newbadge {
+    margin: 3px auto 0; width: max-content;
+    padding: 2px 10px; border-radius: 10px;
+    background: #FFB800; color: #1a1300;
+    font-size: 12px; font-weight: 700; cursor: pointer;
+}
+
+#ck-inputline {
+    display: flex; align-items: center; margin-top: 5px;
+    background: rgba(20, 22, 26, 0.9);
+    border: 1px solid rgba(180, 180, 180, 0.32);
+    border-radius: 4px; padding: 4px 8px;
+}
+#ck-mode { color: #FFB800; font-weight: 700; font-size: 13px; margin-right: 8px; white-space: nowrap; }
+#ck-input { flex: 1 1 auto; background: transparent; border: 0; outline: none; color: #fff; font-size: 13px; }
+
+#ck-idlebar {
+    display: flex; align-items: center; gap: 8px; margin-top: 5px;
+    background: rgba(20, 22, 26, 0.9);
+    border: 1px solid rgba(180, 180, 180, 0.22);
+    border-radius: 4px; padding: 5px 8px;
+    cursor: pointer;
+}
+#ck-idlebar:hover { border-color: #FFB800; }
+.ck-idle-ch {
+    padding: 2px 9px; border-radius: 3px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #FFB800; font-size: 12px; font-weight: 700;
+}
+.ck-idle-ph { color: #7f858c; font-size: 12.5px; }
+
+#ck-suggestions {
+    margin-top: 4px; background: rgba(20, 22, 26, 0.92);
+    border: 1px solid rgba(180, 180, 180, 0.25); border-radius: 4px; overflow: hidden;
+}
+.ck-sug { padding: 3px 10px; font-size: 12.5px; color: #cfd3d8; }
+.ck-sug .ck-sug-name { color: #fff; font-weight: 600; }
+.ck-sug .ck-sug-help { color: #9aa0a6; margin-left: 6px; }
+
+#ck-menu {
+    position: fixed; z-index: 200;
+    width: 168px;
+    background: rgba(22, 24, 28, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+}
+.ck-menu-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 8px 10px;
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff; font-size: 12.5px; font-weight: 700;
+}
+.ck-menu-x { color: #9aa0a6; cursor: pointer; font-size: 12px; }
+.ck-menu-x:hover { color: #ff6b6b; }
+.ck-menu-item {
+    display: block; width: 100%; text-align: left;
+    padding: 10px 12px; border: 0; background: transparent;
+    color: #cfd3d8; font-size: 13px; font-weight: 600; cursor: pointer;
+    font-family: inherit;
+}
+.ck-menu-item:hover { background: rgba(255, 184, 0, 0.12); color: #FFB800; }
+
+#ck-pay {
+    position: fixed; inset: 0; z-index: 210;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.ck-pay-card {
+    width: min(420px, 88vw);
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 20px;
+    padding: 26px 24px 20px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+    color: #1a1a1a;
+}
+.ck-pay-title {
+    font-size: 17px; font-weight: 800; line-height: 1.5;
+    letter-spacing: -0.3px; margin-bottom: 4px;
+}
+.ck-pay-sub { color: #666; font-size: 13.5px; margin-bottom: 18px; }
+
+.ck-pay-inputrow {
+    display: flex; align-items: baseline; gap: 6px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 8px; margin-bottom: 6px;
+}
+.ck-pay-inputrow:focus-within { border-bottom-color: #FFB800; }
+.ck-pay-input {
+    flex: 1; min-width: 0;
+    border: 0; background: transparent; outline: none;
+    color: #1a1a1a; font-size: 34px; font-weight: 800; letter-spacing: -1px;
+    text-align: right; font-family: inherit;
+}
+.ck-pay-input::placeholder { color: #ccc; }
+.ck-pay-won { color: #1a1a1a; font-size: 20px; font-weight: 800; }
+
+.ck-pay-hint { min-height: 18px; font-size: 12.5px; font-weight: 600; color: #c0392b; margin-bottom: 14px; }
+
+.ck-pay-actions { display: flex; gap: 10px; }
+.ck-pay-btn {
+    flex: 1; height: 50px; border: 0; border-radius: 14px;
+    font-size: 15px; font-weight: 800; cursor: pointer; font-family: inherit;
+}
+.ck-pay-btn--ghost { background: #f0f0f0; color: #1a1a1a; }
+.ck-pay-btn--ghost:hover { background: #e4e4e4; }
+.ck-pay-btn--primary { background: #FFB800; color: #1a1300; }
+.ck-pay-btn--primary:hover { background: #ffc42e; }
+.ck-pay-btn:disabled { background: #ddd; color: #999; cursor: not-allowed; }
+
+#ck-settings {
+    position: absolute; top: 34px; right: 0; width: 224px; padding: 10px 12px;
+    background: rgba(22, 24, 28, 0.96);
+    border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5); z-index: 20;
+}
+.ck-set-title { color: #fff; font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.ck-set-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 0;
+}
+.ck-set-label { color: #9aa0a6; font-size: 12px; font-weight: 600; }
+.ck-set-opts { display: flex; gap: 4px; }
+.ck-set-opt {
+    padding: 3px 8px; border-radius: 4px; cursor: pointer;
+    background: rgba(255, 255, 255, 0.08); color: #9aa0a6;
+    font-size: 11px; font-weight: 700;
+}
+.ck-set-opt:hover { background: rgba(255, 255, 255, 0.14); color: #fff; }
+.ck-set-opt.active { background: #FFB800; color: #1a1300; }
+
+.ck-seg { display: flex; gap: 4px; }
+.ck-seg-opt {
+    padding: 3px 8px; border-radius: 4px; cursor: pointer;
+    background: rgba(255, 255, 255, 0.08); color: #9aa0a6;
+    font-size: 11px; font-weight: 700;
+    transition: background .12s, color .12s;
+}
+.ck-seg-opt:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.ck-seg-opt.ck-seg-on { background: #FFB800; color: #1a1300; }
+
+.ck-set-foot {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 10px; padding-top: 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+.ck-set-reset, .ck-set-close {
+    cursor: pointer; font-size: 11px; font-weight: 700; color: #9aa0a6;
+    padding: 3px 8px; border-radius: 4px;
+}
+.ck-set-reset:hover, .ck-set-close:hover { background: rgba(255,255,255,.14); color: #fff; }
+
+.ck-gear { cursor: pointer; color: #9aa0a6; font-size: 14px; margin-left: 6px; }
+.ck-gear:hover { color: #FFB800; }
+
+/* ============================================================
+   COOKIE GLOBAL NO-VISIBLE-SCROLLBAR V14.2.5
+   - 스크롤 기능(휠/드래그/키보드)은 유지
+   - 브라우저 기본 회색 세로/가로 스크롤바만 완전 숨김
+   ============================================================ */
+html, body, * {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+*::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+  background: transparent !important;
+}
+*::-webkit-scrollbar-track,
+*::-webkit-scrollbar-thumb,
+*::-webkit-scrollbar-corner {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}

@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>KZS chat</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="chat" class="ck-hidden">
+        <div id="ck-header">
+            <div class="ck-hdr-left">
+                <img id="ck-logo" class="ck-hdr-logo" src="nui://cookie_select/nui/assets/logo.png" alt="">
+                <span class="ck-hdr-title">COOKIE SERVER</span>
+            </div>
+            <div class="ck-hdr-right">
+                <span class="ck-tab active" data-tab="all">전체</span>
+                <span class="ck-tab" data-tab="prox">근거리</span>
+                <span class="ck-tab" data-tab="sys">시스템</span>
+                <span class="ck-gear" title="설정">&#9881;</span>
+            </div>
+        </div>
+
+        <div id="ck-settings" class="ck-hidden">
+            <div class="ck-set-title">채팅 설정</div>
+            <div class="ck-set-row">
+                <span class="ck-set-label">기본 송신 채널</span>
+                <div class="ck-seg" data-set="defaultChannel">
+                    <span class="ck-seg-opt" data-val="all">전체</span>
+                    <span class="ck-seg-opt" data-val="prox">근거리</span>
+                </div>
+            </div>
+            <div class="ck-set-row">
+                <span class="ck-set-label">페이드아웃</span>
+                <div class="ck-seg" data-set="fadeOn">
+                    <span class="ck-seg-opt" data-val="on">켬</span>
+                    <span class="ck-seg-opt" data-val="off">끔</span>
+                </div>
+            </div>
+            <div class="ck-set-row">
+                <span class="ck-set-label">유지 시간</span>
+                <div class="ck-seg" data-set="fadeSec">
+                    <span class="ck-seg-opt" data-val="5">5초</span>
+                    <span class="ck-seg-opt" data-val="8">8초</span>
+                    <span class="ck-seg-opt" data-val="15">15초</span>
+                </div>
+            </div>
+            <div class="ck-set-row">
+                <span class="ck-set-label">채팅 크기</span>
+                <div class="ck-seg" data-set="size">
+                    <span class="ck-seg-opt" data-val="sm">작게</span>
+                    <span class="ck-seg-opt" data-val="md">보통</span>
+                    <span class="ck-seg-opt" data-val="lg">크게</span>
+                </div>
+            </div>
+            <div class="ck-set-row">
+                <span class="ck-set-label">타임스탬프</span>
+                <div class="ck-seg" data-set="timestamp">
+                    <span class="ck-seg-opt" data-val="on">켬</span>
+                    <span class="ck-seg-opt" data-val="off">끔</span>
+                </div>
+            </div>
+            <div class="ck-set-foot">
+                <span id="ck-set-reset" class="ck-set-reset">기본값 복원</span>
+                <span id="ck-set-close" class="ck-set-close">닫기</span>
+            </div>
+        </div>
+
+        <div id="ck-messages"></div>
+        <div id="ck-newbadge" class="ck-hidden"></div>
+        <div id="ck-inputline" class="ck-hidden">
+            <span id="ck-mode"></span>
+            <input id="ck-input" type="text" maxlength="256" autocomplete="off" spellcheck="false" placeholder="메시지 입력 · TAB 채널 변경">
+        </div>
+
+        <div id="ck-idlebar" class="ck-hidden">
+            <span class="ck-idle-ch" id="ck-idle-ch">전체</span>
+            <span class="ck-idle-ph">ENTER 또는 클릭으로 채팅 활성화</span>
+        </div>
+
+        <div id="ck-suggestions" class="ck-hidden"></div>
+    </div>
+
+    <div id="ck-menu" class="ck-hidden">
+        <div class="ck-menu-head">
+            <span id="ck-menu-title">플레이어</span>
+            <span id="ck-menu-x" class="ck-menu-x">✕</span>
+        </div>
+        <button class="ck-menu-item" data-act="profile">프로필 정보</button>
+        <button class="ck-menu-item" data-act="pay">은행송금</button>
+    </div>
+
+    <div id="ck-pay" class="ck-hidden">
+        <div class="ck-pay-card">
+            <div class="ck-pay-title" id="ck-pay-title">송금</div>
+            <div class="ck-pay-sub">얼마를 보내시겠어요?</div>
+            <div class="ck-pay-inputrow">
+                <input id="ck-pay-amount" class="ck-pay-input" type="text" inputmode="numeric"
+                       placeholder="0" autocomplete="off" spellcheck="false">
+                <span class="ck-pay-won">원</span>
+            </div>
+            <div id="ck-pay-hint" class="ck-pay-hint"></div>
+            <div class="ck-pay-actions">
+                <button id="ck-pay-cancel" class="ck-pay-btn ck-pay-btn--ghost">취소</button>
+                <button id="ck-pay-send" class="ck-pay-btn ck-pay-btn--primary">송금</button>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
