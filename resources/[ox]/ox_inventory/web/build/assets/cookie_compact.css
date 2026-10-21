@@ -1,0 +1,7 @@
+/* Compact display mode; no changes to item counts, drag-drop or menus. */
+#cookie-inv-mode-toggle{position:fixed;right:1.2rem;top:1rem;z-index:10000;background:#232731;color:#fff;border:1px solid #626a75;border-radius:7px;padding:8px 12px;cursor:pointer;font-size:13px}
+#cookie-inv-mode-toggle:hover{background:#414952}
+.cookie-inv-compact .inventory-grid{grid-template-columns:repeat(5,minmax(96px,1fr))!important;gap:5px!important}
+.cookie-inv-compact .inventory-slot{background-size:34px 34px!important;background-position:right 7px center!important;min-height:65px!important;display:flex;align-items:flex-end}
+.cookie-inv-compact .inventory-slot-label-box{width:100%!important;text-align:left!important;max-width:calc(100% - 20px)!important}
+.cookie-inv-compact .inventory-slot-label-text{font-size:12px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
